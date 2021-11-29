@@ -1,9 +1,13 @@
 import React from 'react'
 
 function CustomText(props) {
+
     return (
-            <div>
-                {props.keyword}
+            <div style={{
+                fontSize:22,
+                fontWeight:'bold'
+            }}>
+                {props.name}
             </div>
     )
 }
