@@ -1,0 +1,43 @@
+.contain {
+    max-width: 100%!important;
+    width: 100%!important;
+    margin-left: 0!important;
+    margin-right: 0;
+}
+
+.download__head {
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.download__card {
+    height: 80px;
+    width: 300px;
+    background: rgb(61, 61, 61);
+    border: 1px solid white;
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.download__card:hover {
+    background: rgb(93, 93, 93);
+    border: 1px solid transparent;
+}
+
+.contain__row .col-md-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.download__from {
+    font-size: small;
+    color: white;
+}
+
+.store__name {
+    font-size: larger;
+    color: white;
+    font-weight: 600;
+}

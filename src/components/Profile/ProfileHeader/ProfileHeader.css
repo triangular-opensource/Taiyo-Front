@@ -1,0 +1,44 @@
+.profileHeader__background {
+    background: rgb(235, 231, 224);
+}
+
+.profileHeader__name {
+    font-size: x-large;
+}
+
+.profileHeader__card {
+    width: 160px;
+    height: 80px;
+    padding: 10px;
+    color: white;
+}
+
+.profileHeader__lastActive {
+    font-size: smaller;
+}
+
+.profileHeader__badge {
+    padding: 8px;
+}
+
+.profileHeader__cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.profileHeader__cardData {
+    font-size: 20px;
+}
+
+.profileHeader__card1 {
+    background-color: rgb(68, 68, 161);
+}
+
+.profileHeader__card2 {
+    background-color: rgb(74, 167, 79);
+}
+
+.profileHeader__card3 {
+    background-color: rgb(128, 73, 153);
+}

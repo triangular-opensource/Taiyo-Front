@@ -2,10 +2,11 @@ import React from 'react'
 import "./Footer.css"
 
 function Footer() {
+
     return (
         <div className="footer-dark">
             <footer>
-                <div className="container">
+                <div className="container mt-3">
                     <div className="row">
                         <div className="col-md-3 item text">
                             <h3>TAYIO</h3>
