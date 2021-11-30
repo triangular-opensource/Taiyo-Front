@@ -17,13 +17,17 @@ function CustomLogin() {
         margin: "10px"
 }
 
+function handleClick() {
+    alert('Click happened');
+}
+
     return (
         
         <div style ={style}>
             <CustomText name="Login" weight='bold' size= 'xx-large'/>
             <CustomInput placeholder='Email'/>    
             <CustomInput placeholder='Password'/>
-            <CustomButton data={data}/>
+            <CustomButton data={data} handleClick = {handleClick}   padding = '10' backgroundColor='gray' color = 'white' />
         </div>
     );
 }

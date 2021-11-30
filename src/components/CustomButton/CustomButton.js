@@ -1,12 +1,16 @@
 import React from 'react'
 import './CustomButton.css'
-function handleClick() {
-    alert('Click happened');
-}
-function CustomButton(props){
-    
+
+function CustomButton(props)
+{ 
+        const style = {
+            padding:"10px",
+            color: props.color,
+            backgroundColor: props.backgroundColor,
+    }
+
     return (
-        <a href="#" class="myButton" onClick={() => handleClick()}>{props.data}</a>
+        <div class="myButton"  style = {style} onClick = {props.handleClick}>{props.data}</div>
     )
 }
 

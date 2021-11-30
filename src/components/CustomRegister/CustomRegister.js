@@ -17,6 +17,12 @@ function CustomRegister()
         flexDirection: "column",
         margin: "10px"
 }
+
+function handleClick() {
+    alert('Click happened');
+}
+
+
     return (
         <div style ={style}>
            <CustomText name="Registeration" weight='bold' size= 'xx-large'/>
@@ -25,7 +31,7 @@ function CustomRegister()
             <CustomInput placeholder='name'/>
             <CustomInput placeholder='Address'/>
             <CustomInput placeholder='Phone Number'/>
-            <CustomButton data={data}/>
+            <CustomButton data={data} handleClick = {handleClick}   padding = '10' backgroundColor='gray' color = 'white' />
         </div>
     )
 }

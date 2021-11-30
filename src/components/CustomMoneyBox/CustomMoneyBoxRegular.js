@@ -15,12 +15,19 @@ function CustomMoneyBoxRegular() {
         flexDirection: "column",
         margin: "10px"
 }
+
+
+function handleClick() {
+    alert('Click happened');
+}
+
+
     return (
         <div style ={style}>
             <CustomText name="REGULAR" weight='bold' size= 'xxx-large'/>
             <CustomText name="Rs. 900" weight='100' size= 'x-large'/>
             <CustomText name="validity upto 90 days" weight='300' size= 'large'/>
-            <CustomButton data={data}/>
+            <CustomButton data={data} handleClick = {handleClick}   padding = '10' backgroundColor='gray' color = 'white' />
         </div>
     )
 }
