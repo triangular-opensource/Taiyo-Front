@@ -1,9 +1,11 @@
 import React from 'react'
+import CustomButton from '../CustomButton/CustomButton';
 import CustomInput from '../CustomInputField/CustomInput';
 import CustomText from '../CustomText/CustomText';
 
 function CustomRegister() 
 {
+    const data="REGISTER"
     const style = {
         padding:"50px",
         color:'#f0f9ff',
@@ -23,6 +25,7 @@ function CustomRegister()
             <CustomInput placeholder='name'/>
             <CustomInput placeholder='Address'/>
             <CustomInput placeholder='Phone Number'/>
+            <CustomButton data={data}/>
         </div>
     )
 }

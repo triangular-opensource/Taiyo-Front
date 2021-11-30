@@ -1,6 +1,8 @@
 import React from 'react'
+import CustomButton from '../CustomButton/CustomButton';
 import CustomText from '../CustomText/CustomText';
 function CustomMoneyBox() {
+    const data="SELECT PLAN"
     const style = {
         padding:"50px",
         color:'#f0f9ff',
@@ -18,6 +20,7 @@ function CustomMoneyBox() {
             <CustomText name="Basic" weight='bold' size= 'xxx-large'/>
             <CustomText name="Rs. 300" weight='100' size= 'x-large'/>
             <CustomText name="validity upto 30 days" weight='300' size= 'large'/>
+            <CustomButton data={data}/>
         </div>
     )
 }
