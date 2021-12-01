@@ -10,6 +10,7 @@ import Header from '../components/Header/Header'
 import Home from '../components/Home/Home'
 import Profile from '../components/Profile/Profile'
 import useAuth from './AuthContext'
+import "../static/css/Loader.css"
 
 const Routes = () => {
     const { loading } = useAuth();
