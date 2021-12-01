@@ -1,11 +1,17 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import useAuth from '../../config/AuthContext';
+import useGlobalData from "../../config/useGlobalData"
 import "./Header.css"
 
 function Header() {
+
+    const { generalInfo, policy } = useAuth();
+    console.log(generalInfo)
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <NavLink className="navbar-brand" to="/"><h1>TAIYO</h1></NavLink>
+            <NavLink className="navbar-brand" to="/"><h1>{generalInfo.name}</h1></NavLink>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>

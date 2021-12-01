@@ -1,0 +1,1 @@
+export const GLOBAL_URL = "https://taiyoindustries.herokuapp.com/api";
