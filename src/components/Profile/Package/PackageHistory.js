@@ -1,9 +1,9 @@
 import React from 'react'
-import ProfileData from './ProfileData/ProfileData'
-import ProfileHeader from './ProfileHeader/ProfileHeader'
-import ProfileNavbar from './ProfileNavbar/ProfileNavbar'
+import ProfileHeader from '../ProfileHeader/ProfileHeader'
+import ProfileNavbar from '../ProfileNavbar/ProfileNavbar'
+import PackageHistoryData from './PackageHistoryData'
 
-function Profile() {
+const PackageHistory = () => {
     return (
         <div className="container mt-5">
             <div className="row">
@@ -12,11 +12,11 @@ function Profile() {
                     <ProfileNavbar />
                 </div>
                 <div className="col-md-12">
-                    <ProfileData />
+                    <PackageHistoryData />
                 </div>
             </div>
         </div>
     )
 }
 
-export default Profile
+export default PackageHistory

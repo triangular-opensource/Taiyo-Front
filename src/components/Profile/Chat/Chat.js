@@ -1,9 +1,10 @@
 import React from 'react'
-import ProfileData from './ProfileData/ProfileData'
-import ProfileHeader from './ProfileHeader/ProfileHeader'
-import ProfileNavbar from './ProfileNavbar/ProfileNavbar'
+import ProfileData from '../ProfileData/ProfileData'
+import ProfileHeader from '../ProfileHeader/ProfileHeader'
+import ProfileNavbar from '../ProfileNavbar/ProfileNavbar'
+import ChatComponent from './ChatComponent'
 
-function Profile() {
+const Chat = () => {
     return (
         <div className="container mt-5">
             <div className="row">
@@ -12,11 +13,11 @@ function Profile() {
                     <ProfileNavbar />
                 </div>
                 <div className="col-md-12">
-                    <ProfileData />
+                    <ChatComponent />
                 </div>
             </div>
         </div>
     )
 }
 
-export default Profile
+export default Chat

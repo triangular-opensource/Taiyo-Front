@@ -36,38 +36,6 @@ const ProfileData = () => {
                             <td className="">Package Expiry</td>
                             <td className="">2021-11-21</td>
                         </tr>
-                        <tr>
-                            <td className="">Free Ads Remaining</td>
-                            <td className="">5</td>
-                        </tr>
-                        <tr>
-                            <td className="">Featured Ads Remaining</td>
-                            <td className="">0</td>
-                        </tr>
-                        <tr>
-                            <td className="">Bump-up Ads Remaining</td>
-                            <td className="">0</td>
-                        </tr>
-                        <tr>
-                            <td className="">Allowed Video Link</td>
-                            <td className="">-</td>
-                        </tr>
-                        <tr>
-                            <td className="">Allowed Tags</td>
-                            <td className="">-</td>
-                        </tr>
-                        <tr>
-                            <td className="">Allowed Biddings</td>
-                            <td className="">0</td>
-                        </tr>
-                        <tr>
-                            <td className="">Allowed Images</td>
-                            <td className="">5</td>
-                        </tr>
-                        <tr>
-                            <td className="">Categories</td>
-                            <td className="">-</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>

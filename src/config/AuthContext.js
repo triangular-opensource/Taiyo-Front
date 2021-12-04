@@ -4,6 +4,8 @@ import firebase from 'firebase/compat/app'
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from '@firebase/auth';
 import axios from 'axios';
 import { GLOBAL_URL } from '../global/Constant';
+import Loader from '../components/Loader';
+import "../static/css/Loader.css"
 
 const AuthContext = createContext({});
 
@@ -16,14 +18,6 @@ export const AuthProvider = ({ children }) => {
     const [address, setAddress] = useState(null);
     const [policy, setPolicy] = useState(null);
 
-    const memoedValue = useMemo(() => ({
-        user,
-        loading,
-        error,
-        generalInfo,
-        address,
-        policy
-    }), [user, loading, error, generalInfo, address, policy]);
 
     function googleSignIn() {
         return signInWithPopup(new firebase.auth.GoogleAuthProvider())
@@ -33,7 +27,17 @@ export const AuthProvider = ({ children }) => {
         return createUserWithEmailAndPassword(email, password)
     }
 
-    function login(email, password) {
+    async function login(email, password) {
+        await axios.post(`${GLOBAL_URL}/auth/login`, {
+            "username": email,
+            "password": password
+        }, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+        }).then(response => {
+            console.log(response)
+        } )
         return signInWithEmailAndPassword(email, password)
     }
 
@@ -70,7 +74,6 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const fun = async () => {
-            setLoading(true)
             await getGeneralInfo();
             await getAddress();
             await getPolicy();
@@ -78,9 +81,19 @@ export const AuthProvider = ({ children }) => {
         }
         fun();
     }, []);
+
+    const memoedValue = useMemo(() => ({
+        user,
+        loading,
+        error,
+        generalInfo,
+        address,
+        policy,
+        login
+    }), [user, loading, error, generalInfo, address, policy]);
     return (
         <AuthContext.Provider value={memoedValue}>
-            {!loading && children}
+            {loading ? <Loader /> : !loading && children}
         </AuthContext.Provider>
     )
 }

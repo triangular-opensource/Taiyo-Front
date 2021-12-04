@@ -90,10 +90,16 @@
   
 .container__email {
   margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.container__emailInput {
+  width: inherit;
 }
 
 .InputEmail{
-  width: 250px;
+  width: inherit;
   padding: 10px;
 }
 

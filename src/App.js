@@ -7,11 +7,11 @@ import Routes from './config/Routes';
 function App() {
 
   	return (
-			<AuthProvider>
-		  		<BrowserRouter>
-						<Routes />
-				</BrowserRouter>
-			</AuthProvider>
+		<AuthProvider>
+			<BrowserRouter>
+				<Routes />
+			</BrowserRouter>
+		</AuthProvider>
 	)
 }
 

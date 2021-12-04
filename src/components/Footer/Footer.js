@@ -1,7 +1,18 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { GLOBAL_URL } from '../../global/Constant';
 import "./Footer.css"
 
 function Footer() {
+
+    const [email, setEmail] = useState("");
+
+    const addNewsletter = async () => {
+        await axios.post(`${GLOBAL_URL}/news-letter`, {
+            "email": email
+        }).then(res => alert(res))
+    }
 
     return (
         <div className="footer-dark">
@@ -16,18 +27,22 @@ function Footer() {
                         <div className="col-md-6 item text">
                             <h3>Weekly Newsletter</h3>
                             <p className="mb-4"> We may send you information about related events, webinars, products and services wich we believe.</p>
-                            <span className="container__email">
-                                <input type="email" className="InputEmail rounded" placeholder="Enter Email" />
-                            </span>
-                            <button className="btn btn-secondary SubmitBtn" >Send</button>
+                            <div className="row">
+                                <div className="col-12 container__email">
+                                    <span className="container__emailInput">
+                                        <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} className="InputEmail rounded" placeholder="Enter Email" />
+                                    </span>
+                                    <button disabled={!email} onClick={addNewsletter} className="btn btn-secondary SubmitBtn" >Send</button>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-sm-6 col-md-3 item">
                             <h3>Quick Links</h3>
                             <ul>
-                                <li><a href="/">About Us</a></li>
-                                <li><a href="/">Contact Us</a></li>
-                                <li><a href="/">Terms and Conditons</a></li>
-                                <li><a href="/">Privacy policy</a></li>
+                                <li><NavLink to="/about">About Us</NavLink></li>
+                                <li><NavLink to="/contact">Contact Us</NavLink></li>
+                                <li><NavLink to="/">Terms and Conditons</NavLink></li>
+                                <li><NavLink to="/">Privacy policy</NavLink></li>
                             </ul>
                         </div>
                         <div className="col item social">

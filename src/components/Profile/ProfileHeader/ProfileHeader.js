@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import "./ProfileHeader.css"
 
 function ProfileHeader() {
@@ -21,15 +22,15 @@ function ProfileHeader() {
                         </div>
                         <div className="row">
                             <div className="col-md-12">
-                                <span>
+                                <NavLink to="/profile">
                                     <i class="icon ion-person mx-1"></i>
                                     Profile
-                                </span>
+                                </NavLink>
                                 <span className="mx-2">|</span>
-                                <span>
+                                <NavLink to="/profile">
                                     <i class="icon ion-edit mx-1"></i>
                                     Edit Profile
-                                </span>
+                                </NavLink>
                             </div>
                         </div>
                         <div className="row">

@@ -8,35 +8,27 @@ import Contact from '../components/Contact/Contact'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
 import Home from '../components/Home/Home'
+import Chat from '../components/Profile/Chat/Chat'
+import PackageHistory from '../components/Profile/Package/PackageHistory'
 import Profile from '../components/Profile/Profile'
-import useAuth from './AuthContext'
-import "../static/css/Loader.css"
 
 const Routes = () => {
-    const { loading } = useAuth();
 
     return (
         <>
-            {
-                loading
-                ?
-                <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                :(
-                    <>
-                        <Header />
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            <Route exact path="/about" component={About} />
-                            <Route exact path="/contact" component={Contact} />
-                            <Route exact path="/buy-sell" component={BuySell} />
-                            <Route exact path="/login" component={Login} />
-                            <Route exact path="/register" component={Register} />
-                            <Route exact path="/profile" component={Profile} />
-                        </Switch>
-                        <Footer />
-                    </>
-                )
-            }
+            <Header />
+            <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/about" component={About} />
+                <Route exact path="/contact" component={Contact} />
+                <Route exact path="/buy-sell" component={BuySell} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/chat" component={Chat} />
+                <Route exact path="/package-history" component={PackageHistory} />
+            </Switch>
+            <Footer />
         </>
     )
 }
