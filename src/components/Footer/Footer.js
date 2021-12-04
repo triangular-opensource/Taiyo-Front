@@ -1,10 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import useAuth from '../../config/AuthContext';
 import { GLOBAL_URL } from '../../global/Constant';
 import "./Footer.css"
 
 function Footer() {
+
+    const {generalInfo} = useAuth();
+    console.log(generalInfo)
 
     const [email, setEmail] = useState("");
 
@@ -21,8 +25,7 @@ function Footer() {
                     <div className="row">
                         <div className="col-md-3 item text">
                             <h3>TAYIO</h3>
-                            <p>Largest Classified Market Place for 
-                                steel, offers perfect classified Ads to sell your products.</p>
+                            <p>{generalInfo.intro}</p>
                         </div>
                         <div className="col-md-6 item text">
                             <h3>Weekly Newsletter</h3>

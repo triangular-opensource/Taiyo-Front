@@ -6,8 +6,8 @@ import "./Header.css"
 
 function Header() {
 
-    const { generalInfo, policy } = useAuth();
-    console.log(generalInfo)
+    const { generalInfo } = useAuth();
+    console.log(generalInfo.intro)
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">

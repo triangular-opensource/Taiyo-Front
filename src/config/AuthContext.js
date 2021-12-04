@@ -63,17 +63,17 @@ export const AuthProvider = ({ children }) => {
         }).catch(async (error) => setError(await error))
     }
     const getGeneralInfo = async () => {
-        await axios.get(`${GLOBAL_URL}/general-info`, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(async (response) => {
-            setGeneralInfo(await response.data.data[0])
-        }).catch(async (error) => setError(await error))
+        await fetch(`${GLOBAL_URL}/general-info`, {
+            method: "GET"
+        })
+        .then(async (response) => await response.json())
+        .then(async (result) => setGeneralInfo(await result.data[0]))
+        .catch(async(error) => setError(await error));
     }
 
     useEffect(() => {
         const fun = async () => {
+            setLoading(true);
             await getGeneralInfo();
             await getAddress();
             await getPolicy();
