@@ -3,17 +3,13 @@ import useAuth from '../../config/AuthContext'
 
 function Contact() {
 
-    const { generalInfo, login } = useAuth();
-    const fun = () => {
-        login("Taiyo", "1234");
-    }
+    const { generalInfo } = useAuth();
 
     return (
 
         <div>
             Hello I am contact
             <div className="">
-                <button onClick={fun}>login</button>
                 <br />
                 <br />
                 {generalInfo.email}

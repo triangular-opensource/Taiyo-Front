@@ -8,7 +8,6 @@ import "./Footer.css"
 function Footer() {
 
     const {generalInfo} = useAuth();
-    console.log(generalInfo)
 
     const [email, setEmail] = useState("");
 

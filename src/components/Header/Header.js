@@ -1,13 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import useAuth from '../../config/AuthContext';
-import useGlobalData from "../../config/useGlobalData"
 import "./Header.css"
 
 function Header() {
 
-    const { generalInfo } = useAuth();
-    console.log(generalInfo.intro)
+    const { generalInfo, authenticated, logout } = useAuth();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -42,7 +40,12 @@ function Header() {
             <div className="navbar__right">
                 <ul className="navbar-nav">
                     <li className="nav-item mx-3">
-                        <NavLink className="nav-link py-4" to="/login">Login</NavLink>
+                        { !authenticated
+                            ? 
+                                <NavLink className="nav-link py-4" to="/login">Login</NavLink>
+                            :
+                                <span className="nav-link py-4" onClick={logout(false)}>Logout</span>
+                        }    
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link py-4" to="/profile">Profile</NavLink>

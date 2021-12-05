@@ -1,15 +1,15 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { auth } from './Firebase';
-import firebase from 'firebase/compat/app'
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from '@firebase/auth';
 import axios from 'axios';
 import { GLOBAL_URL } from '../global/Constant';
 import Loader from '../components/Loader';
 import "../static/css/Loader.css"
+import { useHistory } from 'react-router';
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
+
+    const history = useHistory();
 
     const [error, setError] = useState(null);
     const [user, setUser] = useState(null);
@@ -17,33 +17,39 @@ export const AuthProvider = ({ children }) => {
     const [generalInfo, setGeneralInfo] = useState(null);
     const [address, setAddress] = useState(null);
     const [policy, setPolicy] = useState(null);
+    const [authenticated, setAuthenticated] = useState(false);
 
-
-    function googleSignIn() {
-        return signInWithPopup(new firebase.auth.GoogleAuthProvider())
-    }
 
     function signUp(email, password) {
-        return createUserWithEmailAndPassword(email, password)
+        
     }
 
     async function login(email, password) {
-        await axios.post(`${GLOBAL_URL}/auth/login`, {
-            "username": email,
-            "password": password
-        }, {
+        await fetch(`${GLOBAL_URL}/auth/login`, {
+            method : "POST",
+            body: JSON.stringify({
+                "email": email,
+                "password": password
+            }),
             headers: {
                 "Content-Type": "application/json"
-            },
-        }).then(response => {
-            console.log(response)
-        } )
-        return signInWithEmailAndPassword(email, password)
+            }
+        })
+        .then(async (response) => await response.json())
+        .then(async (result) =>  {
+            setAuthenticated(true)
+            localStorage.setItem("token", result.data.token)
+            history.push("/")
+        })
+        .catch(async(error) => setError(await error));
     }
 
-    function logout() {
-        return auth.signOut()
+    function logout(value) {
+        setAuthenticated(value);
+        localStorage.clear();
+        history.push("/login")
     }
+
     const getPolicy = async () => {
         await axios.get(`${GLOBAL_URL}/policy`, {
             headers: {
@@ -71,6 +77,10 @@ export const AuthProvider = ({ children }) => {
         .catch(async(error) => setError(await error));
     }
 
+    const getTokenFromLocalStorage = () => {
+        return localStorage.getItem("token")
+    }
+
     useEffect(() => {
         const fun = async () => {
             setLoading(true);
@@ -83,14 +93,17 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const memoedValue = useMemo(() => ({
+        login,
+        logout,
         user,
         loading,
         error,
         generalInfo,
         address,
         policy,
-        login
-    }), [user, loading, error, generalInfo, address, policy]);
+        authenticated,
+    }), [user, loading, error, generalInfo, address, policy, authenticated]);
+
     return (
         <AuthContext.Provider value={memoedValue}>
             {loading ? <Loader /> : !loading && children}
