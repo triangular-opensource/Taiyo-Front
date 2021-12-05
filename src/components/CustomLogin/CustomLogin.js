@@ -1,16 +1,9 @@
 import React from 'react'
-import useAuth from '../../../config/AuthContext'
-import CustomButton from "../../CustomButton/CustomButton"
-import CustomText from "../../CustomText/CustomText"
-import CustomInput from "../../CustomInputField/CustomInput"
+import CustomButton from '../CustomButton/CustomButton';
+import CustomInput from '../CustomInputField/CustomInput';
+import CustomText from '../CustomText/CustomText';
 
-function Login() {
-
-    const {login} = useAuth();
-    const handleLogin = () => {
-        return login("alankar.18bci1037@abes.ac.in", "1234")
-    }
-
+function CustomLogin() {  
     const data = "LOGIN";  
     const style = {
         padding:"50px",
@@ -22,7 +15,11 @@ function Login() {
         justifyContent: "center",
         flexDirection: "column",
         margin: "10px"
-    }
+}
+
+function handleClick() {
+    alert('Click happened');
+}
 
     return (
         
@@ -30,9 +27,9 @@ function Login() {
             <CustomText name="Login" weight='bold' size= 'xx-large'/>
             <CustomInput placeholder='Email'/>    
             <CustomInput placeholder='Password'/>
-            <CustomButton data={data} handleClick = {handleLogin}   padding = '10' backgroundColor='gray' color = 'white' />
+            <CustomButton data={data} handleClick = {handleClick}   padding = '10' backgroundColor='gray' color = 'white' />
         </div>
     );
 }
 
-export default Login
+export default CustomLogin

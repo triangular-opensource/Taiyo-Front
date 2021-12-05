@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding-top: 40px;
+    color: #2e323c;
+    background: #f5f6fa;
+    position: relative;
+    height: 100%;
+}
+
+.card-body{
+    background-color: #3e4452;
+}
+
+.text{
+    color:white;
+}
+
+.user__image{
+    height: 100px;
+    width: 100px;
+}
+
+.aParent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+        
+}
+
