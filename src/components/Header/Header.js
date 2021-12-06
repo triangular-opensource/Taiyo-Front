@@ -5,7 +5,7 @@ import "./Header.css"
 
 function Header() {
 
-    const { generalInfo, authenticated, logout } = useAuth();
+    const { generalInfo, logout, state } = useAuth();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,17 +39,26 @@ function Header() {
             </div>
             <div className="navbar__right">
                 <ul className="navbar-nav">
-                    <li className="nav-item mx-3">
-                        { !authenticated
+                        { !state
                             ? 
-                                <NavLink className="nav-link py-4" to="/login">Login</NavLink>
+                                <>
+                                    <li className="nav-item mx-3">
+                                        <NavLink className="nav-link py-4" to="/login">Login</NavLink>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link py-4" to="/register">Register</NavLink>
+                                    </li>
+                                </>
                             :
-                                <span className="nav-link py-4" onClick={logout(false)}>Logout</span>
+                                <>
+                                    <li className="nav-item">
+                                        <span style={{cursor: "pointer"}} className="nav-link py-4" onClick={logout}>Logout</span>
+                                    </li>
+                                    <li className="nav-item">
+                                        <NavLink className="nav-link py-4" to="/profile">Profile</NavLink>
+                                    </li>
+                                </>
                         }    
-                    </li>
-                    <li className="nav-item">
-                        <NavLink className="nav-link py-4" to="/profile">Profile</NavLink>
-                    </li>
                 </ul>
                 <NavLink to="/buy-sell" className="ml-4 p-4 bg-secondary rounded text-white nav-btn">Buy/Sell</NavLink>
             </div>

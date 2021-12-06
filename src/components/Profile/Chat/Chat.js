@@ -1,5 +1,4 @@
 import React from 'react'
-import ProfileData from '../ProfileData/ProfileData'
 import ProfileHeader from '../ProfileHeader/ProfileHeader'
 import ProfileNavbar from '../ProfileNavbar/ProfileNavbar'
 import ChatComponent from './ChatComponent'

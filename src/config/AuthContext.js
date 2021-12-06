@@ -1,9 +1,11 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useContext, useEffect, useMemo, useReducer, useState } from 'react'
 import axios from 'axios';
 import { GLOBAL_URL } from '../global/Constant';
 import Loader from '../components/Loader';
 import "../static/css/Loader.css"
 import { useHistory } from 'react-router';
+import useToken from './useToken';
+import { initialState, reducer } from '../reducer/useReducer';
 
 const AuthContext = createContext({});
 
@@ -11,16 +13,17 @@ export const AuthProvider = ({ children }) => {
 
     const history = useHistory();
 
+    const {saveToken} = useToken();
+
     const [error, setError] = useState(null);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [generalInfo, setGeneralInfo] = useState(null);
     const [address, setAddress] = useState(null);
     const [policy, setPolicy] = useState(null);
-    const [authenticated, setAuthenticated] = useState(false);
 
 
-    function signUp(email, password) {
+    function regiser(email, password) {
         
     }
 
@@ -37,16 +40,16 @@ export const AuthProvider = ({ children }) => {
         })
         .then(async (response) => await response.json())
         .then(async (result) =>  {
-            setAuthenticated(true)
-            localStorage.setItem("token", result.data.token)
+            saveToken(result.data.token)
+            dispatch({type: "USER", payload:true})
             history.push("/")
         })
         .catch(async(error) => setError(await error));
     }
-
-    function logout(value) {
-        setAuthenticated(value);
-        localStorage.clear();
+    
+    async function logout() {
+        saveToken(null)
+        dispatch({type: "USER", payload:false})
         history.push("/login")
     }
 
@@ -77,10 +80,6 @@ export const AuthProvider = ({ children }) => {
         .catch(async(error) => setError(await error));
     }
 
-    const getTokenFromLocalStorage = () => {
-        return localStorage.getItem("token")
-    }
-
     useEffect(() => {
         const fun = async () => {
             setLoading(true);
@@ -92,6 +91,8 @@ export const AuthProvider = ({ children }) => {
         fun();
     }, []);
 
+    const [state, dispatch] = useReducer(reducer, initialState)
+
     const memoedValue = useMemo(() => ({
         login,
         logout,
@@ -101,8 +102,9 @@ export const AuthProvider = ({ children }) => {
         generalInfo,
         address,
         policy,
-        authenticated,
-    }), [user, loading, error, generalInfo, address, policy, authenticated]);
+        state,
+        dispatch,
+    }), [user, loading, error, generalInfo, address, policy, state]);
 
     return (
         <AuthContext.Provider value={memoedValue}>
