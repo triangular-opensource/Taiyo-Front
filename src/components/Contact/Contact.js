@@ -5,33 +5,42 @@ import CustomText from "../../customComponents/CustomText/CustomText"
 import CustomInput from "../../customComponents/CustomInputField/CustomInput"
 import CustomButton from "../../customComponents/CustomButton/CustomButton"
 import { ReactComponent as ContactSvg } from "../../static/contact.svg";
+
+
 function Contact() {
 
     const { generalInfo } = useAuth();
 
     return (       
-        <div className="Contact__Container">
-            <div className="Contact__Container__Left">
-                    <CustomText name = "GET IN TOUCH" color = 'black' size = 'xx-large' weight = 'bold'/> 
-                    
-                    <div className = "Contact__Container__Row">
-                        <div className ="Contact__Container__Row__Item__Left" >
-                            <CustomInput type="text"  placeholder='Name' width = '360px'/> 
+        <div className="container py-5 my-4">
+            <div className="row">
+                <div className='col-md-5 text-center my-3'>
+                    <ContactSvg />
+                </div>
+                <div className="col-md-7 my-2">
+                    <CustomText name="GET IN TOUCH" color='black' size='xx-large' weight='bold'/> 
+                    <div className="row">
+                        <div className="col-6" >
+                            <CustomInput type="text" placeholder='Name'/> 
                         </div>
-                        <div className ="Contact__Container__Row__Item__Right" >
-                            <CustomInput type="email" placeholder='Email' width = '360px'/> 
+                        <div className="col-6" >
+                            <CustomInput type="email" placeholder='Email'/> 
                         </div>
                     </div>
-                   
-                    <CustomInput type="text"  placeholder='Subject' width = '730px' />
-                    <CustomInput type="text"  placeholder='Message' width = '730px' height = '120px'/>
-                    <CustomButton  fontSize="17" marginTop="20" data="Submit" handleClick={()=>({})} padding='16' backgroundColor='gray' color='white' width = '620' />
-            </div>
-            <div className = 'Contact__Container__Left'>
-                <ContactSvg />
+                    <div className="row">
+                        <div className="col-12">
+                            <CustomInput type="text" placeholder='Subject' />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-12">
+                            <CustomInput type="text" placeholder='Message' height='160px'/>
+                        </div>
+                    </div>
+                    <CustomButton fontSize="17" marginTop="20" data="Submit" handleClick={()=>({})} padding='16' backgroundColor='gray' color='white' width='620' />
+                </div>
             </div>
         </div>
-    
     )
 }
 
@@ -81,32 +90,3 @@ Hello I am contact
                         </div>
                     </div>
                 </div> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<link rel="stylesheet" href="style.css">
-</head>
-<body> */}
-
-
-

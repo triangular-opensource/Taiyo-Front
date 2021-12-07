@@ -17,7 +17,7 @@ function Header() {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                    <NavLink className="nav-link py-4" to="/">Home</NavLink>
+                    <NavLink className="nav-link py-4" exact to="/">Home</NavLink>
                 </li>
                 <li className="nav-item py-3 dropdown">
                     <span className="nav-link dropdown-toggle" id="navbarDropdown">Search</span>
