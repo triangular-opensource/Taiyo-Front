@@ -5,6 +5,7 @@ import CustomText from "../../customComponents/CustomText/CustomText"
 import CustomInput from "../../customComponents/CustomInputField/CustomInput"
 import CustomButton from "../../customComponents/CustomButton/CustomButton"
 import { ReactComponent as ContactSvg } from "../../static/contact.svg";
+import CustomTextarea from '../../customComponents/CustomTextarea/CustomTextarea'
 
 
 function Contact() {
@@ -34,7 +35,7 @@ function Contact() {
                     </div>
                     <div className="row">
                         <div className="col-12">
-                            <CustomInput type="text" placeholder='Message' height='160px'/>
+                            <CustomTextarea placeholder='Message' height='120px'/>
                         </div>
                     </div>
                     <CustomButton fontSize="17" marginTop="20" data="Submit" handleClick={()=>({})} padding='16' backgroundColor='gray' color='white' width='620' />

@@ -1,18 +1,17 @@
 import React from 'react'
-import './CustomInput.css'
+import './CustomTextarea.css'
 
-function CustomInput(props){
+function CustomTextarea(props){
 
  	const style = {
     	width: "100%",
-    	height : props.height  ? props.height : `55px` 
+    	height : props.height  ? props.height : `150px`,
   	}
     
 	return (
     	<div className="wrapper"> 
-      		<div className="input">
-				<input
-				type={props.type}
+      		<div className="textarea">
+				<textarea
 				value={props.value}
 				className={props.class}
 				style={style}
@@ -24,4 +23,4 @@ function CustomInput(props){
     )
 }
 
-export default CustomInput
+export default CustomTextarea
