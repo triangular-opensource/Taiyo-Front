@@ -1,0 +1,22 @@
+.About__Container {
+    display: flex;
+    flex-direction: row;
+
+  }
+  
+  .About__Container__Left {
+    padding: 100px 0px 100px 50px;
+    float: left;
+    font-size: large;
+    text-align: justify;
+  }
+
+  .About__Container__Right {
+    padding: 50px;
+  }
+
+  /* @media (max-width: 800px) {
+    .About__Container__Right, .About__Container__Left {
+      flex: 100%;
+    }
+  } */ 
