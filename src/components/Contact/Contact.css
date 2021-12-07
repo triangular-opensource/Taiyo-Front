@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+     
+.Contact__Container 
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.Contact__Container__Left
+{   
+    float: left;
+    margin-right: 20px;
+
+}
+.Contact__Container__Left
+{   
+    float: left;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+
+.Contact__Container__Row
+{
+    display: flex;
+    align-items: stretch;
+
+}
+
+.Contact__Container__Row__Item__Left
+{
+    margin-right: 5px;
+}
+
+.Contact__Container__Row__Item__Right
+{
+    margin-left: 5px;
+}

@@ -1,11 +1,11 @@
 .About__Container {
     display: flex;
     flex-direction: row;
-
+    padding: 100px 0px 100px 50px;
   }
   
   .About__Container__Left {
-    padding: 100px 0px 100px 50px;
+   
     float: left;
     font-size: large;
     text-align: justify;
