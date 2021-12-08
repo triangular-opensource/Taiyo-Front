@@ -47,7 +47,7 @@ function ProfileHeader() {
                     </div>
                 </div>
                 <div className="col-md-7">
-                    <div className="container">
+                    {/* <div className="container">
                         <div className="row mt-4 profileHeader__cards">
                             <div className="col-md-4">
                                 <div className="profileHeader__card profileHeader__card1 ">
@@ -86,7 +86,7 @@ function ProfileHeader() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
