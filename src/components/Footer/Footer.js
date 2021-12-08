@@ -37,8 +37,8 @@ function Footer() {
                             <ul>
                                 <li><NavLink to="/about">About Us</NavLink></li>
                                 <li><NavLink to="/contact">Contact Us</NavLink></li>
-                                <li><NavLink to="/">Terms and Conditons</NavLink></li>
-                                <li><NavLink to="/">Privacy policy</NavLink></li>
+                                <li><NavLink to="/terms-and-conditions">Terms and Conditons</NavLink></li>
+                                <li><NavLink to="/privacy-policy">Privacy policy</NavLink></li>
                             </ul>
                         </div>
                         <div className="col item social">

@@ -8,6 +8,8 @@ import Contact from '../components/Contact/Contact'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
 import Home from '../components/Home/Home'
+import PrivacyPolicy from '../components/Policiy/PrivacyPolicy/PrivacyPolicy'
+import TermAndConditions from '../components/Policiy/TermsAndConditions/TermAndConditions'
 import Chat from '../components/Profile/Chat/Chat'
 import PackageHistory from '../components/Profile/Package/PackageHistory'
 import Profile from '../components/Profile/Profile'
@@ -27,6 +29,8 @@ const Routes = () => {
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/chat" component={Chat} />
                 <Route exact path="/package-history" component={PackageHistory} />
+                <Route exact path="/terms-and-conditions" component={TermAndConditions} />
+                <Route exact path="/privacy-policy" component={PrivacyPolicy} />
             </Switch>
             <Footer />
         </>
