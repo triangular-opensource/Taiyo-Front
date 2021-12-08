@@ -3,7 +3,7 @@ import useAuth from '../../../config/AuthContext'
 import CustomButton from "../../../customComponents/CustomButton/CustomButton"
 import CustomInput from "../../../customComponents/CustomInputField/CustomInput"
 import "./Login.css"
-import { ReactComponent as LoginSvg } from "../../../static/login.svg"
+import { ReactComponent as LoginSvg } from "../../../global/static/svg/login.svg";
 import { NavLink } from 'react-router-dom'
 
 function Login() {

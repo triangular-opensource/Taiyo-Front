@@ -11,14 +11,14 @@
   width: 100%;
 }
 
-.wrapper .textarea{
+.textarea{
   background: #fff;
   border-radius: 5px;
   position: relative;
   box-shadow: 0px 1px 5px 3px rgba(0,0,0,0.12);
 }
 
-.textarea textarea{
+textarea{
   outline: none;
   border: none;
   border-radius: 5px;

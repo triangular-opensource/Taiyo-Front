@@ -1,26 +1,24 @@
 import React, { createContext, useContext, useEffect, useMemo, useReducer, useState } from 'react'
 import axios from 'axios';
 import { GLOBAL_URL } from '../global/Constant';
-import Loader from '../components/Loader';
-import "../static/css/Loader.css"
+import Loader from '../customComponents/Loader/Loader';
 import { useHistory } from 'react-router';
 import useToken from './useToken';
-import { initialState, reducer } from '../reducer/useReducer';
+import { initialState, reducer } from './useReducer';
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
 
     const history = useHistory();
-
     const {saveToken} = useToken();
-
     const [error, setError] = useState(null);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [generalInfo, setGeneralInfo] = useState(null);
     const [address, setAddress] = useState(null);
     const [policy, setPolicy] = useState(null);
+    const [subscription, setSubscription] = useState(null);
 
 
     function regiser(email, password) {
@@ -80,12 +78,23 @@ export const AuthProvider = ({ children }) => {
         .catch(async(error) => setError(await error));
     }
 
+
+    const getSubscription = async () => {
+        await fetch(`${GLOBAL_URL}/subscription`, {
+            method: "GET"
+        })
+        .then(async (response) => await response.json())
+        .then(async (result) => setSubscription(await result.data))
+        .catch(async(error) => setError(await error));
+    }
+
     useEffect(() => {
         const fun = async () => {
             setLoading(true);
             await getGeneralInfo();
             await getAddress();
             await getPolicy();
+            await getSubscription();
             setLoading(false);
         }
         fun();
@@ -103,8 +112,9 @@ export const AuthProvider = ({ children }) => {
         address,
         policy,
         state,
+        subscription,
         dispatch,
-    }), [user, loading, error, generalInfo, address, policy, state]);
+    }), [user, loading, error, generalInfo, address, policy, state , subscription]);
 
     return (
         <AuthContext.Provider value={memoedValue}>

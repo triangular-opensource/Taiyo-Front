@@ -10,16 +10,13 @@ function CustomTextarea(props){
     
 	return (
     	<div className="wrapper"> 
-      		<div className="textarea">
-				<textarea
+				<textarea className="textarea"
 				value={props.value}
-				className={props.class}
 				style={style}
 				onChange={props.onChangeValue}
 				placeholder={props.placeholder}
 				/>
-      		</div>
-    	</div>
+      	</div>
     )
 }
 

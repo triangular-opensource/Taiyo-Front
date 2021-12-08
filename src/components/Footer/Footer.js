@@ -2,20 +2,14 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import useAuth from '../../config/AuthContext';
-import { GLOBAL_URL } from '../../global/Constant';
 import "./Footer.css"
+import { postNewsLetter } from '../../global/Function';
 
 function Footer() {
 
     const {generalInfo} = useAuth();
 
     const [email, setEmail] = useState("");
-
-    const addNewsletter = async () => {
-        await axios.post(`${GLOBAL_URL}/news-letter`, {
-            "email": email
-        }).then(res => alert(res))
-    }
 
     return (
         <div className="footer-dark">
@@ -34,7 +28,7 @@ function Footer() {
                                     <span className="container__emailInput">
                                         <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} className="InputEmail rounded" placeholder="Enter Email" />
                                     </span>
-                                    <button disabled={!email} onClick={addNewsletter} className="btn btn-secondary SubmitBtn" >Send</button>
+                                    <button disabled={!email} onClick={()=>  postNewsLetter(email) } className="btn btn-secondary SubmitBtn" >Send</button>
                                 </div>
                             </div>
                         </div>

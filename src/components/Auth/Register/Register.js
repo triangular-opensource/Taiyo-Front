@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import CustomButton from '../../../customComponents/CustomButton/CustomButton';
 import CustomInput from '../../../customComponents/CustomInputField/CustomInput';
-import { ReactComponent as RegisterSvg } from "../../../static/register.svg"
+import { ReactComponent as RegisterSvg } from "../../../global/static/svg/register.svg";
 
 function Register() {
 

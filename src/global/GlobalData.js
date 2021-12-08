@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react"
-import { GLOBAL_URL } from "../global/Constant";
+import { GLOBAL_URL } from "./Constant";
 
 const GlobalDataContext = createContext({});
 

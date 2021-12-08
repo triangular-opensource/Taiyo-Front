@@ -1,7 +1,8 @@
 import React from 'react'
 import "./AppDownload.css"
-import { ReactComponent as AndroidSvg } from "../../../static/android.svg";
-import { ReactComponent as AppleSvg } from "../../../static/apple.svg";
+
+import { ReactComponent as AppleSvg } from "../../../global/static/svg/apple.svg";
+import { ReactComponent as AndroidSvg } from "../../../global/static/svg/android.svg";
 
 function AppDownload() {
     return (

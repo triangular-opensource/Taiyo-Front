@@ -1,7 +1,7 @@
 import React from 'react';
 import useAuth from '../../../config/AuthContext';
 import './AboutData.css';
-import { ReactComponent as AboutSvg } from "../../../static/about.svg";
+import { ReactComponent as AboutSvg } from "../../../global/static/svg/about.svg";
 import CustomText from "../../../customComponents/CustomText/CustomText";
 
 
