@@ -20,14 +20,14 @@ function Header() {
                     <NavLink className="nav-link py-4" exact to="/">Home</NavLink>
                 </li>
                 <li className="nav-item py-3 dropdown">
-                    <span className="nav-link dropdown-toggle" id="navbarDropdown">Search</span>
-                    <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <NavLink className="nav-link" id="navbarDropdown" to="/search">Search</NavLink>
+                    {/* <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                         <NavLink className="dropdown-item" to="/">Uncoated Flat Steel</NavLink>
                         <NavLink className="dropdown-item" to="/">HR - Hot Rolled Steel</NavLink>
                         <NavLink className="dropdown-item" to="/">CR - Cold Rolled Steel</NavLink>
                         <NavLink className="dropdown-item" to="/">Coated Flat Steel</NavLink>
                         <NavLink className="dropdown-item" to="/">GP - Galvanized Steel</NavLink>
-                    </div>
+                    </div> */}
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link py-4" to="/about">About</NavLink>
