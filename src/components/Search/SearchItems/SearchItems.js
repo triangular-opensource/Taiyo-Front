@@ -11,12 +11,12 @@ const SearchItems = () => {
                 </div>
                 <div className="col-md-8">
                     <div className="row">
-                        <div className="col-7">
-                            <h4>Product Name</h4>
+                        <div className="col-6">
+                            <h5>Product Name</h5>
                         </div>
-                        <div className="col-5">
+                        <div className="col-6">
                             <span className="float-right">
-                               <h3>&#8377; 25,688.00</h3>
+                               <h4>&#8377; 25,688.00</h4>
                             </span>
                         </div>
                     </div>
@@ -39,11 +39,11 @@ const SearchItems = () => {
                         </div>
                     </div>
                     <div className="row my-1">
-                        <div className="col-6 searchItem__timestamp">
+                        <div className="col-8 searchItem__timestamp">
                             Posted : November 25, 2021
                         </div>
-                        <div className="col-6">
-                            <a href="/" className="float-right btn btn-primary">View Details</a>
+                        <div className="col-4">
+                            <a href="/" className="float-right btn btn-sm btn-primary">View Details</a>
                         </div>
                     </div>
                 </div>
