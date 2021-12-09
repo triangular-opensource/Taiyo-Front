@@ -14,10 +14,9 @@ function ProfileNavbar() {
                     <a className="dropdown-item" href="/">Featured Ads</a>
                     <a className="dropdown-item" href="/">Shortlisted</a>
                 </div>
-                <NavLink to="/chat" className="col-md-2 py-3 border text-center">MESSAGES</NavLink>
-                <NavLink to="/" className="col-md-2 py-3 border text-center">PACKAGES</NavLink>
+                <NavLink to="/buy-sell" className="col-md-2 py-3 border text-center">PACKAGES</NavLink>
                 <NavLink to="/package-history" className="col-md-2 py-3 border text-center">PACKAGE HISTORY</NavLink>
-                <div className="col-md-4 border"></div>
+                <div className="col-md-6 border"></div>
             </div>
         </div>
     )

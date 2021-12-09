@@ -5,27 +5,27 @@ import CustomText from '../CustomText/CustomText'
 
 import './CustomUserEditForm.css'
 
-function CustomUserEditForm (){
+const CustomUserEditForm = () => {
+
     const style={
         color:'#282d32',
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
-
     }
     
     return (
-    <div className="container">
-<div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 ">
-<div className="card h-100 ">
+	    <div className="container">
+			<div className="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12 ">
+				<div className="card h-100 ">
     
-	<div className="card-body">
-        <div className="aParent">
-            <div className="user-avatar">
-					<img src="https://bootdey.com/img/Content/avatar/avatar7.png" className="user__image"/>                              
-	        </div>
-            <h6 className="mt-2 text-primary">Kartikeya Sharma</h6>
-        </div>
+					<div className="card-body">
+						<div className="aParent">
+							<div className="user-avatar">
+								<img src="https://bootdey.com/img/Content/avatar/avatar7.png" className="user__image" alt='profile'/>                              
+							</div>
+							<h6 className="mt-2 text-primary">Kartikeya Sharma</h6>
+						</div>
         
 	<div className="row gutters">
 		<div className="mt-4 mb-2 col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
