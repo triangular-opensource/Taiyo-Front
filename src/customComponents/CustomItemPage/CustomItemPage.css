@@ -1,0 +1,10 @@
+.auth-bg {
+    background: rgb(244, 245, 245);
+    border-radius: 30px;
+    height: auto;
+}
+
+.image-height
+{
+    max-height: 350px;
+}

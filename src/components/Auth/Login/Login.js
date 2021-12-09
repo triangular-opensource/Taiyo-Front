@@ -6,28 +6,20 @@ import "./Login.css"
 import { ReactComponent as LoginSvg } from "../../../global/static/svg/login.svg";
 import { NavLink } from 'react-router-dom'
 
+import { emailValidation } from '../../../global/validations'
+import { EMAIL_ERROR } from '../../../global/Constant'
+import CustomAlert from '../../../customComponents/CustomAlert/CustomAlert'
+
 function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isEmailValidate, setEmailValidate] = useState(true);
 
     const {login} = useAuth();
     const handleLogin = () => {
         return login(email, password)
     }
-
-    // const style = {
-    //     padding:"50px",
-    //     color:'#f0f9ff',
-    //     backgroundColor:'#282d32',
-    //     width : "400px",
-    //     display: "flex",
-    //     alignItems: "center",
-    //     justifyContent: "center",
-    //     flexDirection: "column",
-    //     margin: "10px"
-    // }
-
     return (
         <div className="container py-5">
             <div className="row no-gutters auth-bg">
@@ -41,7 +33,22 @@ function Login() {
                         </legend>
                     </div>
                     <div className="form-row col-md-12">
-                        <CustomInput type="email" value={email} onChangeValue={(event) => setEmail(event.target.value)} placeholder='Email'/>
+                        <CustomInput type="email" value={email}
+                         onChangeValue = {(event) => { 
+                                setEmail(event.target.value)
+                                if(emailValidation(event.target.value))
+                                    {console.log("sddfdsffd")
+                                    setEmailValidate(false)
+                                    }
+                                else
+                                   {
+                                       console.log("fail")
+                                       setEmailValidate(true)
+                                   }
+                            }}  placeholder='Email'  />
+                        
+                        {isEmailValidate &&  <CustomAlert  message = {EMAIL_ERROR}/ > }    
+                        
                     </div>
                     <div className="form-row col-md-12">
                         <CustomInput type="password" value={password} onChangeValue={(event) => setPassword(event.target.value)} placeholder='Password'/>
