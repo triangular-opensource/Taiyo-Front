@@ -13,16 +13,28 @@ export const AuthProvider = ({ children }) => {
     const history = useHistory();
     const {saveToken} = useToken();
     const [error, setError] = useState(null);
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
     const [generalInfo, setGeneralInfo] = useState(null);
     const [address, setAddress] = useState(null);
     const [policy, setPolicy] = useState(null);
-    const [subscription, setSubscription] = useState(null);
 
 
     function regiser(email, password) {
         
+    }
+
+    const getUserData = async (token) => {
+        await axios.get(`${GLOBAL_URL}/auth/user`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
+            }
+        }).then(async (response) => {
+            let data = [await response.data.data]
+            setUser(data[0])
+            localStorage.setItem("user", JSON.stringify(data[0]))
+        }).catch(async (error) => setError(await error))
     }
 
     async function login(email, password) {
@@ -39,6 +51,7 @@ export const AuthProvider = ({ children }) => {
         .then(async (response) => await response.json())
         .then(async (result) =>  {
             saveToken(result.data.token)
+            getUserData(result.data.token)
             dispatch({type: "USER", payload:true})
             history.push("/")
         })
@@ -46,8 +59,9 @@ export const AuthProvider = ({ children }) => {
     }
     
     async function logout() {
-        saveToken(null)
+        saveToken("")
         dispatch({type: "USER", payload:false})
+        localStorage.removeItem("user")
         history.push("/login")
     }
 
@@ -78,23 +92,15 @@ export const AuthProvider = ({ children }) => {
         .catch(async(error) => setError(await error));
     }
 
-
-    const getSubscription = async () => {
-        await fetch(`${GLOBAL_URL}/subscription`, {
-            method: "GET"
-        })
-        .then(async (response) => await response.json())
-        .then(async (result) => setSubscription(await result.data))
-        .catch(async(error) => setError(await error));
-    }
-
     useEffect(() => {
         const fun = async () => {
             setLoading(true);
+            if (localStorage.getItem("token") !== "" && localStorage.getItem("user") !== "") {
+                dispatch({type: "USER", payload:true})
+            }
             await getGeneralInfo();
             await getAddress();
             await getPolicy();
-            await getSubscription();
             setLoading(false);
         }
         fun();
@@ -112,9 +118,8 @@ export const AuthProvider = ({ children }) => {
         address,
         policy,
         state,
-        subscription,
         dispatch,
-    }), [user, loading, error, generalInfo, address, policy, state , subscription]);
+    }), [user, loading, error, generalInfo, address, policy, state]);
 
     return (
         <AuthContext.Provider value={memoedValue}>

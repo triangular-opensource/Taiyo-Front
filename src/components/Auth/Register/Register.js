@@ -46,14 +46,11 @@ function Register() {
                     </div>
 
                     <div className="form-row">
-                        <div className="form-group col-md-4">
+                        <div className="form-group col-md-6">
                             <CustomInput type="text" value={contact} onChangeValue={(event) => setContact(event.target.value)} placeholder='Contact Number'/>
                         </div>
-                        <div className="form-group col-md-4">
+                        <div className="form-group col-md-6">
                             <CustomInput type="email" value={contact} onChangeValue={(event) => setContact(event.target.value)} placeholder='Email'/>
-                        </div>
-                        <div className="form-group col-md-4">
-                            <CustomInput type="text" value={contact} onChangeValue={(event) => setContact(event.target.value)} placeholder='GST Number'/>
                         </div>
                     </div>
 
@@ -75,31 +72,50 @@ function Register() {
                         </div>
                     </div>
 
-                    <div className="form-row col-md-12">
-                        <CustomInput type="email" value={email} onChangeValue={(event) => setEmail(event.target.value)} placeholder='Email'/>
-                    </div>
-
-                    <div className="form-row col-md-12">
-                        <CustomInput type="password" value={password} onChangeValue={(event) => setPassword(event.target.value)} placeholder='Password'/>
-                    </div>
-
-                    <div className="form-row col-md-12">
-                        <CustomInput type="password" value={confirmPassword} onChangeValue={(event) => setConfirmPassword(event.target.value)} placeholder='Confirm Password'/>
-                    </div>
-
-                    <div className="form-row col-md-12">
-                        <div className="custom-control custom-checkbox my-2">
-                            <input type="checkbox" className="custom-control-input" id="customControlValidation1" required />
-                            <label className="custom-control-label" htmlFor="customControlValidation1">I agree to Terms and Conditions</label>
+                    <div className="form-row">
+                        <div className="form-group col-md-12">
+                            <CustomInput type="text" value={contact} onChangeValue={(event) => setContact(event.target.value)} placeholder='Company Address'/>
                         </div>
                     </div>
 
-                    <div className="form-row col-md-12">
-                        <CustomButton disabled={checkDisabled} fontSize="17" marginTop="20" data="REGISTER" handleClick={handleRegister} padding='16' backgroundColor='gray' color='white' />
+                    <div className="form-row">
+                        <div className="form-group col-md-4">
+                            <CustomInput type="text" value={contact} onChangeValue={(event) => setContact(event.target.value)} placeholder='Company City'/>
+                        </div>
+                        <div className="form-group col-md-4">
+                            <CustomInput type="text" value={contact} onChangeValue={(event) => setContact(event.target.value)} placeholder='Company State'/>
+                        </div>
+                        <div className="form-group col-md-4">
+                            <CustomInput type="text" value={contact} onChangeValue={(event) => setContact(event.target.value)} placeholder='Company Country'/>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group col-md-6">
+                            <CustomInput type="text" value={contact} onChangeValue={(event) => setContact(event.target.value)} placeholder='Company Pincode'/>
+                        </div>
+                        <div className="form-group col-md-6">
+                            <CustomInput type="text" value={contact} onChangeValue={(event) => setContact(event.target.value)} placeholder='GST Number'/>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group col-md-12">
+                            <div className="custom-control custom-checkbox my-2">
+                                <input type="checkbox" className="custom-control-input" id="customControlValidation1" required />
+                                <label className="custom-control-label" htmlFor="customControlValidation1">I agree to Terms and Conditions</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="form-row">
+                        <div className="form-group col-md-12">
+                            <CustomButton disabled={checkDisabled} fontSize="17" data="REGISTER" handleClick={handleRegister} padding='16' backgroundColor='gray' color='white' />
+                        </div>
                     </div>
                     <hr/>
                     
-                    <p className="mt-2 mx-4">Already have an account? <NavLink className="text-decoration-none" to="/login">Login.</NavLink></p>
+                    <p className="mt-2">Already have an account? <NavLink className="text-decoration-none" to="/login">Login.</NavLink></p>
 				</div>
 			</div>
 		</div>
