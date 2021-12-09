@@ -5,7 +5,6 @@ import Login from '../components/Auth/Login/Login'
 import Register from '../components/Auth/Register/Register'
 import BuySell from '../components/BuySell/BuySell'
 import Contact from '../components/Contact/Contact'
-import Details from '../components/Details/Details'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
 import Home from '../components/Home/Home'
@@ -15,7 +14,7 @@ import Chat from '../components/Profile/Chat/Chat'
 import PackageHistory from '../components/Profile/Package/PackageHistory'
 import Profile from '../components/Profile/Profile'
 import Search from '../components/Search/Search'
-import CustomDetailPage from '../customComponents/CustomDetailPage/CustomDetailPage'
+import CustomItemPage from '../customComponents/CustomItemPage/CustomItemPage'
 import CustomUserEditForm from '../customComponents/CustomUserEditForm/CustomUserEditForm'
 
 const Routes = () => {
@@ -36,7 +35,7 @@ const Routes = () => {
                 <Route exact path="/terms-and-conditions" component={TermAndConditions} />
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/search" component={Search} />
-                <Route exact path="/search-detail" component={CustomDetailPage} />
+                <Route exact path="/search-detail" component={CustomItemPage} />
                 <Route exact path="/edit-profile" component={CustomUserEditForm} />
             </Switch>
             <Footer />
