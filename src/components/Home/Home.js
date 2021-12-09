@@ -1,13 +1,11 @@
 import React from 'react'
-
+import AboutData from '../About/AboutData/AboutData'
+import Contact from '../Contact/Contact'
 function Home() {
-
-    let user = localStorage.getItem("user");
-
-    console.log(JSON.parse(user)[0])
-
     return (
         <div>
+                <AboutData />
+                <Contact />
         </div>
     )
 }
