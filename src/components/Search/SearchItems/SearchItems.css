@@ -1,0 +1,12 @@
+.ad__desc {
+    font-size: smaller;
+}
+.searchItem__location {
+    font-size: smaller;
+}
+.searchItem__timestamp {
+    font-size: smaller;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}

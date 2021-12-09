@@ -17,6 +17,6 @@ export async function postContact(name, email, subject , message )
 export async function postNewsLetter(email) {
     await axios.post(`${GLOBAL_URL}/news-letter`, {
         "email": email
-    }).then(res =>alertFire(<p> Request Of NewsLetter Sent </p>) ).catch(async (error) =>alertFire(<p> OOPs Some Problem Occur </p>))
+    }).then(res =>alertFire({html: <p> Request Of NewsLetter Sent </p>, icon:"success"}) ).catch(async (error) =>alertFire(<p> OOPs Some Problem Occur </p>))
 }
 
