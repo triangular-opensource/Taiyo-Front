@@ -4,6 +4,10 @@ import  alertFire from './AlertProvider'
 
 export async function postContact(name, email, subject , message ) 
 {   
+    if(name === "" || subject === "" || message === "")
+        return  alertFire(<p> Please Fill all the fields</p>);
+
+
     await axios.post(`${GLOBAL_URL}/contact`, {
             "name" :  name ,
             "email" : email ,

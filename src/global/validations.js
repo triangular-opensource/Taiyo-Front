@@ -1,23 +1,17 @@
-export function isDataNull(val)
-{ return (val=== "" || val === " " || val === null ) ? false : true;}
+
+
 
 export function emailValidation(email) 
 {  
-    if(isDataNull(email))
-        return String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    return false;
+    return String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 }
 
 export function phoneValidation(phone) 
 {  
-    if(isDataNull(phone))
-        return String(phone).toLowerCase().match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
-    return false;
+    return String(phone).toLowerCase().match(/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/);
 }
 export function gstValidation(gst) 
 {  
-    if(isDataNull(gst))
-     {
         let regTest = /\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}/.test(gst)
         if(regTest){
            let a=65,b=55,c=36;
@@ -29,15 +23,9 @@ export function gstValidation(gst)
            } ,0); 
        }
        return regTest
-     }
-    return false;
 }
 
 export function passwordValidate(password) 
 {  
-    if(isDataNull(password))
-     {
         return String(password).match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/);   
-     }
-    return false;
 }
