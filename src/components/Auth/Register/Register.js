@@ -66,7 +66,7 @@ function Register() {
                         <div className="form-group col-md-6">
                             <CustomInput type="email" value={email} onChangeValue={(event) => setEmail(event.target.value)} placeholder='Email'/>
                         </div>
-                    </div>
+                    </div> 
 
                     <div className="form-row">
                         <div className="form-group col-md-6"> 
