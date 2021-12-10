@@ -5,6 +5,7 @@ import Loader from '../customComponents/Loader/Loader';
 import { useHistory } from 'react-router';
 import useToken from './useToken';
 import { initialState, reducer } from './useReducer';
+import  alertFire from '../global/AlertProvider'
 
 const AuthContext = createContext({});
 
@@ -20,8 +21,39 @@ export const AuthProvider = ({ children }) => {
     const [policy, setPolicy] = useState(null);
 
 
-    function regiser(email, password) {
-        
+    const register = async (firstName, middleName, lastName, gst, phoneNumber, companyName, companyType, companyAddress, companyCity, companyState, companyCountry, companyPincode, email, password) => {
+        await axios.post(`${GLOBAL_URL}/auth/register`, {
+            "first_name": firstName,
+            "middle_name": middleName,
+            "last_name": lastName,
+            "gst_number": gst,
+            "phone_number": phoneNumber,
+            "company_name": companyName,
+            "company_type": companyType,
+            "company_address": companyAddress,
+            "company_city": companyCity,
+            "company_state": companyState,
+            "company_country": companyCountry,
+            "company_pin_code": companyPincode,
+            "email": email,
+            "password": password
+        })
+        .then(res => {
+                console.log(res.data)
+                alertFire({
+                    html: 
+                        <div>
+                            <h5>Check you mailbox</h5>
+                            <p>Email verfication link sent to you email.</p>
+                        </div>,
+                    icon:"success"
+                })
+            }
+        )
+        .catch(async (error) => {
+            console.log(error.response)
+            alertFire(<p> OOPs Some Problem Occur </p>)
+        })
     }
 
     const getUserData = async (token) => {
@@ -34,7 +66,10 @@ export const AuthProvider = ({ children }) => {
             let data = [await response.data.data]
             setUser(data[0])
             localStorage.setItem("user", JSON.stringify(data[0]))
-        }).catch(async (error) => setError(await error))
+        }).catch(async (error) => {
+            setError(await error)
+            console.log(error.response)
+        })
     }
 
     async function login(email, password) {
@@ -119,6 +154,7 @@ export const AuthProvider = ({ children }) => {
         policy,
         state,
         dispatch,
+        register,
     }), [user, loading, error, generalInfo, address, policy, state]);
 
     return (

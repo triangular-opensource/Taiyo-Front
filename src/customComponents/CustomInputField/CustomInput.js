@@ -7,7 +7,7 @@ function CustomInput(props){
     	height : props.height  ? props.height : `45px` 
   	}
 	return (
-    	<div className="wrapper"> 
+    	<div className="wrapper">
       		<div className="input">
 				<input
 				type={props.type}
@@ -16,6 +16,7 @@ function CustomInput(props){
 				style={style}
 				onChange={props.onChangeValue}
 				placeholder={props.placeholder}
+				required={props.required}
 				/>
       		</div>
     	</div>

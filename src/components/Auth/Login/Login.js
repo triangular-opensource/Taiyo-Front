@@ -57,7 +57,7 @@ function Login() {
                            { !isPasswordValidate &&  <PASSWORD_ERROR/> }        
                     </div>
                     <div className="form-row col-md-12">
-                        <CustomButton disabled={!(isEmailValidate && isPasswordValidate)} fontSize="17" marginTop="20" data="LOGIN" handleClick={handleLogin} padding='16' backgroundColor='gray' color='white' />
+                        <CustomButton disabled={(isEmailValidate && isPasswordValidate)} fontSize="17" marginTop="20" data="LOGIN" handleClick={handleLogin} padding='16' backgroundColor='gray' color='white' />
                     </div>
                     <hr />
                     <p className="mt-2 mx-4">Don't have an account? <NavLink className="text-decoration-none" to="/register">Register here</NavLink></p>
