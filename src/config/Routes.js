@@ -14,8 +14,8 @@ import Chat from '../components/Profile/Chat/Chat'
 import PackageHistory from '../components/Profile/Package/PackageHistory'
 import Profile from '../components/Profile/Profile'
 import Search from '../components/Search/Search'
-import CustomItemPage from '../customComponents/CustomItemPage/CustomItemPage'
 import CustomUserEditForm from '../customComponents/CustomUserEditForm/CustomUserEditForm'
+import ItemPage from '../components/ItemPage/ItemPage' 
 
 const Routes = () => {
 
@@ -35,7 +35,7 @@ const Routes = () => {
                 <Route exact path="/terms-and-conditions" component={TermAndConditions} />
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/search" component={Search} />
-                <Route exact path="/search-detail" component={CustomItemPage} />
+                <Route exact path="/search-detail" component={ItemPage} />
                 <Route exact path="/edit-profile" component={CustomUserEditForm} />
             </Switch>
             <Footer />

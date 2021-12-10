@@ -1,11 +1,20 @@
-import React from 'react'
-import CustomText from '../CustomText/CustomText'
-import './CustomItemPage.css'
+import {React , useState } from 'react'
+import CustomText from '../../customComponents/CustomText/CustomText'
+import CustomButton from '../../customComponents/CustomButton/CustomButton'
+import './ItemPage.css'
+import Popup from '../../customComponents/Popup/Popup'
+import Excel from '../../customComponents/Excel/Excel'
 
 function CustomItemPage(){
+
+    const [isOpen, setIsOpen] = useState(false);
+    const togglePopup = () => {
+    setIsOpen(!isOpen);
+  }
+
     return (
-        <div className = "container-fluid py-5 auth-bg px-5">
-        <div className="row no-gutters item-bg">
+        <div className = "container-fluid my-4 py-5 auth-bg px-5">
+        <div className="row no-gutters ">
                 <div className="col-md-12">
                                 <div id="carouselExampleIndicators" class="carousel slide image-height" data-ride="carousel">
                                     <ol class="carousel-indicators image-height">
@@ -34,28 +43,35 @@ function CustomItemPage(){
                                     </a>
                                   </div>
                 </div>
-                <div className="form-row col-md-12">
-                <span>
-                </span>
-                    </div>
-                    <div className="form-row col-md-12">
-                    <CustomText name= "location " weight='bold' size= 'large'/>
-                    </div>
-                    <div className="form-row col-md-12">
-                    <CustomText name= "location " weight='bold' size= 'large'/>
-                    </div>
-                    <div className="form-row col-md-12">
-                    <CustomText name= "location " weight='bold' size= 'large'/>
-                    </div>
-                    <div className="form-row col-md-12">
-                    <CustomText name= "location " weight='200' size= 'large'/>
-                    </div>
-                    <div className="form-row col-md-12">
-                    <CustomText name= "location " weight='200' size= 'large'/>
-                    </div>
+               <div className="container-fluid py-3">
+                   <div className="row">
+                       <div className="col-md-10">
+                       <CustomText name="Sddsffdsdfs" color='grey' size='xx-large' weight='400' />
+                       </div>
+                       <div className="col-md-1">
+                       <CustomButton   fontSize="17" data="Excel" padding='12' backgroundColor='gray' color='white'  handleClick = {togglePopup} />
+    {
+    isOpen && <Popup
+      content=
+      {
+          <>
+          <CustomText name = "Excel File Data" color="grey" size = 'xx-large' weight = '400' />
+          <Excel />
+          </>
+      }
+      handleClose={togglePopup}
+    />}
 
-            </div>
+                       </div>
+                       <div className="col-md-1">
+                       <CustomButton   fontSize="17"  data="Pdf" padding='12' backgroundColor='gray' color='white' />
+                       </div>
+                   </div>
+               </div>
         </div>
+    </div>
+
+
     )
 }
 
