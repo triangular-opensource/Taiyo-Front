@@ -16,11 +16,13 @@ import Profile from '../components/Profile/Profile'
 import Search from '../components/Search/Search'
 import CustomUserEditForm from '../customComponents/CustomUserEditForm/CustomUserEditForm'
 import ItemPage from '../components/ItemPage/ItemPage' 
+import Pdf from '../customComponents/Pdf/Pdf'
 
 const Routes = () => {
 
     return (
         <>
+            <Route exact path="/pdf" component={Pdf} />
             <Header />
             <Switch>
                 <Route exact path="/" component={Home} />

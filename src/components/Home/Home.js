@@ -7,7 +7,6 @@ function Home() {
         <div>
                 <AboutData />
                 <Contact />
-                <Pdf />
         </div>
     )
 }
