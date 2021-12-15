@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 
 function CustomItemPage() {
-    const navigate = useHistory();
+    const history = useHistory();
 
     const [isOpen, setIsOpen] = useState(false);
     const togglePopup = () => {
@@ -71,7 +71,7 @@ function CustomItemPage() {
 
                         </div>
                         <div className="col-md-1">
-                            <CustomButton fontSize="17" data="Pdf" onClick={navigate("../pdf", { replace: true })} padding='12' backgroundColor='gray' color='white' />
+                            <CustomButton fontSize="17" data="Pdf" handleClick={history.push("./pdf")} padding='12' backgroundColor='gray' color='white' />
                         </div>
                     </div>
                 </div>

@@ -22,7 +22,7 @@ const Routes = () => {
 
     return (
         <>
-            <Route exact path="/pdf" component={Pdf} />
+            <Route exact path="/pdf" component={Pdf} /> 
             <Header />
             <Switch>
                 <Route exact path="/" component={Home} />
