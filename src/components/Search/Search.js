@@ -9,49 +9,89 @@ function Search() {
 
     const [category, setCategory] = useState([]);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true)
+    const [categoryLoading, setCategoryLoading] = useState(true)
 
     useEffect(() => {
-        const getSubscription = async () => {
-            await axios.get(`${GLOBAL_URL}/category`)
+        axios.get(`${GLOBAL_URL}/category`)
             .then(async (response) => {
                 setCategory(response.data.data);
-                setLoading(false)
+                setCategoryLoading(false)
             })
             .catch(async (error) => setError(error))
-        }
-        getSubscription();
     }, []);
     
     return (
         <div className="container-fluid py-3">
-            <div className="row">
-                <div className="col-md-4"></div>
-                    <div className="col-md-4 search__col">
-                    <CustomSearchBar placeholder = "Location" /> 
+            <div className="row d-flex justify-content-center">
+                <div className="col-md-6 search__col">
+                    <CustomSearchBar placeholder="Location" /> 
                 </div>
-                <div className="col-md-4"></div>
             </div>
 
-            <div className = "row">
-                     { category.map((cat) => <div className="auth-bg py-2 px-3 mx-4"> <CustomText name = {cat.name}/> </div> )}
-            </div>
+            <div className="row my-4 mx-4">
+                <div className="col-md-3">
+                    <div className="container border rounded-lg bg-light pt-4 pb-2">
+                        <div className="row mb-1">
+                            <div className="col-12">
+                                <h5>Filters</h5>
+                            </div>
+                        </div>
+                        <div className="row mb-3 ml-auto">
+                            <div className="container">
+                                <div className="row mb-1">
+                                    <div className="col-12">
+                                       <h6>Ad Type</h6> 
+                                    </div>
+                                </div>
+                                <div className="row ml-auto">
+                                    <div className="col-12">
+                                        <div class="custom-control custom-switch mb-1">
+                                            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" />
+                                            <label class="custom-control-label" for="customRadio1">Sell</label>
+                                        </div>
+                                        <div class="custom-control custom-switch mt-2">
+                                            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" />
+                                            <label class="custom-control-label" for="customRadio2">Buy</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="row mb-3 ml-auto">
+                            <div className="container">
+                                <div className="row mb-1">
+                                    <div className="col-12">
+                                       <h6>Category</h6>
+                                    </div>
+                                </div>
+                                <div className="row ml-auto">
+                                    <div className="col-12">
+                                        {
+                                            categoryLoading ? (
+                                                <div className="d-flex justify-content-center align-items-center">
+                                                    <div className="spinner-border" role="status">
+                                                        <span className="sr-only">Loading...</span>
+                                                    </div>
+                                                </div>
+                                            ) : 
+                                            category.map(
+                                                (cat) =>
+                                                    <div key={cat.id} class="custom-control custom-switch my-1">
+                                                        <input type="checkbox" class="custom-control-input" id={`check${cat.id}`} />
+                                                        <label class="custom-control-label" htmlFor={`check${cat.id}`}>{cat.name}</label>
+                                                    </div>
+                                            )
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <div className="row mt-4 mx-4">
-                <div className="col-md-6">
-                    <h4 className="text-center">Buy</h4>
                 </div>
-                <div className="col-md-6">
-                    <h4 className="text-center">Sell</h4>
-                </div>
-                <div className="col-md-6" style={{maxHeight: "500px", overflowY: "scroll"}}>
+                <div className="col-md-9" style={{maxHeight: "500px", overflowY: "scroll"}}>
                     <CustomItemCard />
                     <CustomItemCard />
-                    <CustomItemCard />
-                    <CustomItemCard />
-                    <CustomItemCard />
-                </div>
-                <div className="col-md-6" style={{maxHeight: "500px", overflowY: "scroll"}}>
                     <CustomItemCard />
                     <CustomItemCard />
                     <CustomItemCard />

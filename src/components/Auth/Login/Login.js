@@ -14,9 +14,11 @@ function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading , setLoading] = useState(false);
 
     const {login} = useAuth();
     const handleLogin = () => {
+        setLoading(true);
         return login(email, password)
     }
 
@@ -38,7 +40,11 @@ function Login() {
                         {(email!=="" && !emailValidation(email) ) ?  <CustomAlert  message = {EMAIL_ERROR}/ > : null }      
                     </div>
                     <div className="form-row col-md-12">
-                        <CustomInput type="password" value={password} placeholder='Password'   onChangeValue = {(event) => { 
+                        <CustomInput
+                            type="password"
+                            value={password}
+                            placeholder='Password'
+                            onChangeValue = {(event) => { 
                                 setPassword(event.target.value)
                             }} />
                            {(password!=="" && !passwordValidate(password)) ?  <PASSWORD_ERROR/> : null }        

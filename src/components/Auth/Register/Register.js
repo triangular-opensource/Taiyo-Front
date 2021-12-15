@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import CustomButton from '../../../customComponents/CustomButton/CustomButton';
 import CustomInput from '../../../customComponents/CustomInputField/CustomInput';
 import { ReactComponent as RegisterSvg } from "../../../global/static/svg/register.svg";
-import axios from "axios"
-import { GLOBAL_URL } from '../../../global/Constant';
 import useAuth from '../../../config/AuthContext';
 
 function Register() {
@@ -124,7 +122,7 @@ function Register() {
 
                     <div className="form-row">
                         <div className="form-group col-md-12">
-                            <CustomButton disabled={false} fontSize="17" data="REGISTER" handleClick={handleRegister} padding='16' backgroundColor='gray' color='white' />
+                            <CustomButton disabled={checkDisabled} fontSize="17" data="REGISTER" handleClick={handleRegister} padding='16' backgroundColor='gray' color='white' />
                         </div>
                     </div>
                     <hr/>
