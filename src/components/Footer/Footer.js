@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import useAuth from '../../config/AuthContext';
