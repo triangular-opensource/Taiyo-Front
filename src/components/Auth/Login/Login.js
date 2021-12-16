@@ -50,7 +50,16 @@ function Login() {
                            {(password!=="" && !passwordValidate(password)) ?  <PASSWORD_ERROR/> : null }        
                     </div>
                     <div className="form-row col-md-12">
-                        <CustomButton  disabled = { ! ( (email!=="" && emailValidation(email)) && (password!=="" && passwordValidate(password)) ) } fontSize="17" marginTop="20" data="LOGIN" handleClick={handleLogin} padding='16' backgroundColor='gray' color='white' />
+                        <CustomButton
+                            disabled={ !((email !== "" && emailValidation(email)) && (password !== "" && passwordValidate(password)))}
+                            fontSize="17"
+                            marginTop="20"
+                            data={!loading? "LOGIN" : <spam>Loading<div className="ml-2 spinner-border spinner-border-sm" role="status"><span className="sr-only">Loading...</span></div></spam>}
+                            handleClick={handleLogin}
+                            padding='16'
+                            backgroundColor='gray'
+                            color='white'
+                        />
                     </div>
                     <hr />
                     <p className="mt-2 mx-4">Don't have an account? <NavLink className="text-decoration-none" to="/register">Register here</NavLink></p>

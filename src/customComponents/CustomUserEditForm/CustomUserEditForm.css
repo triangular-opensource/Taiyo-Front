@@ -1,7 +1,3 @@
-.card-body{
-    background-color: #3e4452;
-}
-
 .text{
     color:white;
 }
@@ -15,7 +11,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-        
+    flex-direction: column; 
 }
 

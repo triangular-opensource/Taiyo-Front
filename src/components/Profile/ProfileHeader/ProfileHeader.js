@@ -2,10 +2,12 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import useAuth from '../../../config/AuthContext'
 import "./ProfileHeader.css"
+import defaultImage from "../../../global/static/default.png"
+import useToken from '../../../config/useToken'
 
 function ProfileHeader() {
 
-    const {user} = useAuth();
+    const {userData} = useToken();
 
     return (
         <div className="container profileHeader__background">
@@ -14,7 +16,7 @@ function ProfileHeader() {
                     <div className="text-center">
                         <img
                             style={{height:"150px", width:"170px", borderRadius:"50%"}}
-                            src={user.image}
+                            src={userData().image ? userData().image : defaultImage}
                             alt="profile_image"
                         />
                     </div>
@@ -22,7 +24,7 @@ function ProfileHeader() {
                 <div className="col-md-9 p-2">
                     <div className="container">
                         <div className="row">
-                            <div className="col-md-12 profileHeader__name">{user.first_name} {user.middle_name} {user.last_name}</div>
+                            <div className="col-md-12 profileHeader__name">{userData().first_name} {userData().middle_name} {userData().last_name}</div>
                         </div>
                         <div className="row">
                             <div className="col-md-12">
@@ -39,7 +41,7 @@ function ProfileHeader() {
                         </div>
                         <div className="row">
                             <div className="col-md-12 text-secondary mx-1 profileHeader__lastActive">
-                                Last Active {user.last_login}
+                                Last Active {userData().last_login}
                             </div>
                         </div>
                         <div className="row mt-2">

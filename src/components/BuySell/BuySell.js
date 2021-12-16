@@ -17,7 +17,7 @@ function BuySell() {
     const [paymentLoading, setPaymentLoading] = useState(true);
 
     const makePayment = async () => {
-        await axios.post(`${GLOBAL_URL}/billing/`, {
+        await axios.post(`${GLOBAL_URL}/billing`, {
             "amount": 1000,
             "username": `${user.first_name}`,
         }, {
@@ -28,19 +28,19 @@ function BuySell() {
             }
         })
         .then(async(response) => {
-            const finRes = await response.json();
+            const finRes = response.data;
             var options = {
                 "key": "rzp_test_240llZpXCqHDn1", // Enter the Key ID generated from the Dashboard
-                "amount": `${finRes.data.amount}`, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise    
+                "amount": `1000`, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise    
                 "currency": "INR",   
-                "name": "Tracerz",
+                "name": "Taiyo",
                 "description": "Recharge your account",
-                "order_id": `${finRes.data.id}`, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1    
-                "callback_url": "https://taiyoindustries.herokuapp.com/api/success-payment/",
+                "order_id": `${finRes.data.data.order_id}`, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1    
+                "callback_url": "https://taiyoindustries.herokuapp.com/api/success-payment",
                 "prefill": {
-                    "name": `${user.first_name}`,
-                    "email": `${user.email}`,
-                    "contact": `${user.phone_number}`
+                    "name": `Alankar`,
+                    "email": `saxenaalankar42@gmail.com`,
+                    "contact": `+918750859034`
                 }
             };
             var rzp1 = new window.Razorpay(options);
@@ -48,7 +48,7 @@ function BuySell() {
                 rzp1.open();
             }
         }).catch(async(error) => {
-            console.log(error.response)
+            console.log(error)
         });
     }
 
