@@ -16,17 +16,11 @@ const CustomUserEditForm = () => {
     const [userType, setUserType] = useState(userData().user_type);
     const [image, setImage] = useState(userData().image);
     const [companyName, setCompanyName] = useState(userData().company_name);
-    const [companyAddress, setCompanyAddress] = useState(
-        userData().company_address
-    );
+    const [companyAddress, setCompanyAddress] = useState(userData().company_address);
     const [companyCity, setCompanyCity] = useState(userData().company_city);
     const [companyState, setCompanyState] = useState(userData().company_state);
-    const [companyCountry, setCompanyCountry] = useState(
-        userData().company_country
-    );
-    const [companyPinCode, setCompanyPinCode] = useState(
-        userData().company_pin_code
-    );
+    const [companyCountry, setCompanyCountry] = useState(userData().company_country);
+    const [companyPinCode, setCompanyPinCode] = useState(userData().company_pin_code);
     const [gst, setGst] = useState(userData().gst_number);
 
     return (
