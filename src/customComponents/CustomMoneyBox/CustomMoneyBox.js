@@ -18,7 +18,7 @@ function CustomMoneyBox(props) {
 }
 
 function handleClick() {
-    alert('Click happened');
+    props.onClick();
 }
 
 
@@ -28,7 +28,7 @@ function handleClick() {
             <CustomText name="Rs. 300" weight='100' size= 'x-large'/>
             <CustomText name="validity upto 30 days" weight='300' size= 'large'/>
             <br/>
-            <CustomButton data={data} handleClick = {handleClick}   padding = '10' backgroundColor='gray' color = 'white' />
+            <CustomButton data={data} handleClick={handleClick} padding='10' backgroundColor='gray' color = 'white' />
         </div>
     )
 }
