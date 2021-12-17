@@ -16,17 +16,17 @@ import Profile from '../components/Profile/Profile'
 import Search from '../components/Search/Search'
 import CustomUserEditForm from '../customComponents/CustomUserEditForm/CustomUserEditForm'
 import ItemPage from '../components/ItemPage/ItemPage' 
-import Pdf from '../customComponents/Pdf/Pdf'
 import ResetPassword from '../components/Auth/ResetPassword/ResetPassword'
 import Otp from '../components/Auth/Otp/Otp'
 import RegisterSuccess from '../components/Auth/Register/RegisterSuccess/RegisterSuccess'
 import ProfileEdit from '../components/Profile/ProfileEdit/ProfileEdit'
+import Email from '../components/Auth/Email/Email'
+import ResetPasswordSuccess from '../components/Auth/ResetPassword/ResetPasswordSuccess/ResetPasswordSuccess'
 
 const Routes = () => {
 
     return (
         <>
-            <Route exact path="/pdf" component={Pdf} /> 
             <Header />
             <Switch>
                 <Route exact path="/" component={Home} />
@@ -45,6 +45,8 @@ const Routes = () => {
                 <Route exact path="/edit-profile" component={ProfileEdit} />
                 <Route exact path="/reset-password" component={ResetPassword} />
                 <Route exact path="/otp" component={Otp} />
+                <Route exact path="/email" component={Email} />
+                <Route exact path="/reset-password-success" component={ResetPasswordSuccess} />
                 <Route exact path="/register-success" component={RegisterSuccess} />
             </Switch>
             <Footer />

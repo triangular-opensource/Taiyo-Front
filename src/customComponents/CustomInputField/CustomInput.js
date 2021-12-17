@@ -4,7 +4,8 @@ import './CustomInput.css'
 function CustomInput(props){
  	const style = {
     	width: "100%",
-    	height : props.height  ? props.height : `45px` 
+    	height : props.height  ? props.height : `45px`,
+		padding : props.padding ? props.padding : '0 20px 0 20px'
   	}
 	return (
     	<div className="wrapper">
@@ -17,6 +18,7 @@ function CustomInput(props){
 				onChange={props.onChangeValue}
 				placeholder={props.placeholder}
 				required={props.required}
+				onInput={props.onInput}
 				/>
       		</div>
     	</div>
