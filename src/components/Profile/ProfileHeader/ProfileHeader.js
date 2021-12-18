@@ -1,6 +1,5 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import useAuth from '../../../config/AuthContext'
 import "./ProfileHeader.css"
 import defaultImage from "../../../global/static/default.png"
 import useToken from '../../../config/useToken'
@@ -29,12 +28,12 @@ function ProfileHeader() {
                         <div className="row">
                             <div className="col-md-12">
                                 <NavLink to="/profile">
-                                    <i class="icon ion-person mx-1"></i>
+                                    <i className="icon ion-person mx-1"></i>
                                     Profile
                                 </NavLink>
                                 <span className="mx-2">|</span>
                                 <NavLink to="/edit-profile">
-                                    <i class="icon ion-edit mx-1"></i>
+                                    <i className="icon ion-edit mx-1"></i>
                                     Edit Profile
                                 </NavLink>
                             </div>

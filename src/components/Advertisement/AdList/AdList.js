@@ -3,7 +3,7 @@ import React from 'react'
 const AdList = () => {
     return (
         <div className="col-md-4 my-2">
-            <div class="row no-gutters border bg-white rounded overflow-hidden flex-md-row mb-1 shadow h-md-100 position-relative">
+            <div className="row no-gutters border bg-white rounded overflow-hidden flex-md-row mb-1 shadow h-md-100 position-relative">
                 <div className="col p-3 position-static">
                     <div className="row">
                         <div className="col">

@@ -23,30 +23,30 @@ function CustomItemPage() {
         <div className="container-fluid my-4 py-5 auth-bg px-5">
             <div className="row no-gutters ">
                 <div className="col-md-12">
-                    <div id="carouselExampleIndicators" class="carousel slide image-height" data-ride="carousel">
-                        <ol class="carousel-indicators image-height">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <div id="carouselExampleIndicators" className="carousel slide image-height" data-ride="carousel">
+                        <ol className="carousel-indicators image-height">
+                            <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                         </ol>
-                        <div class="carousel-inner image-height">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt="First slide" />
+                        <div className="carousel-inner image-height">
+                            <div className="carousel-item active">
+                                <img className="d-block w-100" src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt="First slide" />
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt="Second slide" />
+                            <div className="carousel-item">
+                                <img className="d-block w-100" src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt="Second slide" />
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt="Third slide" />
+                            <div className="carousel-item">
+                                <img className="d-block w-100" src="https://cdn.logo.com/hotlink-ok/logo-social.png" alt="Third slide" />
                             </div>
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
+                        <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span className="sr-only">Previous</span>
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
+                        <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span className="sr-only">Next</span>
                         </a>
                     </div>
                 </div>

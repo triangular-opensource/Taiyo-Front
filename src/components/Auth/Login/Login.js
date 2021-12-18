@@ -54,7 +54,7 @@ function Login() {
                             disabled={ !((email !== "" && emailValidation(email)) && (password !== "" && passwordValidate(password)))}
                             fontSize="17"
                             marginTop="20"
-                            data={!loading? "LOGIN" : <spam>Loading<div className="ml-2 spinner-border spinner-border-sm" role="status"><span className="sr-only">Loading...</span></div></spam>}
+                            data={!loading? "LOGIN" : <span>Loading<div className="ml-2 spinner-border spinner-border-sm" role="status"><span className="sr-only">Loading...</span></div></span>}
                             handleClick={handleLogin}
                             padding='16'
                             backgroundColor='gray'

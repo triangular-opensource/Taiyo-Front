@@ -1,16 +1,6 @@
-.text{
-    color:white;
+#profileImageUpload {
+    cursor: pointer;
 }
-
-.user__image{
-    height: 100px;
-    width: 100px;
+#profileImageUpload:hover {
+    color: blue;
 }
-
-.aParent{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; 
-}
-

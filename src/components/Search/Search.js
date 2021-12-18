@@ -45,13 +45,13 @@ function Search() {
                                 </div>
                                 <div className="row ml-auto">
                                     <div className="col-12">
-                                        <div class="custom-control custom-switch mb-1">
-                                            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" />
-                                            <label class="custom-control-label" for="customRadio1">Sell</label>
+                                        <div className="custom-control custom-switch mb-1">
+                                            <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input" />
+                                            <label className="custom-control-label" for="customRadio1">Sell</label>
                                         </div>
-                                        <div class="custom-control custom-switch mt-2">
-                                            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" />
-                                            <label class="custom-control-label" for="customRadio2">Buy</label>
+                                        <div className="custom-control custom-switch mt-2">
+                                            <input type="radio" id="customRadio2" name="customRadio" className="custom-control-input" />
+                                            <label className="custom-control-label" for="customRadio2">Buy</label>
                                         </div>
                                     </div>
                                 </div>
@@ -76,9 +76,9 @@ function Search() {
                                             ) : 
                                             category.map(
                                                 (cat) =>
-                                                    <div key={cat.id} class="custom-control custom-switch my-1">
-                                                        <input type="checkbox" class="custom-control-input" id={`check${cat.id}`} />
-                                                        <label class="custom-control-label" htmlFor={`check${cat.id}`}>{cat.name}</label>
+                                                    <div key={cat.id} className="custom-control custom-switch my-1">
+                                                        <input type="checkbox" className="custom-control-input" id={`check${cat.id}`} />
+                                                        <label className="custom-control-label" htmlFor={`check${cat.id}`}>{cat.name}</label>
                                                     </div>
                                             )
                                         }

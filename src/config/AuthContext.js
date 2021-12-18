@@ -68,7 +68,6 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("user", JSON.stringify(data[0]))
         }).catch(async (error) => {
             setError(await error)
-            console.log(error.response)
         })
     }
 
@@ -155,7 +154,8 @@ export const AuthProvider = ({ children }) => {
         state,
         dispatch,
         register,
-    }), [user, loading, error, generalInfo, address, policy, state]);
+        getUserData
+    }), [user, loading, error, generalInfo, address, policy, state, getUserData]);
 
     return (
         <AuthContext.Provider value={memoedValue}>

@@ -1,6 +1,5 @@
 import React from 'react'
 import CustomUserEditForm from '../../../customComponents/CustomUserEditForm/CustomUserEditForm'
-import ProfileData from '../ProfileData/ProfileData'
 import ProfileHeader from '../ProfileHeader/ProfileHeader'
 
 const ProfileEdit = () => {

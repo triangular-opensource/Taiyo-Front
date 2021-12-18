@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom'
 const CustomItemCard = () => {
     return (
         <div className="col-md-12 my-2">
-            <div class="row p-3 no-gutters border bg-white rounded overflow-hidden flex-md-row mb-1 shadow h-md-100 position-relative">
+            <div className="row p-3 no-gutters border bg-white rounded overflow-hidden flex-md-row mb-1 shadow h-md-100 position-relative">
                 <div className="col-md-4 text-center">
                     <img className="rounded" style={{maxHeight: "130px"}} src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9jdXN8ZW58MHx8MHx8&w=1000&q=80" alt="some" />
                 </div>

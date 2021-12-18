@@ -5,7 +5,9 @@ function CustomInput(props){
  	const style = {
     	width: "100%",
     	height : props.height  ? props.height : `45px`,
-		padding : props.padding ? props.padding : '0 20px 0 20px'
+		padding : props.padding ? props.padding : '0 20px 0 20px',
+		background: props.type === "readonly" ? "rgb(221 221 221)" :"white",
+		cursor:  props.type === "readonly" ? "not-allowed" :"auto"
   	}
 	return (
     	<div className="wrapper">

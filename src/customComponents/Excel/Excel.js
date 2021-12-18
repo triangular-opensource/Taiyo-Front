@@ -31,7 +31,7 @@ function fileHandler(event){
     return (
         <div>
         <input type="file" onChange={fileHandler.bind()} style={{"padding":"10px"}} />
-        <OutTable data={rows} columns={cols} tableClassName="ExcelTable2007" tableHeaderRowClass="heading" /> 
+        <OutTable data={rows} columns={cols} tableClassName="ExcelTable2007" tableHeaderRowclassName="heading" /> 
         </div>
     )
 }
