@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useAuth from '../../../config/AuthContext'
 import CustomButton from "../../../customComponents/CustomButton/CustomButton"
 import CustomInput from "../../../customComponents/CustomInputField/CustomInput"
@@ -16,11 +16,17 @@ function Login() {
     const [password, setPassword] = useState("");
     const [loading , setLoading] = useState(false);
 
-    const {login} = useAuth();
+    const {login, loginError} = useAuth();
     const handleLogin = () => {
         setLoading(true);
         return login(email, password)
     }
+
+    useEffect(() => {
+        if (loginError) {
+            setLoading(false)
+        }
+    }, [loginError])
 
     return (
         <div className="container py-5">
@@ -34,6 +40,18 @@ function Login() {
                             <h3 className="text-center">Sign into your account</h3>
                         </legend>
                     </div>
+                    {
+                        loginError ? (
+                            <div className="col-md-12">
+                                <div className="w-100 text-center alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Invalid Email or Password!</strong>
+                                    <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        ) : ""
+                    }
                     <div className="form-row col-md-12">
                         <CustomInput type="email" value={email}
                          onChangeValue = {(event) => setEmail(event.target.value)} placeholder='Email'  />
@@ -49,12 +67,24 @@ function Login() {
                             }} />
                            {(password!=="" && !passwordValidate(password)) ?  <PASSWORD_ERROR/> : null }        
                     </div>
+                    <p className="mt-2 mx-4"><NavLink className="text-decoration-none" to="/reset-password">Forgot Password</NavLink></p>
                     <div className="form-row col-md-12">
                         <CustomButton
                             disabled={ !((email !== "" && emailValidation(email)) && (password !== "" && passwordValidate(password)))}
                             fontSize="17"
                             marginTop="20"
-                            data={!loading? "LOGIN" : <span>Loading<div className="ml-2 spinner-border spinner-border-sm" role="status"><span className="sr-only">Loading...</span></div></span>}
+                            data={
+                                loading
+                                ?
+                                    <span>
+                                        Loading
+                                        <div className="ml-2 spinner-border spinner-border-sm" role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                    </span>
+                                : 
+                                    "LOGIN"
+                            }
                             handleClick={handleLogin}
                             padding='16'
                             backgroundColor='gray'

@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
     const history = useHistory();
     const {saveToken} = useToken();
     const [error, setError] = useState(null);
+    const [loginError, setLoginError] = useState(null);
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
     const [generalInfo, setGeneralInfo] = useState(null);
@@ -89,7 +90,7 @@ export const AuthProvider = ({ children }) => {
             dispatch({type: "USER", payload:true})
             history.push("/")
         })
-        .catch(async(error) => setError(await error));
+        .catch(async(error) => setLoginError(await error));
     }
     
     async function logout() {
@@ -154,8 +155,9 @@ export const AuthProvider = ({ children }) => {
         state,
         dispatch,
         register,
-        getUserData
-    }), [user, loading, error, generalInfo, address, policy, state, getUserData]);
+        getUserData,
+        loginError
+    }), [user, loading, loginError, error, generalInfo, address, policy, state, getUserData]);
 
     return (
         <AuthContext.Provider value={memoedValue}>

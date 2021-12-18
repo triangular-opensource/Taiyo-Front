@@ -39,7 +39,9 @@ const CustomUserEditForm = () => {
     const [uploadImageName, setUploadImageName] = useState("");
 
 
-    const imageUpload = async () => {
+    const imageUpload = async (e) => {
+        setUploadImage(e.target.files[0]);
+        setUploadImageName(e.target.files[0].name);
         const storageRef = ref(storage, `Users/ProfilePics/${email}/${uploadImageName}`)
         
         await uploadBytes(storageRef, uploadImage).then(async (snapshot) => {
@@ -101,11 +103,11 @@ const CustomUserEditForm = () => {
                     <div>
                         <img
                             style={{ height: "100px", width: "100px" }}
-                            src={userData().image ? userData().image : defaultImage}
+                            src={imageUrl ? imageUrl : defaultImage}
                             className="user__image"
                             alt="profile"
                         />
-                        <input accept="image/*" type="file" onChange={(e) => {setUploadImage(e.target.files[0]); setUploadImageName(e.target.files[0].name)}} id="imageUpload" style={{"display": "none"}} />
+                        <input accept="image/*" type="file" onChange={(e) => imageUpload(e)} id="imageUpload" style={{"display": "none"}} />
                     </div>
                     <label id="profileImageUpload" className="mt-2" htmlFor="imageUpload">
                         <i className="icon ion-edit mx-1">
@@ -114,7 +116,6 @@ const CustomUserEditForm = () => {
                             }
                         </i>
                     </label>
-                    {imageUrl}
                 </div>
 
                 <div className="row gutters">

@@ -14,13 +14,11 @@ import Chat from '../components/Profile/Chat/Chat'
 import PackageHistory from '../components/Profile/Package/PackageHistory'
 import Profile from '../components/Profile/Profile'
 import Search from '../components/Search/Search'
-import CustomUserEditForm from '../customComponents/CustomUserEditForm/CustomUserEditForm'
 import ItemPage from '../components/ItemPage/ItemPage' 
-import ResetPassword from '../components/Auth/ResetPassword/ResetPassword'
 import Otp from '../components/Auth/Otp/Otp'
 import RegisterSuccess from '../components/Auth/Register/RegisterSuccess/RegisterSuccess'
 import ProfileEdit from '../components/Profile/ProfileEdit/ProfileEdit'
-import Email from '../components/Auth/Email/Email'
+import ResetPassword from '../components/Auth/ResetPassword/ResetPassword'
 import ResetPasswordSuccess from '../components/Auth/ResetPassword/ResetPasswordSuccess/ResetPasswordSuccess'
 
 const Routes = () => {
@@ -43,9 +41,8 @@ const Routes = () => {
                 <Route exact path="/search" component={Search} />
                 <Route exact path="/search-detail" component={ItemPage} />
                 <Route exact path="/edit-profile" component={ProfileEdit} />
-                <Route exact path="/reset-password" component={ResetPassword} />
                 <Route exact path="/otp" component={Otp} />
-                <Route exact path="/email" component={Email} />
+                <Route exact path="/reset-password" component={ResetPassword} />
                 <Route exact path="/reset-password-success" component={ResetPasswordSuccess} />
                 <Route exact path="/register-success" component={RegisterSuccess} />
             </Switch>
