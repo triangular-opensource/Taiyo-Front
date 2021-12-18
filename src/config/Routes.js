@@ -20,6 +20,7 @@ import RegisterSuccess from '../components/Auth/Register/RegisterSuccess/Registe
 import ProfileEdit from '../components/Profile/ProfileEdit/ProfileEdit'
 import ResetPassword from '../components/Auth/ResetPassword/ResetPassword'
 import ResetPasswordSuccess from '../components/Auth/ResetPassword/ResetPasswordSuccess/ResetPasswordSuccess'
+import Package from '../components/Packages/Package'
 
 const Routes = () => {
 
@@ -39,6 +40,7 @@ const Routes = () => {
                 <Route exact path="/terms-and-conditions" component={TermAndConditions} />
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/search" component={Search} />
+                <Route exact path="/packages" component={Package} />
                 <Route exact path="/search-detail" component={ItemPage} />
                 <Route exact path="/edit-profile" component={ProfileEdit} />
                 <Route exact path="/otp" component={Otp} />

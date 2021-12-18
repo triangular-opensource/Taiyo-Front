@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BuySell = () => {
+const PostNavbar = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const BuySell = () => {
     )
 }
 
-export default BuySell
+export default PostNavbar
