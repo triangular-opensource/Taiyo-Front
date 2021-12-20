@@ -2,7 +2,6 @@ import React from 'react'
 import { Route, Switch } from 'react-router'
 import Login from '../components/Auth/Login/Login'
 import Register from '../components/Auth/Register/Register'
-import Contact from '../components/Contact/Contact'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
 import Home from '../components/Home/Home'
@@ -36,6 +35,7 @@ const Routes = () => {
                 <Route exact path="/post-ad/step-1" component={AdInformation} />
                 <Route exact path="/post-ad/step-2" component={AdDetails} />
                 <Route exact path="/post-ad/step-3" component={UserInformation} />
+                <Route exact path="/post/:id" component={ItemPage} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/profile" component={Profile} />
