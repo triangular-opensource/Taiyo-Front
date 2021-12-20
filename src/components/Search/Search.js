@@ -2,7 +2,6 @@ import {React , useState ,  useEffect } from 'react'
 import "./Search.css"
 import CustomSearchBar from '../../customComponents/CustomSearchBar/CustomSearchBar'
 import CustomItemCard from '../../customComponents/CustomItemCard/CustomItemCard'
-import CustomText from '../../customComponents/CustomText/CustomText'
 import { GLOBAL_URL } from '../../global/Constant'
 import axios from 'axios'
 function Search() {
@@ -12,7 +11,7 @@ function Search() {
     const [categoryLoading, setCategoryLoading] = useState(true)
 
     useEffect(() => {
-        axios.get(`${GLOBAL_URL}/category`)
+        axios.get(`$GLOBAL_URL}/category`)
             .then(async (response) => {
                 setCategory(response.data.data);
                 setCategoryLoading(false)
@@ -21,7 +20,7 @@ function Search() {
     }, []);
     
     return (
-        <div className="container-fluid py-3">
+        <div className="container-fluid py-4 px-5">
             <div className="row d-flex justify-content-center">
                 <div className="col-md-6 search__col">
                     <CustomSearchBar placeholder="Location" /> 
@@ -30,8 +29,8 @@ function Search() {
 
             <div className="row my-4 mx-4">
                 <div className="col-md-3">
-                    <div className="container border rounded-lg bg-light pt-4 pb-2">
-                        <div className="row mb-1">
+                    <div className="container rounded-lg bg-light pt-4 ">
+                        <div className="row "> 
                             <div className="col-12">
                                 <h5>Filters</h5>
                             </div>
@@ -89,12 +88,10 @@ function Search() {
                     </div>
 
                 </div>
-                <div className="col-md-9" style={{maxHeight: "500px", overflowY: "scroll"}}>
-                    <CustomItemCard />
-                    <CustomItemCard />
-                    <CustomItemCard />
-                    <CustomItemCard />
-                    <CustomItemCard />
+                <div className="col-md-9">
+                {
+                    Array(4).fill(null).map((value, index) => (<CustomItemCard key={index}/>))
+                }
                 </div>
             </div>
         </div>

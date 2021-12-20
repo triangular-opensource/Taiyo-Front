@@ -7,7 +7,7 @@ import CustomText from "../../../customComponents/CustomText/CustomText";
 const AboutData = () => {
     const {generalInfo} = useAuth();
     return (
-        <div className='container About__Container py-5 my-5'>
+        <div className='container About__Container py-5 my-5' >
             <div className="row">
                 <div className='col-md-6 About__Container__Right py-2 mb-5'>
                     <AboutSvg />

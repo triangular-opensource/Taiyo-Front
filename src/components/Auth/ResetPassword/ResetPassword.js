@@ -33,7 +33,7 @@ const ResetPassword = () => {
             <div class="col-md-4 text-center">
               <div class="row">
                 <div class="col-sm-12 bgWhite">
-                  <div class="title mb-5">
+                  <div class="title mt-5">
                     <CustomText
                       name="Reset Password"
                       color="black"
@@ -50,6 +50,8 @@ const ResetPassword = () => {
                   {email !== "" && !emailValidation(email) ? (
                     <CustomAlert message={EMAIL_ERROR} />
                   ) : null}
+
+                  <div  class = "mb-5">
                   <CustomButton
                     fontSize="17"
                     marginTop="20"
@@ -59,7 +61,9 @@ const ResetPassword = () => {
                     backgroundColor="gray"
                     color="white"
                     width="620"
+                    disabled = {!(email!=="" && emailValidation(email))}
                   />
+                  </div>
                 </div>
               </div>
             </div>

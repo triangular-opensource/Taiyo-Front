@@ -2,6 +2,7 @@
 * {
     font-family: "Poppins", sans-serif;
     text-decoration: none;
+    scroll-behavior: smooth;
 }
 a {
   text-decoration: none;
@@ -24,3 +25,5 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+
+
