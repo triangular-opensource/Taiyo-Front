@@ -1,0 +1,11 @@
+.PostNavbar__pill {
+    background: rgb(192, 192, 192);
+    color: black;
+}
+.PostNavbar__pill:hover {
+    background: rgb(168, 167, 167);
+    color: black;
+}
+.PostNavbar__pill.active {
+    background: rgb(92, 92, 92)!important;
+}

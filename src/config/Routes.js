@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router'
 import About from '../components/About/About'
 import Login from '../components/Auth/Login/Login'
 import Register from '../components/Auth/Register/Register'
-import BuySell from '../components/BuySell/BuySell'
 import Contact from '../components/Contact/Contact'
 import Footer from '../components/Footer/Footer'
 import Header from '../components/Header/Header'
@@ -21,6 +20,9 @@ import ProfileEdit from '../components/Profile/ProfileEdit/ProfileEdit'
 import ResetPassword from '../components/Auth/ResetPassword/ResetPassword'
 import ResetPasswordSuccess from '../components/Auth/ResetPassword/ResetPasswordSuccess/ResetPasswordSuccess'
 import Package from '../components/Packages/Package'
+import AdInformation from '../components/BuySell/AdInformation/AdInformation'
+import AdDetails from '../components/BuySell/AdDetails/AdDetails'
+import UserInformation from '../components/BuySell/UserInformation/UserInformation'
 
 const Routes = () => {
 
@@ -31,7 +33,9 @@ const Routes = () => {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/contact" component={Contact} />
-                <Route exact path="/buy-sell" component={BuySell} />
+                <Route exact path="/post-ad/step-1" component={AdInformation} />
+                <Route exact path="/post-ad/step-2" component={AdDetails} />
+                <Route exact path="/post-ad/step-3" component={UserInformation} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/profile" component={Profile} />

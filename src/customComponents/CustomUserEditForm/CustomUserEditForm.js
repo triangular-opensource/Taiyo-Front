@@ -10,10 +10,13 @@ import { storage } from "../../config/Firebase";
 import axios from "axios";
 import { GLOBAL_URL } from "../../global/Constant";
 import useAuth from "../../config/AuthContext";
+import { useHistory } from "react-router-dom";
 
 const CustomUserEditForm = () => {
 
     const scrollRef = useRef(null)
+
+    const history = useHistory()
 
     const {getUserData} = useAuth()
     const { userData, getToken } = useToken();
@@ -51,7 +54,9 @@ const CustomUserEditForm = () => {
     
     const upload = async () => {
         setLoading(true)
-        await imageUpload()
+        if (uploadImageName) {
+            await imageUpload()
+        } 
         await axios.patch(`${GLOBAL_URL}/auth/user`, {
             "first_name": firstName,
             "middle_name": middleName,
@@ -76,9 +81,12 @@ const CustomUserEditForm = () => {
         }).then(async (res) => {
             if (res.status === 200) {
                 getUserData(getToken());
-                scrollRef.current.scrollIntoView({behavior: "smooth"})
                 setUpdated(true);
                 setLoading(false);
+                scrollRef.current.scrollIntoView({behavior: "smooth"})
+                setTimeout(() => {
+                    history.push("/edit-profile")
+                }, 1000);
             }
         }).catch(error => console.log(error))
     }
