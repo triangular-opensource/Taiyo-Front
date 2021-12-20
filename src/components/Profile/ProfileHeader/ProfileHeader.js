@@ -4,7 +4,7 @@ import "./ProfileHeader.css"
 import defaultImage from "../../../global/static/default.png"
 import useToken from '../../../config/useToken'
 
-function ProfileHeader() {
+function ProfileHeader({updateProfile}) {
 
     const {userData} = useToken();
 
@@ -32,7 +32,7 @@ function ProfileHeader() {
                                     Profile
                                 </NavLink>
                                 <span className="mx-2">|</span>
-                                <NavLink to="/edit-profile">
+                                <NavLink ref={updateProfile} to="/edit-profile">
                                     <i className="icon ion-edit mx-1"></i>
                                     Edit Profile
                                 </NavLink>

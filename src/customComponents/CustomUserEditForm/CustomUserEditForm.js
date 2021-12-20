@@ -10,10 +10,13 @@ import { storage } from "../../config/Firebase";
 import axios from "axios";
 import { GLOBAL_URL } from "../../global/Constant";
 import useAuth from "../../config/AuthContext";
+import { useHistory } from "react-router-dom";
 
 const CustomUserEditForm = () => {
 
     const scrollRef = useRef(null)
+
+    const history = useHistory()
 
     const {getUserData} = useAuth()
     const { userData, getToken } = useToken();
@@ -39,13 +42,10 @@ const CustomUserEditForm = () => {
     const [uploadImageName, setUploadImageName] = useState("");
 
 
-    const imageUpload = async (e) => {
-        setUploadImage(e.target.files[0]);
-        setUploadImageName(e.target.files[0].name);
-        const storageRef = ref(storage, `Users/ProfilePics/${email}/${uploadImageName}`)
-        
+    const imageUpload = async () => {
+        const storageRef = ref(storage, `Users/ProfilePics/${email}`)
         await uploadBytes(storageRef, uploadImage).then(async (snapshot) => {
-            const imageRef = ref(storage, `Users/ProfilePics/${email}/${uploadImageName}`)
+            const imageRef = ref(storage, `Users/ProfilePics/${email}`)
             await getDownloadURL(imageRef).then((url) => {
                 setImageUrl(url);
             }).catch((error) => console.log(error))
@@ -54,7 +54,9 @@ const CustomUserEditForm = () => {
     
     const upload = async () => {
         setLoading(true)
-
+        if (uploadImageName) {
+            await imageUpload()
+        } 
         await axios.patch(`${GLOBAL_URL}/auth/user`, {
             "first_name": firstName,
             "middle_name": middleName,
@@ -79,9 +81,12 @@ const CustomUserEditForm = () => {
         }).then(async (res) => {
             if (res.status === 200) {
                 getUserData(getToken());
-                scrollRef.current.scrollIntoView({behavior: "smooth"})
                 setUpdated(true);
                 setLoading(false);
+                scrollRef.current.scrollIntoView({behavior: "smooth"})
+                setTimeout(() => {
+                    history.push("/edit-profile")
+                }, 1000);
             }
         }).catch(error => console.log(error))
     }
@@ -107,7 +112,7 @@ const CustomUserEditForm = () => {
                             className="user__image"
                             alt="profile"
                         />
-                        <input accept="image/*" type="file" onChange={(e) => imageUpload(e)} id="imageUpload" style={{"display": "none"}} />
+                        <input accept="image/*" type="file" onChange={(e) => {setUploadImage(e.target.files[0]); setUploadImageName(e.target.files[0].name)}} id="imageUpload" style={{"display": "none"}} />
                     </div>
                     <label id="profileImageUpload" className="mt-2" htmlFor="imageUpload">
                         <i className="icon ion-edit mx-1">

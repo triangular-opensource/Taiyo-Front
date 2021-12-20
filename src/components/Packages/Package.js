@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import CustomMoneyBox from '../../customComponents/CustomMoneyBox/CustomMoneyBox'
-import './BuySell.css';
+import './Package.css';
 import { GLOBAL_URL } from '../../global/Constant';
 import axios from 'axios';
 import Loader from '../../customComponents/Loader/Loader';
 import useAuth from '../../config/AuthContext';
 import useToken from '../../config/useToken';
 
-function BuySell() {
-
+const Package = () => {
     const {user} = useAuth();
     const {getToken} = useToken()
     const [subscription, setSubscription] = useState([]);
@@ -63,7 +62,6 @@ function BuySell() {
         }
         getSubscription();
     }, []);
-    
 
     return (
         <div className="BuySell__Container">
@@ -82,4 +80,4 @@ function BuySell() {
     )
 }
 
-export default BuySell
+export default Package

@@ -69,7 +69,7 @@ function Header() {
                                         </>
                                 }    
                         </ul>
-                        <NavLink to="/buy-sell" className="ml-4 p-2 bg-secondary rounded text-white nav-btn" style={{"fontSize" : "smaller"}}> Buy/Sell </NavLink>
+                        <NavLink to="/post-ad/step-1" className="ml-4 p-4 bg-secondary rounded text-white nav-btn">Buy/Sell</NavLink>
                     </div>
                 </nav>
             ) 
