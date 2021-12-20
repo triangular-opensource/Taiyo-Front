@@ -22,6 +22,7 @@ import Package from '../components/Packages/Package'
 import AdInformation from '../components/BuySell/AdInformation/AdInformation'
 import AdDetails from '../components/BuySell/AdDetails/AdDetails'
 import UserInformation from '../components/BuySell/UserInformation/UserInformation'
+import AboutData from '../components/About/AboutData/AboutData'
 
 const Routes = () => {
 
@@ -31,8 +32,8 @@ const Routes = () => {
             <div className='mt-4 pt-4'>
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/about" component={About} />
-                <Route exact path="/contact" component={Contact} />
+                <Route exact path="/#about" component={Home} />
+                <Route exact path="/#contact" component={Home} />
                 <Route exact path="/post-ad/step-1" component={AdInformation} />
                 <Route exact path="/post-ad/step-2" component={AdDetails} />
                 <Route exact path="/post-ad/step-3" component={UserInformation} />
@@ -58,4 +59,4 @@ const Routes = () => {
     )
 }
 
-export default Routes
+export default Routes 

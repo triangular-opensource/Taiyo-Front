@@ -9,7 +9,11 @@ function Home() {
     const {generalInfo} = useAuth();
     return (
         <div>
-                <img src = {generalInfo.cover_image_link} style={{ "width" : "100%" , "height" : "700px"} } />
+                <img
+                    src={generalInfo.cover_image_link}
+                    style={{ "width" : "100%" , "height" : "700px"}}
+                    alt='cover'
+                />
                 <AboutData />
                 <Contact />
         </div>

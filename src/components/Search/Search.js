@@ -11,7 +11,7 @@ function Search() {
     const [categoryLoading, setCategoryLoading] = useState(true)
 
     useEffect(() => {
-        axios.get(`$GLOBAL_URL}/category`)
+        axios.get(`${GLOBAL_URL}/category`)
             .then(async (response) => {
                 setCategory(response.data.data);
                 setCategoryLoading(false)

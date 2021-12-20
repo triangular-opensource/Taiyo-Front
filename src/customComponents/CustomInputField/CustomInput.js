@@ -26,6 +26,7 @@ function CustomInput(props){
 				required={props.required}
 				onInput={props.onInput}
 				onFocus={props.onFocus}
+				onBlur={props.onBlur}
 				/>
       		</div>
     	</div>

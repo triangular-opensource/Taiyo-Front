@@ -29,10 +29,10 @@ function Header() {
                             <NavLink className="nav-link " exact to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link " to="/about">About</Link>
+                            <Link className="nav-link " to="/#about">About</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link " to="/contact">Contact</Link>
+                            <Link className="nav-link " to="/#contact">Contact</Link>
                         </li>
                         <li className="nav-item dropdown">
                             <NavLink className="nav-link" id="navbarDropdown" to="/search">Search</NavLink>
@@ -69,7 +69,7 @@ function Header() {
                                         </>
                                 }    
                         </ul>
-                        <NavLink to="/post-ad/step-1" className="ml-4 p-4 bg-secondary rounded text-white nav-btn">Buy/Sell</NavLink>
+                        <NavLink to="/post-ad/step-1" className="ml-4 p-2 bg-secondary rounded text-white nav-btn">Buy/Sell</NavLink>
                     </div>
                 </nav>
             ) 

@@ -40,7 +40,7 @@ const AdInformation = ({location}) => {
                     <div className="col-12 mx-3 pr-5">
                         <div className="form-group">
                             <label htmlFor="category">Category <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">Select suitable Category</span></label>
-                            <select name="" value={!data?.category ? postData.category : data?.category} onChange={(e) => {setPostData({...postData, category: parseInt(e.target.value)}); getProduct(e.target.value)}} id="category" className="form-control">
+                            <select name="" value={postData.category} onChange={(e) => {setPostData({...postData, category: parseInt(e.target.value)}); getProduct(e.target.value)}} id="category" className="form-control">
                                 <option value={""} selected={true} disabled>Choose...</option>
                                 {
                                     category.map(cat => (

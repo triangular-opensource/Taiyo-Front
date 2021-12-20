@@ -6,7 +6,7 @@
   background: #664AFF;
 }
 
-.wrapper{
+.wrapperSearch{
   width: 75%;
   margin: 10px 0px 0px 0px;
 }
@@ -38,7 +38,7 @@
 .search-input .icon{
   position: absolute;
   right: 0px;
-  top: 0px;
+  top: -5px;
   height: 45px;
   width: 55px;
   text-align: center;
