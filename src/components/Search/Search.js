@@ -4,17 +4,27 @@ import CustomSearchBar from '../../customComponents/CustomSearchBar/CustomSearch
 import CustomItemCard from '../../customComponents/CustomItemCard/CustomItemCard'
 import { GLOBAL_URL } from '../../global/Constant'
 import axios from 'axios'
+import Loader from '../../customComponents/Loader/Loader'
 function Search() {
 
     const [category, setCategory] = useState([]);
+    const [ads, setAd] = useState([]);
+    const [adLoading, setAdLoading] = useState(true);
     const [error, setError] = useState(null);
     const [categoryLoading, setCategoryLoading] = useState(true)
 
     useEffect(() => {
-        axios.get(`$GLOBAL_URL}/category`)
+        axios.get(`${GLOBAL_URL}/category`)
             .then(async (response) => {
                 setCategory(response.data.data);
                 setCategoryLoading(false)
+            })
+            .catch(async (error) => setError(error))
+        
+        axios.get(`${GLOBAL_URL}/ads`)
+            .then(async (response) => {
+                setAd(response.data.data);
+                setAdLoading(false)
             })
             .catch(async (error) => setError(error))
     }, []);
@@ -90,7 +100,13 @@ function Search() {
                 </div>
                 <div className="col-md-9">
                 {
-                    Array(4).fill(null).map((value, index) => (<CustomItemCard key={index}/>))
+                   (adLoading) ?   
+                <div className="d-flex justify-content-center align-items-center">
+                   <div className="spinner-border" style={{"width" : "4rem"  , "height" : "4rem"}} role="status">
+                       <span className="sr-only">Loading...</span>
+                   </div>
+               </div>
+                 :ads.map((ad) => (<CustomItemCard key={ad.id} data = {ad} />))
                 }
                 </div>
             </div>

@@ -5,6 +5,7 @@ import "./CustomItemCard.css"
 import { NavLink } from 'react-router-dom'
 
 const CustomItemCard = (props) => {
+    console.log(props)
     return (
         <div className="col-12 mb-2">
             <div className="row p-3 no-gutters border bg-white rounded overflow-hidden flex-row  h-100 position-relative   shadow-sm">
@@ -16,28 +17,29 @@ const CustomItemCard = (props) => {
                 <div className="col-9 pl-3">
                     <div className="row">
                         <div className="col-6">
-                            <h5>Product Name</h5>
+                            <h5>Product Name </h5>
                         </div>
                         <div className="col-6">
                             <span className="float-right">
-                                <h5>&#8377; 25,688.00</h5>
+                                <h5>&#8377;  {props.data.basic_price} </h5>
                             </span>
                         </div>
                     </div>
                     <div className="row ">
                         <div className="col ad__desc">
-                            Coated Flat Steel GP Galvanized Steel
+                            {props.data.product_description}
                         </div>
                     </div>
                     <div className="row my-1">
                         <div className="col text-muted searchItem__location">
                             <LocationSvg /> 
-                            <span> Mathura, Uttar Pradesh, India</span>
+                            <span> {props.data.author_business_address}  </span>
+                            <span> {props.data.author_country} </span>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-8 searchItem__timestamp">
-                            Posted : November 25, 2021
+                            Posted : {Date(props.data.timestamp.slice(0 , 10)).slice(0 ,16)}  
                         </div>
                         <div className="col-4">
                             <NavLink to="/search-detail">
