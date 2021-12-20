@@ -3,9 +3,8 @@ import useAuth from '../../config/AuthContext';
 import AboutData from '../About/AboutData/AboutData'
 import Contact from '../Contact/Contact'
 
-function Home() {
-    const aboutref = useRef(null);
-    const contactref = useRef(null);
+const Home = () => {
+
     const {generalInfo} = useAuth();
     return (
         <div>
@@ -14,8 +13,12 @@ function Home() {
                     style={{ "width" : "100%" , "height" : "700px"}}
                     alt='cover'
                 />
-                <AboutData />
-                <Contact />
+                <div>
+                    <AboutData />
+                </div>
+                <div>
+                    <Contact />
+                </div>
         </div>
     )
 }

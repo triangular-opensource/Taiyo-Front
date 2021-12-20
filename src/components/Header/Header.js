@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import useAuth from '../../config/AuthContext';
 import "./Header.css"
 
-function Header() {
+function Header({aboutRef, contactRef}) {
 
     const location = useLocation();
 
@@ -26,13 +26,13 @@ function Header() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <NavLink className="nav-link " exact to="/">Home</NavLink>
+                            <NavLink className="nav-link" exact to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link " to="/#about">About</Link>
+                            <span className="nav-link" onClick={() => console.log(aboutRef)}>About</span>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link " to="/#contact">Contact</Link>
+                            <span className="nav-link" onClick={() => contactRef.current.scrollIntoView({behavior: "smooth"})}>Contact</span>
                         </li>
                         <li className="nav-item dropdown">
                             <NavLink className="nav-link" id="navbarDropdown" to="/search">Search</NavLink>

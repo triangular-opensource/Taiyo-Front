@@ -22,7 +22,6 @@ import Package from '../components/Packages/Package'
 import AdInformation from '../components/BuySell/AdInformation/AdInformation'
 import AdDetails from '../components/BuySell/AdDetails/AdDetails'
 import UserInformation from '../components/BuySell/UserInformation/UserInformation'
-import AboutData from '../components/About/AboutData/AboutData'
 
 const Routes = () => {
 
