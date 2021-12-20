@@ -16,8 +16,8 @@ function Contact() {
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
 
-    return (          
-        <div className="container py-5 my-4 auth-bg px-5">
+    return (        
+        <div className="container py-5 my-4 auth-bg px-5" > 
             <div className="row">
                 <div className='col-md-5 text-center my-3'>
                     <ContactSvg />

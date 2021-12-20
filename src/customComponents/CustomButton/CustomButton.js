@@ -17,7 +17,7 @@ function CustomButton(props)
     }
 
     return (
-        <button className="myButton" disabled={props.disabled}  style={style} onClick={props.handleClick}>{props.data}</button>
+        <button className="myButton" disabled={props.disabled}  style={style}   dataTarget = {props.dataTarget}  dataToggle = {props.dataToggle}  onClick={props.handleClick}>{props.data}</button>
     )
 }
 

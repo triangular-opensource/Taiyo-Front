@@ -4,25 +4,27 @@ import { ReactComponent as LocationSvg } from "../../global/static/svg/location.
 import "./CustomItemCard.css"
 import { NavLink } from 'react-router-dom'
 
-const CustomItemCard = () => {
+const CustomItemCard = (props) => {
     return (
-        <div className="col-md-12 my-2">
-            <div className="row p-3 no-gutters border bg-white rounded overflow-hidden flex-md-row mb-1 shadow h-md-100 position-relative">
-                <div className="col-md-4 text-center">
-                    <img className="rounded" style={{maxHeight: "130px"}} src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9jdXN8ZW58MHx8MHx8&w=1000&q=80" alt="some" />
+        <div className="col-12 mb-2">
+            <div className="row p-3 no-gutters border bg-white rounded overflow-hidden flex-row  h-100 position-relative   shadow-sm">
+                <div className="col-3 text-center">
+                    <img className="rounded" style={{maxHeight: "120px"}} src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9jdXN8ZW58MHx8MHx8&w=1000&q=80" alt="some" />
                 </div>
-                <div className="col-md-8 pl-4">
+                {/* <div className="col-1">
+                </div> */}
+                <div className="col-9 pl-3">
                     <div className="row">
                         <div className="col-6">
                             <h5>Product Name</h5>
                         </div>
                         <div className="col-6">
                             <span className="float-right">
-                                <h4>&#8377; 25,688.00</h4>
+                                <h5>&#8377; 25,688.00</h5>
                             </span>
                         </div>
                     </div>
-                    <div className="row my-1">
+                    <div className="row ">
                         <div className="col ad__desc">
                             Coated Flat Steel GP Galvanized Steel
                         </div>
@@ -33,13 +35,13 @@ const CustomItemCard = () => {
                             <span> Mathura, Uttar Pradesh, India</span>
                         </div>
                     </div>
-                    <div className="row my-1">
+                    <div className="row">
                         <div className="col-8 searchItem__timestamp">
                             Posted : November 25, 2021
                         </div>
                         <div className="col-4">
                             <NavLink to="/search-detail">
-                                <CustomButton disabled={false} fontSize="14" marginTop="0" data="Details" handleClick={() => {}} padding='6' backgroundColor='gray' color='white' />
+                                <CustomButton disabled={false} fontSize="16"  data="Details" handleClick={() => {}} padding='7' backgroundColor='black' color='white' />
                             </NavLink>
                         </div>
                     </div>

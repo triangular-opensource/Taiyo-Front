@@ -1,23 +1,22 @@
-  import {React , useState , useEffect  , useRef} from 'react'
+import {React , useState , useEffect  , useRef} from 'react'
 import './CustomSearchBar.css'
-import {ReactComponent as GlobalSvg} from '../../global/static/svg/search.svg'
+import {ReactComponent as SearchSvg} from '../../global/static/svg/search.svg'
+import Autocomplete from 'react-google-autocomplete'
 
-
-const CustomSearchBar = (props) => {
- 
+const CustomSearchBar = (props) => 
+{
   return (
-    <div className="wrapper">
-      <div className="search-input">
-        <input type="text" placeholder={props.placeholder}/>
-        <div className="icon"><GlobalSvg /></div>
-      </div>
-    </div>
-//   <Autocomplete
-//   apiKey="AIzaSyBebUjvEESxtkjRTfYEknr0Qn6rnTQGfjc"
-//   onPlaceSelected={(place) => {
-//     console.log(place);
-//   }}
-// />
+  <div className="wrapper">
+    <div className='search-input'>
+  <Autocomplete 
+  apiKey="AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM"
+  onPlaceSelected={(place) => {
+    console.log(place);
+  }}
+  />
+    <div className="icon"><SearchSvg /></div>
+  </div>
+  </div>
 
   );
 };

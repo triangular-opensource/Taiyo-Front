@@ -29,3 +29,8 @@ export function passwordValidate(password)
 {  
         return String(password).match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/);   
 }
+
+export function pincodeValidate(pincode) 
+{  
+    return String(pincode).match("^[1-9]{1}[0-9]{2}\\s{0, 1}[0-9]{3}$");  
+}
