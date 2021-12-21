@@ -14,10 +14,11 @@ const CustomSearchBar = () => {
                         console.log(place);
                     }}
                 />
-                <div onClick={() => alertMessage("search cliked")} className="icon">
+                 <div onClick={() => alertMessage("search cliked")} className="icon">
                     <SearchSvg />
                 </div>
             </div>
+           
         </div>
     );
 };

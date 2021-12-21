@@ -3,17 +3,18 @@ import { NavLink } from 'react-router-dom'
 import useAuth from '../../config/AuthContext';
 import "./Footer.css"
 import { postNewsLetter } from '../../global/Function';
+import ScrollButton from '../../customComponents/ScrollUp/ScrollUp';
+
 
 function Footer() {
 
     const {generalInfo} = useAuth();
 
     const [email, setEmail] = useState("");
-
     return (
         <div className="footer-dark ">
             <footer>
-                <div className="container mt-2 text-center">
+                <div className="container-fluid mt-2 text-center">
                     <div className="row">
                         <div className="col-md-3 item text">
                             <h3>TAYIO</h3>
@@ -45,12 +46,16 @@ function Footer() {
                                 <li><NavLink to="/privacy-policy">Privacy policy</NavLink></li>
                                 <li><a href="https://github.com/triangular-opensource/Taiyo-Front/issues">Issues</a></li>
                             </ul>
+                            <ScrollButton/>
                         </div>
                     </div>
-                    <p className="copyright">TAYIO © 2018</p>
+                    <div className='row'>
+                            <p className="col-sm-12 copyright ">TAYIO © 2018</p>
+                    </div>
                 </div>
             </footer>
-        </div>
+
+    </div>
     )
 }
 

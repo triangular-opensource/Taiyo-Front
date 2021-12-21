@@ -22,6 +22,7 @@ import AdInformation from '../components/BuySell/AdInformation/AdInformation'
 import AdDetails from '../components/BuySell/AdDetails/AdDetails'
 import UserInformation from '../components/BuySell/UserInformation/UserInformation'
 
+
 const Routes = () => {
 
     return (
@@ -52,6 +53,7 @@ const Routes = () => {
                 <Route exact path="/reset-password-success" component={ResetPasswordSuccess} />
                 <Route exact path="/register-success" component={RegisterSuccess} />
             </Switch>
+          
             <Footer />
             </div>
         </>

@@ -9,8 +9,6 @@ import CustomInput from '../../customComponents/CustomInputField/CustomInput'
 
 
 const CustomItemPage = (props) => {
-
-    // TODO: kartikeya ye postId mein post ki id pass karwa di hai maine
     const postId = props.data.match.params.id
     const history = useHistory();
 
