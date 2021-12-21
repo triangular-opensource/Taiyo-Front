@@ -1,29 +1,55 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import useAuth from '../../../config/AuthContext'
 import { GLOBAL_URL } from '../../../global/Constant'
 import PostNavbar from '../PostNavbar/PostNavbar'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import { useHistory } from 'react-router-dom'
 
-const AdInformation = ({location}) => {
+const AdInformation = () => {
 
-    const {category} = useAuth();
+    const MySwal = withReactContent(Swal)
+    const history = useHistory()
 
-    const data = JSON.parse(localStorage.getItem("adInfo"))
+    const ConfirmMessage = async (message, url) => {
+        return await MySwal.fire({
+            title: 'Are you sure?',
+            text: message,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, I am Sure!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                history.push(url)
+            }
+        })
+    }
+
     const [postData, setPostData] = useState({
         category: null,
         product: null,
         buy_or_sell: ""
     })
-    const [selectedCategory, setSelectedCategory] = useState(null)
-    const [selectedProduct, setSelectedProduct] = useState(null)
+    const [category, setCategory] = useState([])
     const [product, setProduct] = useState([])
     const [error, setError] = useState(null)
 
-    const setAdInfoData = () => {
-        localStorage.setItem("adInfo", JSON.stringify(postData))
-    }
+    useEffect(() => {
+        axios.get(`${GLOBAL_URL}/category`)
+        .then(async (response) => {
+            setCategory(response.data.data)
+            })
+            .catch(async (error) => setError(error))
+    }, [])
 
+    const setAdInfoData = async () => {
+        localStorage.setItem("adInfo", JSON.stringify(postData))
+        await ConfirmMessage("Please check this data or you will have to enter these fields again!", "/post-ad/step-2")
+    }
+    
     const getProduct = async (category) => {
         await axios.get(`${GLOBAL_URL}/product/${category}`)
         .then(async (response) => {
@@ -34,7 +60,7 @@ const AdInformation = ({location}) => {
 
     return (
         <div className="container my-5 auth-bg">
-            <PostNavbar active1={true} post={postData} category={selectedCategory} />
+            <PostNavbar active1={true} post={postData} category={"aa"} />
             <div className='container pb-4'>
                 <div className="row">
                     <div className="col-12 mx-3 pr-5">
@@ -56,7 +82,7 @@ const AdInformation = ({location}) => {
                         <div className="form-group">
                             <label htmlFor="category">Product <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">Select suitable Product</span></label>
                             <select name="" id="category"value={postData.product} onChange={e => setPostData({...postData, product: parseInt(e.target.value)})} className="form-control">
-                                <option value={""} selected disabled>Choose...</option>
+                                <option value={""} selected={true} disabled>Choose...</option>
                                 {
                                     product.map(prod => (
                                         <option key={prod.id} value={prod.id}>{prod.name}</option>
@@ -80,7 +106,7 @@ const AdInformation = ({location}) => {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        <NavLink onClick={setAdInfoData} to="/post-ad/step-2">
+                        <span onClick={setAdInfoData}>
                             <button
                                 style={{
                                     "cursor": !(postData.category && postData.product && postData.buy_or_sell) ? "not-allowed" : "pointer"
@@ -90,7 +116,7 @@ const AdInformation = ({location}) => {
                             >
                                 Next
                             </button>
-                        </NavLink>
+                        </span>
                     </div>
                 </div>
             </div>

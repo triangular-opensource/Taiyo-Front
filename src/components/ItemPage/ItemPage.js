@@ -9,7 +9,10 @@ import CustomInput from '../../customComponents/CustomInputField/CustomInput'
 
 
 const CustomItemPage = (props) => {
-    const postId = props.data.match.params.id
+
+    // TODO: kartikeya ye postId mein post ki id pass karwa di hai maine
+    const postId = props.match.params.id
+    // console.log(props.match.params.id)
     const history = useHistory();
 
     const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +63,7 @@ const CustomItemPage = (props) => {
                                     <CustomText name="Sddsffdsdfs" color='grey' size='xx-large' weight='400' />
                                 </div>
                                 <div className="col-md-2">
-                                    <CustomButton fontSize="15" data="Excel" padding='8' backgroundColor='gray' color='white' handleClick={togglePopup} />
+                                    <CustomButton fontSize="15" data="Excel" dataToggle="modal" dataTarget="#exampleModal" padding='8' backgroundColor='gray' color='white' handleClick={togglePopup} />
                                     {
                                         isOpen && <Popup
                                             content=

@@ -47,7 +47,7 @@ const CustomItemCard = (props) => {
                             Posted : {Date(props.data.timestamp.slice(0 , 10)).slice(0 ,16)}  
                         </div>
                         <div className="col-4">
-                            <NavLink to= {`/post/${props.data.id}`} >
+                            <NavLink to={`/post/${props.data.id}`}>
                                 <CustomButton disabled={false} fontSize="16"  data="Details" handleClick={() => {}} padding='7' backgroundColor='black' color='white' />
                             </NavLink>
                         </div>
