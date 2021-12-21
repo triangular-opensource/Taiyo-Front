@@ -20,7 +20,6 @@ export const AuthProvider = ({ children }) => {
     const [generalInfo, setGeneralInfo] = useState(null);
     const [address, setAddress] = useState(null);
     const [policy, setPolicy] = useState(null);
-    const [category, setCategory] = useState([]);
 
 
     const register = async (firstName, middleName, lastName, gst, phoneNumber, companyName, companyType, companyAddress, companyCity, companyState, companyCountry, companyPincode, email, password) => {
@@ -93,15 +92,6 @@ export const AuthProvider = ({ children }) => {
         })
         .catch(async(error) => setLoginError(await error));
     }
-    
-    
-    const getCategory = async () => {
-        await axios.get(`${GLOBAL_URL}/category`)
-        .then(async (response) => {
-            setCategory(response.data.data)
-            })
-            .catch(async (error) => setError(error))
-    }
 
     const logout = async () => {
         saveToken("");
@@ -146,7 +136,6 @@ export const AuthProvider = ({ children }) => {
             await getGeneralInfo();
             await getAddress();
             await getPolicy();
-            await getCategory();
             setLoading(false);
         }
         fun();
@@ -167,9 +156,8 @@ export const AuthProvider = ({ children }) => {
         dispatch,
         register,
         getUserData,
-        category,
         loginError
-    }), [user, loading, loginError, error, generalInfo, category, address, policy, state, getUserData, login, logout]);
+    }), [user, loading, loginError, error, generalInfo, address, policy, state, getUserData, login, logout]);
 
     return (
         <AuthContext.Provider value={memoedValue}>
