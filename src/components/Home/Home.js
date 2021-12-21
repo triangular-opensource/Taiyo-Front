@@ -13,10 +13,10 @@ const Home = () => {
                     style={{ "width" : "100%" , "height" : "700px"}}
                     alt='cover'
                 />
-                <div>
+                <div id = 'about'>
                     <AboutData />
                 </div>
-                <div>
+                <div id='contact'>
                     <Contact />
                 </div>
         </div>

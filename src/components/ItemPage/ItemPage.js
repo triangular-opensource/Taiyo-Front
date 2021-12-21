@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import  React, {useState , useEffect} from 'react'
 import CustomText from '../../customComponents/CustomText/CustomText'
 import CustomButton from '../../customComponents/CustomButton/CustomButton'
 import './ItemPage.css'
@@ -6,19 +6,91 @@ import Popup from '../../customComponents/Popup/Popup'
 import Excel from '../../customComponents/Excel/Excel'
 import { useHistory } from "react-router-dom";
 import CustomInput from '../../customComponents/CustomInputField/CustomInput'
+import { GLOBAL_URL } from '../../global/Constant'
+import axios from 'axios'
+import useToken from '../../config/useToken'
+import alertMessage from '../../global/AlertProvider'
 
 
-const CustomItemPage = (props) => {
+const CustomItemPage = (props) => 
+{
 
-    // TODO: kartikeya ye postId mein post ki id pass karwa di hai maine
     const postId = props.match.params.id
-    // console.log(props.match.params.id)
     const history = useHistory();
+    const {getToken, userData} = useToken();
+    const [ad, setAd] = useState([]);
+    const [adLoading, setAdLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [bidList, setBidList] = useState([]);
+    const [bidListLoading, setBidListLoading] = useState(true)
+    const [amount , setAmount] = useState("");
+
+
+    const postBid = async () => 
+    {
+       await axios.post(`${GLOBAL_URL}/ads/bid`,
+            {
+            "amount" : amount , 
+            "user" :  userData().id,
+            "selected" : false,
+            "advertisement" : postId
+        
+            },
+            {
+            headers:
+              {
+                "Authorization": `Token ${getToken()}`,
+                "Content-Type": "application/json"
+              }
+            }   
+        )
+            .then(async (response) => {
+                alertMessage("bid posted successfully");
+                setBidList([...bidList , response.data.data]);
+            })
+            .catch(async (error) => setError(error))
+    }
+
+
+    
+    useEffect(() => {
+        axios.get(`${GLOBAL_URL}/ads/${postId}`,
+        {
+            headers: {
+                "Authorization": `Token ${getToken()}`,
+                "Content-Type": "application/json"
+        }
+    }   
+        )
+            .then(async (response) => {
+                setAd(response.data.data);
+                console.log(response.data.data);
+                setAdLoading(false)
+            })
+            .catch(async (error) => setError(error))
+        
+        axios.get(`${GLOBAL_URL}/ads/bid/${postId}` , {
+            headers: {
+                "Authorization": `Token ${getToken()}`,
+                "Content-Type": "application/json"
+        }
+    }   )
+            .then(async (response) => {
+                setBidList(response.data.data);
+                setBidListLoading(false)
+            })
+            .catch(async (error) => setError(error))
+    }, []);
+    
+
+
 
     const [isOpen, setIsOpen] = useState(false);
     const togglePopup = () => {
         setIsOpen(!isOpen);
     }
+
+    
 
     async function handleSubmit(event) {
         ;
@@ -93,32 +165,33 @@ const CustomItemPage = (props) => {
                                 </div>
                         </div>
 
-                            <div className ="row mt-1 mb-1 ">
-                                <div className="col-3">
-                                       <CustomText name = "Rs.10000"/>
+                        {
+
+                        bidList.map
+                        (
+                            (bid)=>
+                            (
+                                <div className ="row mt-1 mb-1 ">
+                                <div className="col-9">
+                                       <CustomText name = {`Rs.${bid.amount}`}/>
                                 </div>
-                                <div className="col-6">
-                                </div>
+                                
                                <div className='col-3'>
-                                      <CustomText name = "#i12"/>
+                                      <CustomText name = {`#${bid.user}`}/>
                                </div>
                             </div>
+                            )
+                        )
 
-
-                            <div className ="row mt-1 mb-1 ">
-                                <div className="col-3">
-                                       <CustomText name = "Rs.10000"/>
-                                </div>
-                                <div className="col-6">
-                                </div>
-                               <div className='col-3'>
-                                      <CustomText name = "#i12"/>
-                               </div>
-                            </div>
-
+                        }
                             <div className='row'>
                                 <div className="col-9">
-                                     <CustomInput  placeholder = "Enter Amount" margin = '0px 0px 0px 0px'/>
+                                        <CustomInput  placeholder = "Enter Amount" 
+                                        margin = '0px 0px 0px 0px'
+                                        value = {amount}
+                                        onChangeValue = {(event) => setAmount(event.target.value) }
+                                        type="number"
+                                    />
                                 </div>
                                <div className='col-3'>
                                <CustomButton
@@ -128,6 +201,7 @@ const CustomItemPage = (props) => {
                                    padding='8'
                                    backgroundColor='gray'
                                    color='white'
+                                   handleClick = {postBid}     
                                />
                             </div>  
 

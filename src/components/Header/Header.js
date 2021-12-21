@@ -6,6 +6,17 @@ import "./Header.css"
 
 function Header({aboutRef, contactRef}) {
 
+
+    function toggleFullScreen() {
+		if (!document.fullscreenElement) {
+			document.documentElement.requestFullscreen();
+		} else {
+		  if (document.exitFullscreen) {
+			document.exitFullscreen();
+		  }
+		}
+	  }
+
     const location = useLocation();
 
     const { generalInfo, logout, state } = useAuth();
@@ -51,6 +62,9 @@ function Header({aboutRef, contactRef}) {
                                 { !state
                                     ? 
                                         <>
+                                          <li className="nav-item">
+                                                <div onClick={()=>toggleFullScreen()}>button</div>
+                                            </li>
                                             <li className="nav-item">
                                                 <NavLink className="nav-link " to="/login">Login</NavLink>
                                             </li>

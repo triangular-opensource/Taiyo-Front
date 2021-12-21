@@ -5,6 +5,8 @@ import "./CustomItemCard.css"
 import { NavLink } from 'react-router-dom'
 import DefaultPic from '../../global/static/defaultImage.png'
 
+import Countdown from 'react-countdown';
+
 const CustomItemCard = (props) => {
     console.log(props)
     return (
@@ -17,6 +19,8 @@ const CustomItemCard = (props) => {
                     <img className="rounded" style={{maxHeight: "120px"}} src= {DefaultPic}   alt="some" />
                     }
                 </div>
+
+                <Countdown date={Date.now() + 10000} />,
                 {/* <div className="col-1">
                 </div> */}
                 <div className="col-9 pl-3">
