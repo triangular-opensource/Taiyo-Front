@@ -48,6 +48,16 @@ function Header(props) {
                     </div>
                     <div className="navbar__right">
                         <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <div
+                                    className='fullScreen'
+                                    style={{
+                                       
+                                    }}
+                                >
+                                    <i className="icon ion-android-expand"></i>
+                                </div>
+                            </li>
                                 { !state
                                     ? 
                                         <>
@@ -68,16 +78,6 @@ function Header(props) {
                                             </li>
                                         </>
                                 }
-                            <li className="nav-item">
-                                <div
-                                    className='fullScreen'
-                                    style={{
-                                       
-                                    }}
-                                >
-                                    <i className="icon ion-android-expand"></i>
-                                </div>
-                            </li>
                         </ul>
                         <NavLink to="/post-ad/step-1" className="ml-4 p-2 bg-secondary rounded text-white nav-btn">Buy/Sell</NavLink>
                     </div>
