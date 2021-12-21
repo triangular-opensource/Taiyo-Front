@@ -228,16 +228,19 @@ const CustomItemPage = (props) => {
                                 <div class="text-dark"> #{ad.id}</div>
                             </div>
                         </div>
-                        {bidList.map((bid) => (
+                        
+                        {
+                        bidList.map((bid) => (
                             <div className="row mt-1 mb-1 ">
                                 <div className="col-9">
                                     <CustomText name={`Rs.${bid.amount}`} />
                                 </div>
                                 <div className="col-3">
-                                    <CustomText name={`#${bid.user}`} />
+                                        <CustomText name={`#${bid.user}`} />
                                 </div>
                             </div>
-                        ))}
+                        ))
+                        }
                         <div className="row">
                             <div className="col-9">
                                 <CustomInput
