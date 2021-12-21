@@ -10,6 +10,7 @@ import { GLOBAL_URL } from "../../global/Constant";
 import axios from "axios";
 import useToken from "../../config/useToken";
 import alertMessage from "../../global/AlertProvider";
+import CustomTimer from "../Customs/CustomTimer/CustomTimer";
 
 const CustomItemPage = (props) => {
     const postId = props.match.params.id;
@@ -75,11 +76,20 @@ const CustomItemPage = (props) => {
     const togglePopup = () => {
         setIsOpen(!isOpen);
     };
+    const bidding_last = new Date(bidList.bidding_close_date)
+    const bidding_last_day = bidding_last.getDate();
+    const bidding_last_month = bidding_last.getMonth();
+    const bidding_last_year = bidding_last.getFullYear();
+    
+    
     async function handleSubmit(event) {}
     return adLoading === false && bidListLoading === false ? (
         <div className="container-fluid my-4">
             <div className="row no-gutters">
                 <div className="col-md-8 mx-5">
+                    <div className="row d-flex justify-content-center my-3">
+                        <CustomTimer timeTillDate={`${bidding_last_month} ${bidding_last_day} ${bidding_last_year}, 11:59 pm`} timeFormat="MM DD YYYY, h:mm a" />
+                    </div>
                     <div className="row auth-bg">
                         <div className="col-md-12">
                             <div
@@ -215,13 +225,13 @@ const CustomItemPage = (props) => {
                     <div className="auth-bg py-3 px-3">
                         <div className="row">
                             <div className="col-12">
-                                <div class="text-dark"> #{ad.id}</div>
+                                <div className="text-dark"> #{ad.id}</div>
                             </div>
                         </div>
                         
                         {
                         bidList.map((bid) => (
-                            <div className="row mt-1 mb-1 ">
+                            <div key={bid.id} className="row mt-1 mb-1">
                                 <div className="col-9">
                                     <CustomText name={`Rs.${bid.amount}`} />
                                 </div>

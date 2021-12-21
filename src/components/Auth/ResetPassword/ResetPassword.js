@@ -28,12 +28,12 @@ const ResetPassword = () => {
     return (
         <div>
             <div>
-                <div class="container my-5">
-                    <div class="row justify-content-md-center">
-                        <div class="col-md-4 text-center">
-                            <div class="row">
-                                <div class="col-sm-12 bgWhite">
-                                    <div class="title mt-5">
+                <div className="container my-5">
+                    <div className="row justify-content-md-center">
+                        <div className="col-md-4 text-center">
+                            <div className="row">
+                                <div className="col-sm-12 bgWhite">
+                                    <div className="title mt-5">
                                         <CustomText
                                             name="Reset Password"
                                             color="black"
@@ -53,7 +53,7 @@ const ResetPassword = () => {
                                         <CustomAlert message={EMAIL_ERROR} />
                                     ) : null}
 
-                                    <div class="mb-5">
+                                    <div className="mb-5">
                                         <CustomButton
                                             fontSize="17"
                                             marginTop="20"

@@ -34,12 +34,12 @@ const Otp = (props) => {
 
     return (
         <div>
-            <div class="container">
-                <div class="row justify-content-md-center">
-                    <div class="text-center">
-                        <div class="row">
-                            <div class="col-12 mt-5 bgWhite">
-                                <div class="title">
+            <div className="container">
+                <div className="row justify-content-md-center">
+                    <div className="text-center">
+                        <div className="row">
+                            <div className="col-12 mt-5 bgWhite">
+                                <div className="title">
                                     <CustomText
                                         name="Verify Otp"
                                         color="black"

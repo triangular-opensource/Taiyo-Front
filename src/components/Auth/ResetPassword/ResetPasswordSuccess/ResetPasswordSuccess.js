@@ -9,12 +9,12 @@ const history =  useHistory();
 return (
 <div>
 <div> 
-<div class="container">
-  <div class="row justify-content-md-center">
-      <div class="col-md-4 text-center">
-        <div class="row">
-          <div class="col-sm-12 mt-5 bgWhite">
-            <div class="title">
+<div className="container">
+  <div className="row justify-content-md-center">
+      <div className="col-md-4 text-center">
+        <div className="row">
+          <div className="col-sm-12 mt-5 bgWhite">
+            <div className="title">
             <CustomText name="Password Changed SuccessFully" color='black' size='xx-large' weight='bold' />
             </div>
             <br/>
