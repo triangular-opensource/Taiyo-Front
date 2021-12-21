@@ -13,6 +13,20 @@
     
 }
 
+.fullScreen {
+    background: #999999;
+    padding: 0px 10px 0px 10px;
+    margin-top: 2px;
+    font-size: x-large;
+    border-radius: 10%;
+    color: white;
+    cursor: pointer;
+}
+
+.fullScreen:hover {
+    background: #7e7e7e;
+}
+
 .dropdown:hover .dropdown-menu {
     margin-top: -10px;
     display: block;

@@ -24,7 +24,7 @@ const UserInformation = () => {
     const adDetail = JSON.parse(localStorage.getItem("adDetail"))
 
     const savePost = async () => {
-        await axios.post(`${GLOBAL_URL}/ads`, {
+        await axios.post(`${GLOBAL_URL}/post-ads`, {
             "product": adInfo.product,
             "buy_or_sell": adInfo.buy_or_sell,
             "basic_price": adDetail.basic_price,

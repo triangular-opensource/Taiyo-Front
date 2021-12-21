@@ -1,20 +1,17 @@
-import React , {useState} from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import  { AuthProvider } from "./config/AuthContext";
-import Routes from './config/Routes';
+import { AuthProvider } from "./config/AuthContext";
+import Routes from "./config/Routes";
 
 function App() {
-	const handle = useFullScreenHandle();
-
-return (
-	        <BrowserRouter>
-			    <AuthProvider>
-				<Routes />
-			   	</AuthProvider>
-		    </BrowserRouter>
-
-	)
+    return (
+        <BrowserRouter>
+            <AuthProvider>
+                <Routes />
+            </AuthProvider>
+        </BrowserRouter>
+    );
 }
 
 export default App;

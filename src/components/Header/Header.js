@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom'
 import useAuth from '../../config/AuthContext';
 import "./Header.css"
 
-function Header({aboutRef, contactRef}) {
+function Header(props) {
 
     const location = useLocation();
 
@@ -29,10 +29,10 @@ function Header({aboutRef, contactRef}) {
                             <NavLink className="nav-link" exact to="/">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <span className="nav-link" onClick={() => console.log(aboutRef)}>About</span>
+                            <NavLink className="nav-link" to="/about">About</NavLink>
                         </li>
                         <li className="nav-item">
-                            <span className="nav-link" onClick={() => contactRef.current.scrollIntoView({behavior: "smooth"})}>Contact</span>
+                            <NavLink className="nav-link" to="/contact">Contact</NavLink>
                         </li>
                         <li className="nav-item dropdown">
                             <NavLink className="nav-link" id="navbarDropdown" to="/search">Search</NavLink>
@@ -67,7 +67,17 @@ function Header({aboutRef, contactRef}) {
                                                 <NavLink className="nav-link" to="/profile">Profile</NavLink>
                                             </li>
                                         </>
-                                }    
+                                }
+                            <li className="nav-item">
+                                <div
+                                    className='fullScreen'
+                                    style={{
+                                       
+                                    }}
+                                >
+                                    <i className="icon ion-android-expand"></i>
+                                </div>
+                            </li>
                         </ul>
                         <NavLink to="/post-ad/step-1" className="ml-4 p-2 bg-secondary rounded text-white nav-btn">Buy/Sell</NavLink>
                     </div>

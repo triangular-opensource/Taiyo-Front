@@ -1,36 +1,45 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
+const ScrollButton = () => {
+    const [visible, setVisible] = useState(true);
 
-const ScrollButton = () =>{
+    const toggleVisible = () => {
+        const scrolled = document.documentElement.scrollTop;
+        if (scrolled > 300) {
+            setVisible(true);
+        } else if (scrolled <= 300) {
+            setVisible(false);
+        }
+    };
 
-const [visible, setVisible] = useState(false)
+    const scrollToTop = () => {
+        console.log("to top")
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    };
 
-const toggleVisible = () => {
-	const scrolled = document.documentElement.scrollTop;
-	if (scrolled > 300){
-	setVisible(true)
-	}
-	else if (scrolled <= 300){
-	setVisible(false)
-	}
+    window.addEventListener("scroll", toggleVisible);
+
+    return (
+        <div
+            onClick={scrollToTop}
+            style={{
+                "display": visible ? "block" : "block",
+                "position": "fixed",
+                "bottom": "15px",
+                "right": "10px",
+                "background": "#504d4d",
+                "padding": "0px 15px 0px 15px",
+                "fontSize": "xx-large",
+                "borderRadius": "10%",
+                "color": "white"
+            }}
+        >
+            <i className="icon ion-arrow-up-c"></i>
+        </div>
+    );
 };
-
-const scrollToTop = () =>{
-	window.scrollTo({
-	top: 0,
-	behavior: 'smooth'
-	/* you can also use 'auto' behaviour
-		in place of 'smooth' */
-	});
-};
-
-window.addEventListener('scroll', toggleVisible);
-
-return (
-	<div onClick={scrollToTop} style={{display: visible ? 'inline' : 'none'}} >
-            Go Up
-	</div>
-);
-}
 
 export default ScrollButton;

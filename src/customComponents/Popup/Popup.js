@@ -3,7 +3,6 @@ import "./Popup.css";
 
 const Popup = (props) => {
     return (
-
 		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-xl modal-dialog-scrollable">
 				<div class="modal-content">
@@ -14,7 +13,9 @@ const Popup = (props) => {
 						</button>
 					</div>
 					<div class="modal-body" style={{"overflowX": "scroll"}}>
-						{props.content}
+						<div className="container">
+							{props.content}
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -23,14 +24,6 @@ const Popup = (props) => {
 				</div>
 			</div>
 		</div>
-        // <div className="popup-box">
-        //     <div className="box">
-        //         <span className="close-icon" onClick={props.handleClose}>
-        //             x
-        //         </span>
-        //         {props.content}
-        //     </div>
-        // </div>
     );
 }
 

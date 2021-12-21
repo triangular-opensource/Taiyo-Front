@@ -8,10 +8,12 @@ import { emailValidation, gstValidation, passwordValidate, phoneValidation, pinc
 import CustomAlert from '../../../customComponents/CustomAlert/CustomAlert';
 import { EMAIL_ERROR, PASSWORD_ERROR } from '../../../global/Constant';
 import alertMessage from '../../../global/AlertProvider';
+import Popup from '../../../customComponents/Popup/Popup';
+import TermAndConditions from '../../Policiy/TermsAndConditions/TermAndConditions';
 
 function Register() {
 
-    const {register} = useAuth();
+    const {register, policy} = useAuth();
 
     const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("")
@@ -158,12 +160,20 @@ function Register() {
                         <div className="col-md-12">
                             <div className="custom-control custom-checkbox my-2">
                                 <input type="checkbox" className="custom-control-input" id="customControgsylValidation1" required />
-                                <label className="custom-control-label" htmlFor="customControlValidation1">I agree to  </label>
-                                <NavLink to="/terms-and-condition"><label> Terms And Condition </label> </NavLink>
+                                <label className="custom-control-label" htmlFor="customControlValidation1">I agree to </label>
+                                <span className='ml-2 text-primary' style={{"fontWeight": "bold", "cursor": "pointer"}} data-target="#exampleModal" data-toggle="modal">
+                                    Terms And Condition
+                                </span>
                             </div>
                         </div>
                     </div>
-
+                    <Popup 
+                        content={
+                            <>
+                                <TermAndConditions />
+                            </>
+                        }
+                    />
                     <div className="form-row">
                         <div className="col-md-12">
                             <CustomButton disabled={checkDisabled} fontSize="17" data="REGISTER" handleClick={handleRegister} padding='16' backgroundColor='gray' color='white' />

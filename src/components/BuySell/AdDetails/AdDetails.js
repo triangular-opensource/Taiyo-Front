@@ -17,7 +17,7 @@ const AdDetails = () => {
     const [excel, setExcel] = useState("")
     const [pdf, setPdf] = useState("")
     const [pdfFile, setPdfFile] = useState(null)
-    const data = JSON.parse(localStorage.getItem("adDetail"))
+    const data = JSON.parse(localStorage.getItem("adDetail")) ? JSON.parse(localStorage.getItem("adDetail")) : false 
 
     const fileUpload = async () => {
         const storageRef = ref(storage, `Users/ProfilePics`)
@@ -45,10 +45,6 @@ const AdDetails = () => {
         }
     }, [history])
 
-    const checkDisabledNextButton = () => {
-        return false;
-    }
-
     const setAdDetailData = () => {
         localStorage.setItem("adDetail", JSON.stringify(postData))
     }
@@ -56,13 +52,13 @@ const AdDetails = () => {
 
     return (
         <div className="container my-5 auth-bg">
-            <PostNavbar active2={true} />
+            <PostNavbar active2={true} post2={postData} />
             <div className='container pb-4'>
                 <div className="row">
                     <div className="col-12 mx-3 pr-5">
                         <div className="form-group">
                             <label htmlFor="basicPrice">Basic Price <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">(₹ per metric ton. GST extra as applicable)</span></label>
-                            <input type="text" name="" id="basicPrice" value={data?.basic_price ? data?.basic_price : postData.basic_price} onChange={e => setPostData({...postData, basic_price: e.target.value})} placeholder='Basic Price' className="form-control" />
+                            <input type="text" name="" id="basicPrice" value={data.basic_price ? data.basic_price : postData.basic_price} onChange={e => setPostData({...postData, basic_price: e.target.value})} placeholder='Basic Price' className="form-control" />
                         </div>
                     </div>
                 </div>
@@ -70,7 +66,7 @@ const AdDetails = () => {
                     <div className="col-12 mx-3 pr-5">
                         <div className="form-group">
                             <label htmlFor="prodDesc">Product Description <span style={{"fontSize":"smaller"}} className="ml-2 text-muted">Enter long description</span></label>
-                            <textarea name="" id="" cols="30" value={data?.description ? data?.description : postData.description} onChange={e => setPostData({...postData, description: e.target.value})} rows="6" className="form-control"></textarea>
+                            <textarea name="" id="" cols="30" value={data.description ? data.description : postData.description} onChange={e => setPostData({...postData, description: e.target.value})} rows="6" className="form-control"></textarea>
                         </div>
                     </div>
                 </div>
@@ -78,13 +74,13 @@ const AdDetails = () => {
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="quantity">Quantity (MT) <span className="text-danger">*</span></label>
-                            <input type="text" name="" id="quantity" value={data?.quantity ? data?.quantity : postData.quantity} onChange={e => setPostData({...postData, quantity: e.target.value})} placeholder='Quantity' className="form-control" />
+                            <input type="text" name="" id="quantity" value={data.quantity ? data.quantity : postData.quantity} onChange={e => setPostData({...postData, quantity: e.target.value})} placeholder='Quantity' className="form-control" />
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="grad-spec">Grad/Spec <span className="text-danger">*</span></label>
-                            <input type="text" name="" id="grad-spec" value={data?.grad_or_spec ? data?.grad_or_spec : postData.grad_or_spec} onChange={e => setPostData({...postData, grad_or_spec: e.target.value})} placeholder='Grad/Spec' className="form-control" />
+                            <input type="text" name="" id="grad-spec" value={data.grad_or_spec ? data.grad_or_spec : postData.grad_or_spec} onChange={e => setPostData({...postData, grad_or_spec: e.target.value})} placeholder='Grad/Spec' className="form-control" />
                         </div>
                     </div>
                 </div>
@@ -92,7 +88,7 @@ const AdDetails = () => {
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="quality">Quality <span className="text-danger">*</span></label>
-                            <select className='form-control' value={data?.quality ? data?.quality : postData.quality} onChange={e => setPostData({...postData, quality: e.target.value})} name="" id="quality">
+                            <select className='form-control' value={data.quality ? data.quality : postData.quality} onChange={e => setPostData({...postData, quality: e.target.value})} name="" id="quality">
                                 <option value=""selected disabled>Choose...</option>
                                 <option value="Prime">Prime</option>
                                 <option value="Defective">Defective</option>
@@ -102,7 +98,7 @@ const AdDetails = () => {
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="temper">Temper <span className="text-danger">*</span></label>
-                            <select className='form-control' value={data?.temper ? data?.temper : postData.temper} onChange={e => setPostData({...postData, temper: e.target.value})} name="" id="temper">
+                            <select className='form-control' value={data.temper ? data.temper : postData.temper} onChange={e => setPostData({...postData, temper: e.target.value})} name="" id="temper">
                                 <option value=""selected disabled>Choose...</option>
                                 <option value="Hard">Hard</option>
                                 <option value="Soft">Soft</option>
@@ -114,13 +110,13 @@ const AdDetails = () => {
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="specNumber">Specification Number <span className="text-danger">*</span></label>
-                            <input type="text" name="" id="specNumber" value={data?.specification_number ? data?.specification_number : postData.specification_number} onChange={e => setPostData({...postData, specification_number: e.target.value})} placeholder='Specification Number' className="form-control" />
+                            <input type="text" name="" id="specNumber" value={data.specification_number ? data.specification_number : postData.specification_number} onChange={e => setPostData({...postData, specification_number: e.target.value})} placeholder='Specification Number' className="form-control" />
                         </div>
                     </div>
                     <div className="col-6">
                         <div className="form-group">
                             <label htmlFor="coating_gsm">Coating in GSM <span className="text-danger">*</span></label>
-                            <input type="text" name="" id="coating_gsm" value={data?.coating_in_gsm ? data?.coating_in_gsm : postData.coating_in_gsm} onChange={e => setPostData({...postData, coating_in_gsm: e.target.value})} placeholder='Coating in GSM' className="form-control" />
+                            <input type="text" name="" id="coating_gsm" value={data.coating_in_gsm ? data.coating_in_gsm : postData.coating_in_gsm} onChange={e => setPostData({...postData, coating_in_gsm: e.target.value})} placeholder='Coating in GSM' className="form-control" />
                         </div>
                     </div>
                 </div>
@@ -128,19 +124,19 @@ const AdDetails = () => {
                     <div className="col-4">
                         <div className="form-group">
                             <label htmlFor="thickness">Thickness <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">(in mm)</span></label>
-                            <input type="text" name="" id="thickness" value={data?.thickness ? data?.thickness : postData.thickness} onChange={e => setPostData({...postData, thickness: e.target.value})} placeholder='Thickness' className="form-control" />
+                            <input type="text" name="" id="thickness" value={data.thickness ? data.thickness : postData.thickness} onChange={e => setPostData({...postData, thickness: parseFloat(e.target.value)})} placeholder='Thickness' className="form-control" />
                         </div>
                     </div>
                     <div className="col-4">
                         <div className="form-group">
                             <label htmlFor="width">Width <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">(in mm)</span></label>
-                            <input type="text" name="" id="width" value={data?.width ? data?.width : postData.width} onChange={e => setPostData({...postData, width: e.target.value})} placeholder='Width' className="form-control" />
+                            <input type="text" name="" id="width" value={data.width ? data.width : postData.width} onChange={e => setPostData({...postData, width: parseFloat(e.target.value)})} placeholder='Width' className="form-control" />
                         </div>
                     </div>
                     <div className="col-4">
                         <div className="form-group">
                             <label htmlFor="length">Length <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">(in mm)</span></label>
-                            <input type="text" name="" id="length" value={data?.length ? data?.length : postData.length} onChange={e => setPostData({...postData, length: e.target.value})} placeholder='Length' className="form-control" />
+                            <input type="text" name="" id="length" value={data.length ? data.length : postData.length} onChange={e => setPostData({...postData, length: parseFloat(e.target.value)})} placeholder='Length' className="form-control" />
                         </div>
                     </div>
                 </div>
@@ -175,7 +171,10 @@ const AdDetails = () => {
                     <div className="col-12">
                     <NavLink onClick={setAdDetailData} to="/post-ad/step-3">
                         <button
-                            disabled={checkDisabledNextButton()}
+                            style={{
+                                "cursor": !(postData.basic_price && postData.description && postData.quantity && postData.grad_or_spec && postData.quality && postData.temper && postData.specification_number && postData.coating_in_gsm && postData.thickness && postData.width &&postData.length) ? "not-allowed" : "pointer"
+                            }}
+                            disabled={!(postData.basic_price && postData.description && postData.quantity && postData.grad_or_spec && postData.quality && postData.temper && postData.specification_number && postData.coating_in_gsm && postData.thickness && postData.width &&postData.length)}
                             className="btn btn-primary float-right mx-3"
                         >
                             Next

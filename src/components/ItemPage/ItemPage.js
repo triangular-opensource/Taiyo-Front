@@ -64,8 +64,7 @@ const CustomItemPage = (props) => {
                                 </div>
                                 <div className="col-md-2">
                                     <CustomButton fontSize="15" data="Excel" dataToggle="modal" dataTarget="#exampleModal" padding='8' backgroundColor='gray' color='white' handleClick={togglePopup} />
-                                    {
-                                        isOpen && <Popup
+                                        <Popup
                                             content=
                                             {
                                                 <>
@@ -74,8 +73,7 @@ const CustomItemPage = (props) => {
                                                 </>
                                             }
                                             handleClose={togglePopup}
-                                        />}
-
+                                        />
                                 </div>
                                 <div className="col-md-2">
                                     <CustomButton fontSize="15" data="Pdf" padding='8' backgroundColor='gray' color='white' />
