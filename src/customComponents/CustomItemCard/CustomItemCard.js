@@ -5,6 +5,7 @@ import "./CustomItemCard.css"
 import { NavLink } from 'react-router-dom'
 import DefaultPic from '../../global/static/defaultImage.png'
 
+
 const CustomItemCard = (props) => {
     console.log(props)
     return (
@@ -17,6 +18,7 @@ const CustomItemCard = (props) => {
                     <img className="rounded" style={{maxHeight: "120px"}} src= {DefaultPic}   alt="some" />
                     }
                 </div>
+
                 {/* <div className="col-1">
                 </div> */}
                 <div className="col-9 pl-3">

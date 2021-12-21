@@ -1,10 +1,24 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom'
 import useAuth from '../../config/AuthContext';
 import "./Header.css"
 
-function Header(props) {
+const Header = () => {
+
+    const [fullScreenEnabled, setFullScreenEnabled] = useState(false)
+
+    const toggleFullScreen = () => {
+		if (!document.fullscreenElement) {
+			document.documentElement.requestFullscreen();
+            setFullScreenEnabled(true)
+		} else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+                setFullScreenEnabled(false)
+		  }
+		}
+	  }
 
     const location = useLocation();
 
@@ -50,12 +64,16 @@ function Header(props) {
                         <ul className="navbar-nav">
                             <li className="nav-item">
                                 <div
+                                    onClick={toggleFullScreen}
                                     className='fullScreen'
-                                    style={{
-                                       
-                                    }}
                                 >
-                                    <i className="icon ion-android-expand"></i>
+                                    {
+                                        fullScreenEnabled
+                                            ?
+                                                <i className="icon ion-android-contract"></i>
+                                            :
+                                                <i className="icon ion-android-expand"></i>
+                                    }
                                 </div>
                             </li>
                                 { !state
