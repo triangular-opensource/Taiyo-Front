@@ -13,7 +13,6 @@ const ScrollButton = () => {
     };
 
     const scrollToTop = () => {
-        console.log("to top")
         window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -26,7 +25,7 @@ const ScrollButton = () => {
         <div
             onClick={scrollToTop}
             style={{
-                "display": visible ? "block" : "block",
+                "display": visible ? "block" : "none",
                 "position": "fixed",
                 "bottom": "15px",
                 "right": "10px",
