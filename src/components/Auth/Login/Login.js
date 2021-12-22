@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import useAuth from '../../../config/AuthContext'
-import CustomButton from "../../../customComponents/CustomButton/CustomButton"
-import CustomInput from "../../../customComponents/CustomInputField/CustomInput"
+import CustomButton from "../../Customs/CustomButton/CustomButton"
+import CustomInput from "../../Customs/CustomInputField/CustomInput"
 import "./Login.css"
 import { ReactComponent as LoginSvg } from "../../../global/static/svg/login.svg";
 import { NavLink } from 'react-router-dom'
 
-import { emailValidation , isDataNull, passwordValidate, PasswordValidate } from '../../../global/validations'
+import { emailValidation, passwordValidate } from '../../../global/validations'
 import { EMAIL_ERROR , PASSWORD_ERROR } from '../../../global/Constant'
-import CustomAlert from '../../../customComponents/CustomAlert/CustomAlert'
+import CustomAlert from '../../Customs/CustomAlert/CustomAlert'
 
 function Login() {
 
@@ -32,7 +32,7 @@ function Login() {
         <div className="container py-5">
             <div className="row no-gutters auth-bg">
                 <div className="col-md-7">
-                    <LoginSvg />    
+                    <LoginSvg style={{ width: '100%', height: 'auto' }} />    
                 </div>
                 <div className="col-md-5 px-3 pt-3">
                     <div className="col-md-12 my-4">

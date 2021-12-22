@@ -1,18 +1,18 @@
 import React, { useRef, useState } from "react";
-import useToken from "../../config/useToken";
-import CustomButton from "../CustomButton/CustomButton";
-import CustomInput from "../CustomInputField/CustomInput";
-import CustomText from "../CustomText/CustomText";
-import defaultImage from "../../global/static/default.png";
-import "./CustomUserEditForm.css"
+import CustomButton from "../../../Customs/CustomButton/CustomButton";
+import CustomInput from "../../../Customs/CustomInputField/CustomInput";
+import CustomText from "../../../Customs/CustomText/CustomText";
+import defaultImage from "../../../../global/static/default.png";
+import "./ProfileEditForm.css"
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "../../config/Firebase";
 import axios from "axios";
-import { GLOBAL_URL } from "../../global/Constant";
-import useAuth from "../../config/AuthContext";
 import { useHistory } from "react-router-dom";
+import useAuth from "../../../../config/AuthContext";
+import { storage } from "../../../../config/Firebase";
+import useToken from "../../../../config/useToken";
+import { GLOBAL_URL } from "../../../../global/Constant";
 
-const CustomUserEditForm = () => {
+const ProfileEditForm = () => {
 
     const scrollRef = useRef(null)
 
@@ -23,7 +23,6 @@ const CustomUserEditForm = () => {
  
     const [loading, setLoading] = useState(false);
     const [updated, setUpdated] = useState(false);
-    const [error, setError] = useState("");
     const [firstName, setFirstName] = useState(userData().first_name);
     const [middleName, setMiddleName] = useState(userData().middle_name ? userData().middle_name : "");
     const [lastName, setLastName] = useState(userData().last_name);
@@ -396,4 +395,4 @@ const CustomUserEditForm = () => {
     );
 };
 
-export default CustomUserEditForm;
+export default ProfileEditForm;

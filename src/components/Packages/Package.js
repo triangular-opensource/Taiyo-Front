@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import CustomMoneyBox from '../../customComponents/CustomMoneyBox/CustomMoneyBox'
 import './Package.css';
 import { GLOBAL_URL } from '../../global/Constant';
 import axios from 'axios';
-import Loader from '../../customComponents/Loader/Loader';
+import Loader from '../Customs/Loader/Loader';
+import PackageItem from "./PackageItem/PackageItem"
 import useAuth from '../../config/AuthContext';
 import useToken from '../../config/useToken';
 
@@ -72,7 +72,7 @@ const Package = () => {
                 :
                     subscription.map(
                         sub => (
-                            <CustomMoneyBox key={sub.id} name={sub.name} loading={paymentLoading} setLoading={setPaymentLoading} onClick={makePayment} amount= {sub.amount} days={sub.days} />
+                            <PackageItem key={sub.id} name={sub.name} loading={paymentLoading} setLoading={setPaymentLoading} onClick={makePayment} amount= {sub.amount} days={sub.days} />
                         )
                     )
             } 

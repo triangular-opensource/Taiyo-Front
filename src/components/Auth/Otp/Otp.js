@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CustomText from "../../../customComponents/CustomText/CustomText";
-import CustomButton from "../../../customComponents/CustomButton/CustomButton";
+import CustomText from "../../Customs/CustomText/CustomText";
+import CustomButton from "../../Customs/CustomButton/CustomButton";
 import OtpInput from "react-otp-input";
-import CustomInput from "../../../customComponents/CustomInputField/CustomInput";
+import CustomInput from "../../Customs/CustomInputField/CustomInput";
 import { GLOBAL_URL } from "../../../global/Constant";
 import axios from "axios";
 import alertMessage from "../../../global/AlertProvider";

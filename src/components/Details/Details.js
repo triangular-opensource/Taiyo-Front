@@ -1,5 +1,5 @@
 import React from 'react'
-import CustomItemPage from '../../customComponents/CustomItemPage/CustomItemPage'
+import CustomItemPage from '../Customs/CustomItemPage/CustomItemPage'
 
 function Details(){
     return (

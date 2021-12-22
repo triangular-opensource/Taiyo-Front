@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../../config/AuthContext";
 import "./Footer.css";
 import { postNewsLetter } from "../../global/Function";
-import ScrollButton from "../../customComponents/ScrollUp/ScrollUp";
 
 function Footer() {
     const { generalInfo } = useAuth();

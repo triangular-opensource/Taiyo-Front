@@ -1,13 +1,13 @@
 import {React  , useState } from 'react'
-import CustomText from "../../customComponents/CustomText/CustomText"
-import CustomInput from "../../customComponents/CustomInputField/CustomInput"
-import CustomButton from "../../customComponents/CustomButton/CustomButton"
+import CustomText from "../Customs/CustomText/CustomText"
+import CustomInput from "../Customs/CustomInputField/CustomInput"
+import CustomButton from "../Customs/CustomButton/CustomButton"
 import { ReactComponent as ContactSvg } from "../../global/static/svg/contact.svg";
-import CustomTextarea from '../../customComponents/CustomTextarea/CustomTextarea'
+import CustomTextarea from '../Customs/CustomTextarea/CustomTextarea'
 import {postContact} from '../../global/Function'
 import { emailValidation } from '../../global/validations'
 import { EMAIL_ERROR } from '../../global/Constant'
-import CustomAlert from '../../customComponents/CustomAlert/CustomAlert'
+import CustomAlert from '../Customs/CustomAlert/CustomAlert'
 
 function Contact() {
 

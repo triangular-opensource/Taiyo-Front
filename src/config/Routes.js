@@ -1,4 +1,4 @@
-import React, { createRef, useRef } from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router'
 import Login from '../components/Auth/Login/Login'
 import Register from '../components/Auth/Register/Register'
@@ -23,19 +23,16 @@ import AdDetails from '../components/BuySell/AdDetails/AdDetails'
 import UserInformation from '../components/BuySell/UserInformation/UserInformation'
 import Contact from '../components/Contact/Contact'
 import About from '../components/About/About'
-import ScrollButton from '../customComponents/ScrollUp/ScrollUp'
+import ScrollButton from '../components/Customs/ScrollUp/ScrollUp'
 
 const Routes = () => {
 
-    const aboutRef = useRef(null)
-    const contactRef = useRef(null)
-
     return (
         <>
-            <Header aboutRef={aboutRef} contactRef={contactRef} />
+            <Header />
             <div className='mt-4 pt-4'>
                 <Switch>
-                    <Route exact path="/" component={() => <Home aboutRef={aboutRef} />} />
+                    <Route exact path="/" component={() => <Home />} />
                     <Route exact path="/about" component={() => <About />} />
                     <Route exact path="/contact" component={() => <Contact />} />
                     <Route exact path="/post-ad/step-1" component={AdInformation} />

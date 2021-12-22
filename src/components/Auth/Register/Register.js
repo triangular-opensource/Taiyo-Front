@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom';
-import CustomButton from '../../../customComponents/CustomButton/CustomButton';
-import CustomInput from '../../../customComponents/CustomInputField/CustomInput';
+import CustomButton from '../../Customs/CustomButton/CustomButton';
+import CustomInput from '../../Customs/CustomInputField/CustomInput';
 import { ReactComponent as RegisterSvg } from "../../../global/static/svg/register.svg";
 import useAuth from '../../../config/AuthContext';
 import { emailValidation, gstValidation, passwordValidate, phoneValidation, pincodeValidate } from '../../../global/validations';
-import CustomAlert from '../../../customComponents/CustomAlert/CustomAlert';
+import CustomAlert from '../../Customs/CustomAlert/CustomAlert';
 import { EMAIL_ERROR, PASSWORD_ERROR } from '../../../global/Constant';
 import alertMessage from '../../../global/AlertProvider';
-import Popup from '../../../customComponents/Popup/Popup';
+import Popup from '../../Customs/Popup/Popup';
 import TermAndConditions from '../../Policiy/TermsAndConditions/TermAndConditions';
 
 function Register() {
@@ -69,8 +69,8 @@ function Register() {
     return (
         <div className="container-fluid py-5 px-4">
 			<div className="row no-gutters auth-bg">
-				<div className="col-md-6">
-                    <RegisterSvg />
+				<div className="col-md-6 py-5">
+                    <RegisterSvg style={{ width: '100%', height: 'auto' }} />
                 </div>
 				<div className="col-md-6 px-5 pt-3">
                     <div className="col-md-12 my-4">

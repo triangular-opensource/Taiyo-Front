@@ -18,7 +18,7 @@ function AppDownload() {
                         <div className="download__card container">
                             <div className="row my-3 pb-3">
                                 <div className="col-3">
-                                    <AndroidSvg />
+                                    <AndroidSvg style={{ width: '100%', height: 'auto' }} />
                                 </div>
                                 <div className="col-9">
                                     <div className="container">

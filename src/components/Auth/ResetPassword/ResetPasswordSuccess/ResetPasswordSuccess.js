@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import CustomButton from '../../../../customComponents/CustomButton/CustomButton';
-import CustomText from '../../../../customComponents/CustomText/CustomText';
+import CustomButton from '../../../Customs/CustomButton/CustomButton';
+import CustomText from '../../../Customs/CustomText/CustomText';
 
 const ResetPasswordSuccess = () => 
 {

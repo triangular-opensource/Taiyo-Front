@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import CustomAlert from "../../../customComponents/CustomAlert/CustomAlert";
-import CustomButton from "../../../customComponents/CustomButton/CustomButton";
-import CustomInput from "../../../customComponents/CustomInputField/CustomInput";
-import CustomText from "../../../customComponents/CustomText/CustomText";
+import CustomAlert from "../../Customs/CustomAlert/CustomAlert";
+import CustomButton from "../../Customs/CustomButton/CustomButton";
+import CustomInput from "../../Customs/CustomInputField/CustomInput";
+import CustomText from "../../Customs/CustomText/CustomText";
 import alertMessage from "../../../global/AlertProvider";
 import { EMAIL_ERROR, GLOBAL_URL } from "../../../global/Constant";
 import { emailValidation } from "../../../global/validations";

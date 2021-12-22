@@ -1,7 +1,6 @@
 import React, { useRef } from 'react'
-import CustomUserEditForm from '../../../customComponents/CustomUserEditForm/CustomUserEditForm'
 import ProfileHeader from '../ProfileHeader/ProfileHeader'
-
+import ProfileEditForm from "./ProfileEditForm/ProfileEditForm"
 const ProfileEdit = () => {
 
     const updateHeader = useRef(null)
@@ -13,7 +12,7 @@ const ProfileEdit = () => {
                     <ProfileHeader updateProfile={updateHeader} />
                 </div>
                 <div className="col-md-12 mb-5 pb-4">
-                    <CustomUserEditForm  updateProfile={updateHeader} />
+                    <ProfileEditForm updateProfile={updateHeader} />
                 </div>
             </div>
         </div>

@@ -1,11 +1,11 @@
 import {React , useState ,  useEffect } from 'react'
 import "./Search.css"
-import CustomSearchBar from '../../customComponents/CustomSearchBar/CustomSearchBar'
-import CustomItemCard from '../../customComponents/CustomItemCard/CustomItemCard'
+import CustomSearchBar from '../Customs/CustomSearchBar/CustomSearchBar'
+import CustomItemCard from '../Customs/CustomItemCard/CustomItemCard'
 import { GLOBAL_URL } from '../../global/Constant'
 import axios from 'axios'
-import Loader from '../../customComponents/Loader/Loader'
-function Search() {
+
+const Search = () => {
 
     const [category, setCategory] = useState([]);
     const [ads, setAd] = useState([]);
@@ -56,11 +56,11 @@ function Search() {
                                     <div className="col-12">
                                         <div className="custom-control custom-switch mb-1">
                                             <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input" />
-                                            <label className="custom-control-label" for="customRadio1">Sell</label>
+                                            <label className="custom-control-label" htmlFor="customRadio1">Sell</label>
                                         </div>
                                         <div className="custom-control custom-switch mt-2">
                                             <input type="radio" id="customRadio2" name="customRadio" className="custom-control-input" />
-                                            <label className="custom-control-label" for="customRadio2">Buy</label>
+                                            <label className="custom-control-label" htmlFor="customRadio2">Buy</label>
                                         </div>
                                     </div>
                                 </div>

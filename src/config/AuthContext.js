@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useReducer, useState } from 'react'
 import axios from 'axios';
 import { GLOBAL_URL } from '../global/Constant';
-import Loader from '../customComponents/Loader/Loader';
+import Loader from '../components/Customs/Loader/Loader';
 import { useHistory } from 'react-router';
 import useToken from './useToken';
 import { initialState, reducer } from './useReducer';

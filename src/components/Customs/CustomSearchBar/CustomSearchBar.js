@@ -1,8 +1,8 @@
 import React from "react";
 import "./CustomSearchBar.css";
-import { ReactComponent as SearchSvg } from "../../global/static/svg/search.svg";
+import { ReactComponent as SearchSvg } from "../../../global/static/svg/search.svg";
 import Autocomplete from "react-google-autocomplete";
-import alertMessage from "../../global/AlertProvider";
+import alertMessage from "../../../global/AlertProvider";
 
 const CustomSearchBar = () => {
     return (
@@ -14,11 +14,13 @@ const CustomSearchBar = () => {
                         console.log(place);
                     }}
                 />
-                 <div onClick={() => alertMessage("search cliked")} className="icon">
-                    <SearchSvg />
+                <div
+                    onClick={() => alertMessage("search cliked")}
+                    className="icon border mt-1 d-flex justify-content-center align-items-center bg-secondary rounded text-white"
+                >
+                    <SearchSvg style={{ color: "white" }} />
                 </div>
             </div>
-           
         </div>
     );
 };

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import CustomText from "../../customComponents/CustomText/CustomText";
-import CustomButton from "../../customComponents/CustomButton/CustomButton";
+import CustomText from "../Customs/CustomText/CustomText";
+import CustomButton from "../Customs/CustomButton/CustomButton";
 import "./ItemPage.css";
-import Popup from "../../customComponents/Popup/Popup";
-import Excel from "../../customComponents/Excel/Excel";
+import Popup from "../Customs/Popup/Popup";
+import Excel from "../Customs/Excel/Excel";
 import { useHistory } from "react-router-dom";
-import CustomInput from "../../customComponents/CustomInputField/CustomInput";
+import CustomInput from "../Customs/CustomInputField/CustomInput";
 import { GLOBAL_URL } from "../../global/Constant";
 import axios from "axios";
 import useToken from "../../config/useToken";

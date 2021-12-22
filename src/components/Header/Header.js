@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { NavLink, useLocation } from 'react-router-dom'
 import useAuth from '../../config/AuthContext';
 import "./Header.css"
 

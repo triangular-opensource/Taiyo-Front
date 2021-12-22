@@ -16,7 +16,7 @@
     "react-google-autocomplete": "^2.6.1",
     "react-otp-input": "^2.4.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.0",
     "react-scroll-up-button": "^1.6.4",
     "sweetalert2": "^11.3.0",
     "sweetalert2-react-content": "^4.2.0",
