@@ -19,14 +19,20 @@ const Search = () => {
                 setCategory(response.data.data);
                 setCategoryLoading(false)
             })
-            .catch(async (error) => setError(error))
+            .catch(async (error) => 
+            setError(error))
         
         axios.get(`${GLOBAL_URL}/ads`)
             .then(async (response) => {
                 setAd(response.data.data);
                 setAdLoading(false)
             })
-            .catch(async (error) => setError(error))
+            .catch(async (error) =>
+               {
+                    console.log(error.response)
+            setError(error)
+        }
+            )
     }, []);
     
     return (

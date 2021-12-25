@@ -25,6 +25,8 @@ import Contact from '../components/Contact/Contact'
 import About from '../components/About/About'
 import ScrollButton from '../components/Customs/ScrollUp/ScrollUp'
 import PrivateRoute from './PrivateRoute'
+import Ads from '../components/Advertisement/Ads/Ads'
+
 
 const Routes = () => {
 
@@ -55,6 +57,7 @@ const Routes = () => {
                     <Route exact path="/reset-password" component={ResetPassword} />
                     <Route exact path="/reset-password-success" component={ResetPasswordSuccess} />
                     <Route exact path="/register-success" component={RegisterSuccess} />
+                    <Route exact path="/ads" component={Ads} />
                 </Switch>
                 <Footer />
                 <ScrollButton />
