@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import useAuth from '../../config/AuthContext';
+import useToken from '../../config/useToken';
 import "./Header.css"
 
 const Header = () => {
+    
+    const {userData} = useToken()
 
     const [fullScreenEnabled, setFullScreenEnabled] = useState(false)
+    const [userImage, setUserImage] = useState(userData()?.image)
+
+    useEffect(() => {
+        (async () => setUserImage(await userData()?.image))() 
+    }, [userData])
 
     const toggleFullScreen = () => {
 		if (!document.fullscreenElement) {
@@ -21,7 +29,7 @@ const Header = () => {
 
     const location = useLocation();
 
-    const { generalInfo, logout, state } = useAuth();
+    const { generalInfo, logout, state} = useAuth();
 
     return (
     <>
@@ -61,7 +69,7 @@ const Header = () => {
                     </div>
                     <div className="navbar__right">
                         <ul className="navbar-nav">
-                            <li className="nav-item">
+                            <li className="nav-item d-flex align-items-center">
                                 <div
                                     onClick={toggleFullScreen}
                                     className='fullScreen'
@@ -87,11 +95,14 @@ const Header = () => {
                                         </>
                                     :
                                         <>
-                                            <li className="nav-item">
-                                                <span style={{cursor: "pointer"}} className="nav-link " onClick={logout}>Logout</span>
-                                            </li>
-                                            <li className="nav-item">
-                                                <NavLink className="nav-link" to="/profile">Profile</NavLink>
+                                            <li className="nav-item dropdown">
+                                                <span className="nav-link dropdown-toggle" id="navbarProfileDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                                    <img style={{"height": "35px", "width": "35px", "borderRadius": "50%"}} src={userImage} alt="profile" />
+                                                </span>
+                                                <div className="dropdown-menu">
+                                                    <Link className="dropdown-item" to="/profile">Profile</Link>
+                                                    <span className="dropdown-item" style={{"cursor": "pointer"}} onClick={() => logout()}>Logout</span>
+                                                </div>
                                             </li>
                                         </>
                                 }

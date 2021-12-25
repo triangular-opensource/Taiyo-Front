@@ -13,7 +13,7 @@ import TermAndConditions from '../../Policiy/TermsAndConditions/TermAndCondition
 
 function Register() {
 
-    const {register, policy} = useAuth();
+    const {register} = useAuth();
 
     const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("")
