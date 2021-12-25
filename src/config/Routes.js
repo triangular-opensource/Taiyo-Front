@@ -21,6 +21,7 @@ import Package from '../components/Packages/Package'
 import AdInformation from '../components/BuySell/AdInformation/AdInformation'
 import AdDetails from '../components/BuySell/AdDetails/AdDetails'
 import UserInformation from '../components/BuySell/UserInformation/UserInformation'
+import Ads from '../components/Advertisement/Ads/Ads'
 
 
 const Routes = () => {
@@ -52,6 +53,7 @@ const Routes = () => {
                 <Route exact path="/reset-password" component={ResetPassword} />
                 <Route exact path="/reset-password-success" component={ResetPasswordSuccess} />
                 <Route exact path="/register-success" component={RegisterSuccess} />
+                <Route exact path="/ads" component={Ads} />
             </Switch>
           
             <Footer />
