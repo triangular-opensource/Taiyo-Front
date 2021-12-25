@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState  , useEffect } from 'react'
-import CustomItemCard from '../../../customComponents/CustomItemCard/CustomItemCard';
 import { GLOBAL_URL } from '../../../global/Constant';
+import CustomItemCard from '../../Customs/CustomItemCard/CustomItemCard';
 
 const Ads = (props) => 
 {
