@@ -15,7 +15,7 @@ const AdDetails = () => {
     const [postData, setPostData] = useState({})
     const [images, setImages] = useState([])
     const [excel, setExcel] = useState("")
-    const [pdf, setPdf] = useState("")
+    // const [pdf, setPdf] = useState("")
     const [pdfFile, setPdfFile] = useState(null)
     const data = JSON.parse(localStorage.getItem("adDetail")) ? JSON.parse(localStorage.getItem("adDetail")) : false 
 

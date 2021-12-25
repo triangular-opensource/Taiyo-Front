@@ -13,10 +13,17 @@ export default function useToken() {
         const data = localStorage.getItem("user");
         return JSON.parse(data);
     }
+    
+    const isUser = () => {
+        const data = localStorage.getItem("user");
+        if (data !== undefined) return true;
+        else return false;    
+    }
 
     return {
         saveToken,
         getToken,
-        userData
+        userData,
+        isUser
     }
 }

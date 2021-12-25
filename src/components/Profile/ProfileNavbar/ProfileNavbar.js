@@ -6,14 +6,7 @@ function ProfileNavbar() {
     return (
         <div className="container">
             <div className="row text-secondary">
-                <div className="col-md-2 py-3 border text-center dropdown-toggle" style={{cursor: "pointer"}} data-toggle="dropdown" id="profileNavbar">MY ADS</div>
-                <div className="dropdown-menu" aria-labelledby="profileNavbar">
-                    <a className="dropdown-item" href="/">My Ads</a>
-                    <a className="dropdown-item" href="/">Rejected Ads</a>
-                    <a className="dropdown-item" href="/">Inactive Ads</a>
-                    <a className="dropdown-item" href="/">Featured Ads</a>
-                    <a className="dropdown-item" href="/">Shortlisted</a>
-                </div>
+                <NavLink to="/buy-sell" className="col-md-2 py-3 border text-center">MY ADS</NavLink>
                 <NavLink to="/buy-sell" className="col-md-2 py-3 border text-center">PACKAGES</NavLink>
                 <NavLink to="/package-history" className="col-md-2 py-3 border text-center">PACKAGE HISTORY</NavLink>
                 <div className="col-md-6 border"></div>

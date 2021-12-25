@@ -4,7 +4,6 @@ import CustomButton from "../Customs/CustomButton/CustomButton";
 import "./ItemPage.css";
 import Popup from "../Customs/Popup/Popup";
 import Excel from "../Customs/Excel/Excel";
-import { useHistory } from "react-router-dom";
 import CustomInput from "../Customs/CustomInputField/CustomInput";
 import { GLOBAL_URL } from "../../global/Constant";
 import axios from "axios";
@@ -14,7 +13,6 @@ import CustomTimer from "../Customs/CustomTimer/CustomTimer";
 
 const CustomItemPage = (props) => {
     const postId = props.match.params.id;
-    const history = useHistory();
     const { getToken, userData } = useToken();
     const [ad, setAd] = useState([]);
     const [adLoading, setAdLoading] = useState(true);

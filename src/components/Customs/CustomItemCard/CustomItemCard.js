@@ -63,7 +63,7 @@ const CustomItemCard = (props) => {
                     </div>
                     <div className="row">
                         <div className="col-8 searchItem__timestamp">
-                            Posted :{` ${Date(props.data.timestamp.slice(0, 10)).slice(0,16)}`}
+                            Posted :{` ${new Date(props.data.timestamp.slice(0, 10))}`}
                         </div>
                         <div className="col-4">
                             <NavLink to={`/post/${props.data.id}`}>
