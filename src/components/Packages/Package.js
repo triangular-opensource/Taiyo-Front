@@ -47,7 +47,7 @@ const Package = () => {
                 rzp1.open();
             }
         }).catch(async(error) => {
-            console.log(error)
+            setError(error)
         });
     }
 

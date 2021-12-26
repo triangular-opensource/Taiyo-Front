@@ -23,6 +23,7 @@ function CustomButton(props) {
             onClick={props.handleClick}
             data-toggle={props.dataToggle}
             data-target={props.dataTarget}
+            id={props.id}
         >
             {props.data}
         </button>

@@ -40,7 +40,6 @@ export const AuthProvider = ({ children }) => {
             "password": password
         })
         .then(res => {
-                console.log(res.data)
                 alertFire({
                     html: 
                         <div>
@@ -52,7 +51,6 @@ export const AuthProvider = ({ children }) => {
             }
         )
         .catch(async (error) => {
-            console.log(error.response)
             alertFire(<p> OOPs Some Problem Occur </p>)
         })
     }

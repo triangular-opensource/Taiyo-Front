@@ -27,12 +27,7 @@ const Search = () => {
                 setAd(response.data.data);
                 setAdLoading(false)
             })
-            .catch(async (error) =>
-               {
-                    console.log(error.response)
-            setError(error)
-        }
-            )
+            .catch(async (error) => setError(error))
     }, []);
     
     return (

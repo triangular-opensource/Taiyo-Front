@@ -6,7 +6,6 @@ import { NavLink } from "react-router-dom";
 import DefaultPic from "../../../global/static/defaultImage.png";
 
 const CustomItemCard = (props) => {
-    console.log(props.data)
     return (
         <div className="col-12 mb-2">
             <div className="row p-3 no-gutters border bg-white rounded overflow-hidden flex-row  h-100 position-relative   shadow-sm">
@@ -63,7 +62,7 @@ const CustomItemCard = (props) => {
                     </div>
                     <div className="row">
                         <div className="col-8 searchItem__timestamp">
-                            Posted :{` ${new Date(props.data.timestamp.slice(0, 10))}`}
+                            Posted :{` ${new Date(props.data.timestamp)}`}
                         </div>
                         <div className="col-4">
                             <NavLink to={`/post/${props.data.id}`}>
@@ -71,7 +70,6 @@ const CustomItemCard = (props) => {
                                     disabled={false}
                                     fontSize="16"
                                     data="Details"
-                                    handleClick={() => {}}
                                     padding="7"
                                     backgroundColor="black"
                                     color="white"

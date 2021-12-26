@@ -11,6 +11,7 @@ import useAuth from "../../../../config/AuthContext";
 import { storage } from "../../../../config/Firebase";
 import useToken from "../../../../config/useToken";
 import { GLOBAL_URL } from "../../../../global/Constant";
+import alertMessage from "../../../../global/AlertProvider"
 
 const ProfileEditForm = () => {
 
@@ -47,15 +48,19 @@ const ProfileEditForm = () => {
             const imageRef = ref(storage, `Users/ProfilePics/${email}`)
             await getDownloadURL(imageRef).then((url) => {
                 setImageUrl(url);
-            }).catch((error) => console.log(error))
-        }).catch((error) => console.log(error))
+            }).catch((error) => {
+                console.log(error)
+            })
+        }).catch((error) => {
+            console.log(error)
+        })
     }
     
     const upload = async () => {
         setLoading(true)
         if (uploadImageName) {
             await imageUpload()
-        } 
+        }
         await axios.patch(`${GLOBAL_URL}/auth/user`, {
             "first_name": firstName,
             "middle_name": middleName,
@@ -87,7 +92,7 @@ const ProfileEditForm = () => {
                     history.push("/edit-profile")
                 }, 1000);
             }
-        }).catch(error => console.log(error))
+        }).catch(error => console.log(error.response))
     }
 
     return (
@@ -111,7 +116,7 @@ const ProfileEditForm = () => {
                             className="user__image"
                             alt="profile"
                         />
-                        <input accept="image/*" type="file" onChange={(e) => {setUploadImage(e.target.files[0]); setUploadImageName(e.target.files[0].name)}} id="imageUpload" style={{"display": "none"}} />
+                        <input accept="image/*" type="file" onChange={(e) => {setUploadImage(e.target.files[0]); setUploadImageName(e.target.files[0].name);}} id="imageUpload" style={{"display": "none"}} />
                     </div>
                     <label id="profileImageUpload" className="mt-2" htmlFor="imageUpload">
                         <i className="icon ion-edit mx-1">

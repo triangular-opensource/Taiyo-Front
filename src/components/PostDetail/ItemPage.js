@@ -4,12 +4,13 @@ import CustomButton from "../Customs/CustomButton/CustomButton";
 import "./ItemPage.css";
 import Popup from "../Customs/Popup/Popup";
 import Excel from "../Customs/Excel/Excel";
-import CustomInput from "../Customs/CustomInputField/CustomInput";
 import { GLOBAL_URL } from "../../global/Constant";
 import axios from "axios";
 import useToken from "../../config/useToken";
 import alertMessage from "../../global/AlertProvider";
 import CustomTimer from "../Customs/CustomTimer/CustomTimer";
+import SelectBid from "./Bids/SelectBid";
+import SubmitBid from "./Bids/SubmitBid";
 
 const CustomItemPage = (props) => {
     const postId = props.match.params.id;
@@ -17,9 +18,11 @@ const CustomItemPage = (props) => {
     const [ad, setAd] = useState([]);
     const [adLoading, setAdLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [selectedBid, setSelectedBid] = useState("off");
     const [bidList, setBidList] = useState([]);
     const [bidListLoading, setBidListLoading] = useState(true);
-    const [amount, setAmount] = useState("");
+    const [amount, setAmount] = useState(null);
+     
     const postBid = async () => {
         await axios
             .post(
@@ -32,8 +35,8 @@ const CustomItemPage = (props) => {
                 },
                 {
                     headers: {
-                        Authorization: `Token ${getToken()}`,
                         "Content-Type": "application/json",
+                        "Authorization": `Token ${getToken()}`,
                     },
                 }
             )
@@ -41,7 +44,8 @@ const CustomItemPage = (props) => {
                 alertMessage("bid posted successfully");
                 setBidList([...bidList, response.data.data]);
             })
-            .catch(async (error) => setError(error));
+            .catch(async (error) => {
+                setError(error)})
     };
     useEffect(() => {
         axios
@@ -53,7 +57,6 @@ const CustomItemPage = (props) => {
             })
             .then(async (response) => {
                 setAd(response.data.data);
-                console.log(response.data.data);
                 setAdLoading(false);
             })
             .catch(async (error) => setError(error));
@@ -69,18 +72,52 @@ const CustomItemPage = (props) => {
                 setBidListLoading(false);
             })
             .catch(async (error) => setError(error));
-    }, []);
+    }, [getToken, postId]);
     const [isOpen, setIsOpen] = useState(false);
     const togglePopup = () => {
         setIsOpen(!isOpen);
     };
-    const bidding_last = new Date(bidList.bidding_close_date)
-    const bidding_last_day = bidding_last.getDate();
-    const bidding_last_month = bidding_last.getMonth();
-    const bidding_last_year = bidding_last.getFullYear();
+
+    const bidding_last = new Date(ad.bidding_close_date)
+    const bidding_last_day = parseInt(bidding_last.getDate())
+    const bidding_last_month = parseInt(bidding_last.getMonth() + 1)
+    const bidding_last_year = parseInt(bidding_last.getFullYear())
     
-    
-    async function handleSubmit(event) {}
+    const handleSubmit = async () => {
+        await axios.put(`${GLOBAL_URL}/ads/${ad.id}`, {
+            "product": ad.product,
+            "buy_or_sell": ad.buy_or_sell,
+            "basic_price": ad.basic_price,
+            "product_description": ad.product_description,
+            "image_1_link": ad.image_1_link,
+            "quality": ad.quality,
+            "thickness": ad.thickness,
+            "width": ad.width,
+            "length": ad.length,
+            "grade_or_spec": ad.grade_or_spec,
+            "temper": ad.temper,
+            "specification_number": ad.specification_number,
+            "quantity": ad.quantity,
+            "coating_in_gsm": ad.coating_in_gsm,
+            "author_name": ad.author_name,
+            "author_mobile_number": ad.author_mobile_number,
+            "author_country": ad.author_country,
+            "author_business_address": ad.author_business_address,
+            "selected_bid": bidList[selectedBid - 1].id,
+        }, {
+            headers: {
+                "Authorization": `Token ${getToken()}`,
+                "Content-Type": "application/json"
+            }
+        }).then((res) => {
+            if (res.status === 200) {
+                alertMessage(`Bid selected of amount: Rs. ${bidList[selectedBid - 1].amount}`)
+            }
+        }).catch((error) => {
+            console.log(error.response)
+        })
+    }
+
     return adLoading === false && bidListLoading === false ? (
         <div className="container-fluid my-4">
             <div className="row no-gutters">
@@ -223,52 +260,62 @@ const CustomItemPage = (props) => {
                     <div className="auth-bg py-3 px-3">
                         <div className="row">
                             <div className="col-12">
-                                <div className="text-dark"> #{ad.id}</div>
+                                <div className="text-dark h4"> #{ad.id}</div>
                             </div>
                         </div>
                         
                         {
-                        bidList.map((bid) => (
-                            <div key={bid.id} className="row mt-1 mb-1">
-                                <div className="col-9">
-                                    <CustomText name={`Rs.${bid.amount}`} />
-                                </div>
-                                <div className="col-3">
-                                        <CustomText name={`#${bid.user}`} />
-                                </div>
-                            </div>
-                        ))
+                            userData().id === ad.user
+                            ?
+                                ad.selected_bid === null
+                                    ?
+                                        <>
+                                            {
+                                                bidList.map((bid) => (
+                                                    <div key={bid.id}>
+                                                        <SelectBid bid={bid} key={bid.id} selectBid={setSelectedBid} />
+                                                        <hr />
+                                                    </div>
+                                                ))
+                                            }
+                                            <div className="row">
+                                                <div className="col-12">
+                                                    <div onClick={() => handleSubmit()} className="btn btn-secondary w-100 mt-3">Choose Bid</div>
+                                                </div>
+                                            </div>
+                                        </>
+                                    :
+                                        <div className="row">
+                                            <div className="col-12">
+                                                You have already selected a bid of Rs. {bidList[ad.selected_bid - 1].amount}!
+                                            </div>
+                                        </div>
+                                :
+                                    <>
+                                        {
+                                            bidList.map((bid) => (
+                                                <div key={bid.id}>
+                                                    <SubmitBid key={bid.id} bid={bid} />
+                                                    <hr />
+                                                </div>
+                                            ))
+                                        }
+                                        <div className="row px-2 mt-3">
+                                            <div className="input-group">
+                                                <input type="number" className="form-control" onChange={(e) => setAmount(e.target.value)} placeholder="Enter Bid value" aria-label="Bid value" aria-describedby="button-addon2" />
+                                                <div className="input-group-append">
+                                                <button className="btn btn-secondary" onClick={postBid} type="button" id="button-addon2">BID</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
                         }
-                        <div className="row">
-                            <div className="col-9">
-                                <CustomInput
-                                    placeholder="Enter Amount"
-                                    margin="0px 0px 0px 0px"
-                                    value={amount}
-                                    onChangeValue={(event) =>
-                                        setAmount(event.target.value)
-                                    }
-                                    type="number"
-                                />
-                            </div>
-                            <div className="col-3">
-                                <CustomButton
-                                    fontSize="17"
-                                    marginTop="5"
-                                    data="BID"
-                                    padding="8"
-                                    backgroundColor="gray"
-                                    color="white"
-                                    handleClick={postBid}
-                                />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     ) : (
-        <div className="d-flex justify-content-center align-items-center">
+        <div className="d-flex justify-content-center align-items-center w-100 h-100 my-5 py-5">
             <div className="spinner-border" role="status">
                 <span className="sr-only">Loading...</span>
             </div>

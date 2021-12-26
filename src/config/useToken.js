@@ -16,7 +16,7 @@ export default function useToken() {
     
     const isUser = () => {
         const data = localStorage.getItem("user");
-        if (data !== undefined) return true;
+        if (data !== null) return true;
         else return false;    
     }
 

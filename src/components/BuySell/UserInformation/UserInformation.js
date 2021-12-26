@@ -61,7 +61,6 @@ const UserInformation = () => {
 
         })
         .catch((error) => {
-            console.log(error.response)
             alertMessage("Oops some error occured!")
         })
     }
