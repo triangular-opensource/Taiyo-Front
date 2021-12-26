@@ -95,6 +95,9 @@ const Header = () => {
                                         </>
                                     :
                                         <>
+                                         <li className="nav-item">
+                                                <NavLink className="nav-link " to="/notification"> <i className="icon ion-ios-bell"></i> </NavLink>
+                                            </li>
                                             <li className="nav-item dropdown">
                                                 <span className="nav-link dropdown-toggle" id="navbarProfileDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                                                     <img style={{"height": "35px", "width": "35px", "borderRadius": "50%"}} src={userImage} alt="profile" />

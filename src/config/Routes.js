@@ -26,6 +26,7 @@ import About from '../components/About/About'
 import ScrollButton from '../components/Customs/ScrollUp/ScrollUp'
 import PrivateRoute from './PrivateRoute'
 import Ads from '../components/Advertisement/Ads/Ads'
+import Notification from '../components/Notification/Notification'
 
 
 const Routes = () => {
@@ -57,7 +58,8 @@ const Routes = () => {
                     <Route exact path="/reset-password" component={ResetPassword} />
                     <Route exact path="/reset-password-success" component={ResetPasswordSuccess} />
                     <Route exact path="/register-success" component={RegisterSuccess} />
-                    <Route exact path="/ads" component={Ads} />
+                    <Route exact path="/ads" component={Ads} /> 
+                    <PrivateRoute exact path="/notification" component={Notification} />
                 </Switch>
                 <Footer />
                 <ScrollButton />

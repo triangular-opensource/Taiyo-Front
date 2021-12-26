@@ -66,6 +66,7 @@ export const AuthProvider = ({ children }) => {
         }).then(async (response) => {
             let data = [await response.data.data]
             setUser(data[0])
+            console.log(user)
             localStorage.setItem("user", JSON.stringify(data[0]))
         }).catch(async (error) => {
             setError(await error)
