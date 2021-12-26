@@ -19,7 +19,6 @@ const Notification = () => {
             })
             .then(async (response) => {
                 setNotification(response.data.data);
-                console.log(response.data.data);
                 setNotificationLoading(false);
             })
             .catch(async (error) => setError(error));

@@ -1,10 +1,6 @@
-
-.countdown_timer {
-    color: white;
-    padding: 20px;
-    width: 700px;
-    color: white;
-    
+.timer {
+    display: flex;
+    justify-content: center;
 }
 
 .countdown_timer_div {
@@ -13,4 +9,11 @@
     padding: 15px;
     border-radius: 5px;
     margin: 10px;
+}
+
+.countdown_timer_div_small {
+    display: inline-block;
+    border-radius: 5px;
+    margin: 6px;
+    margin-top: 0px;
 }

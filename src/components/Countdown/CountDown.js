@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import './CountDown.css'
+import React, { useEffect, useState } from "react";
+import "./CountDown.css";
 
-const CountDown = ({time}) => 
-{
-    const [d, setD] = useState(0)
-    const [h, setH] = useState(0)
-    const [m, setM] = useState(0)
-    const [s, setS] = useState(0)
-    
-    function updateTimer()
-    {
+const CountDown = ({ time, styleClass }) => {
+    const [d, setD] = useState(0);
+    const [h, setH] = useState(0);
+    const [m, setM] = useState(0);
+    const [s, setS] = useState(0);
+
+    function updateTimer() {
         let future = new Date(time);
         let now = new Date();
         let diff = future - now;
@@ -26,21 +24,35 @@ const CountDown = ({time}) =>
     useEffect(() => {
         updateTimer();
     });
-  
+
     setInterval(() => {
         updateTimer();
     }, 1000);
 
-
     return (
- 
         <div className="timer">
-        <div className='countdown_timer_div auth-bg'> {d} <span> Days </span></div>
-        <div className='countdown_timer_div auth-bg'> {h} <span> Hours </span></div>
-        <div className='countdown_timer_div auth-bg'> {m} <span> Minutes </span></div>
-        <div className='countdown_timer_div auth-bg'> {s} <span> Seconds </span></div>
-        </div>          
-    )
-}
+            <div className={`${styleClass ? "countdown_timer_div_small" : `countdown_timer_div`} auth-bg`}>
+                <div className="d-flex justify-content-center px-2">
+                    {` ${d} Days`}
+                </div>
+            </div>
+            <div className={`${styleClass ? "countdown_timer_div_small" : `countdown_timer_div`} auth-bg`}>
+                <div className="d-flex justify-content-center px-2">
+                    {` ${h} Hrs`}
+                </div>
+            </div>
+            <div className={`${styleClass ? "countdown_timer_div_small" : `countdown_timer_div`} auth-bg`}>
+                <div className="d-flex justify-content-center px-2">
+                    {` ${m} Min`}
+                </div>
+            </div>
+            <div className={`${styleClass ? "countdown_timer_div_small" : `countdown_timer_div`} auth-bg`}>
+                <div className="d-flex justify-content-center px-2">
+                    {` ${s} Sec`}
+                </div>
+            </div>
+        </div>
+    );
+};
 
-export default CountDown
+export default CountDown;

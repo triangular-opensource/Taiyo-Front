@@ -4,25 +4,26 @@ import { ReactComponent as LocationSvg } from "../../../global/static/svg/locati
 import "./CustomItemCard.css";
 import { NavLink } from "react-router-dom";
 import DefaultPic from "../../../global/static/defaultImage.png";
+import CountDown from "../../Countdown/CountDown"
 
 const CustomItemCard = (props) => {
     return (
         <div className="col-12 mb-2">
             <div className="row p-3 no-gutters border bg-white rounded overflow-hidden flex-row  h-100 position-relative   shadow-sm">
-                <div className="col-3 text-center">
+                <div className="col-3 d-flex justify-content-center align-items-center">
                     {
                         props.data.image_1_link
                             ?
                                 <img
                                     className="rounded"
-                                    style={{ maxHeight: "120px" }}
+                                    style={{ maxHeight: "120px", "width": "inherit" }}
                                     src={props.data.image_1_link}
                                     alt="some"
                                 />
                             :
                                 <img
                                     className="rounded"
-                                    style={{ maxHeight: "120px" }}
+                                    style={{ maxHeight: "120px", "width": "inherit" }}
                                     src={DefaultPic}
                                     alt="some"
                                 />
@@ -30,19 +31,22 @@ const CustomItemCard = (props) => {
                 </div>
                 <div className="col-9 pl-3">
                     <div className="row">
-                        <div className="col-6">
-                            <h6>
-                                #{props.data.id}
+                        <div className="col-2 px-0 pl-3">
+                            <h4>
+                                <span className="">#{props.data.id}</span>
                                 {
                                     props.data.buy_or_sell === "Sell"
                                         ? 
-                                            <span style={{"fontSize" : "larger"}} className="ml-2 badge badge-info">Sell</span>
+                                            <span style={{"fontSize" : "smaller"}} className="ml-2 badge badge-info">Sell</span>
                                         :
-                                            <span style={{"fontSize" : "larger"}} className="ml-2 badge badge-warning">Buy</span>
+                                            <span style={{"fontSize" : "smaller"}} className="ml-2 badge badge-warning">Buy</span>
                                 }
-                            </h6>
+                            </h4>
                         </div>
-                        <div className="col-6">
+                        <div className="col-8">
+                            <CountDown time={props.data.bidding_close_date} styleClass="countdown_timer_div_small" />
+                        </div>
+                        <div className="col-2">
                             <span className="float-right">
                                 <h5>&#8377; {props.data.basic_price} </h5>
                             </span>
