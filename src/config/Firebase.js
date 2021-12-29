@@ -23,5 +23,6 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
 const storage = getStorage();
+const storageOlder = app.so
 
 export { auth, analytics, storage }

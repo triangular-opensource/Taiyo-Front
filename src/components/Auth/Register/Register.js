@@ -159,7 +159,7 @@ function Register() {
                     <div className="form-row">
                         <div className="col-md-12">
                             <div className="custom-control custom-checkbox my-2">
-                                <input type="checkbox" className="custom-control-input" id="customControgsylValidation1" required />
+                                <input type="checkbox" className="custom-control-input" id="customControlValidation1" required />
                                 <label className="custom-control-label" htmlFor="customControlValidation1">I agree to </label>
                                 <span className='ml-2 text-primary' style={{"fontWeight": "bold", "cursor": "pointer"}} data-target="#exampleModal" data-toggle="modal">
                                     Terms And Condition

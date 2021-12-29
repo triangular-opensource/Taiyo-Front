@@ -1,30 +1,29 @@
-import { React, useState } from "react";
+import { React, useState, useEffect} from "react";
 import "./Excel.css"
 import { OutTable, ExcelRenderer } from "react-excel-renderer";
 
-const Excel = () => {
+const Excel = ({fileLink}) => {
     const [rows, setrows] = useState([]);
     const [cols, setcols] = useState([]);
 
-    const fileHandler = (event) => {
-        let fileObj = event.target.files[0];
-        ExcelRenderer(fileObj, (err, resp) => {
-            if (err) {
-                console.log(err);
-            } else {
-                setrows(resp.rows);
-                setcols(resp.cols);
-            }
-        });
-    }
+    useEffect(() => {
+        const fileHandler = async () => {
+            let fileObj = await fetch(fileLink).then(r => r.blob())
+            ExcelRenderer(fileObj, (err, resp) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    setrows(resp.rows);
+                    setcols(resp.cols);
+                }
+            });
+        }
+        fileHandler();
+    }, [fileLink])
+
 
     return (
         <div>
-            <input
-                type="file"
-                onChange={fileHandler.bind()}
-                style={{ padding: "10px" }}
-            />
             <OutTable
                 data={rows}
                 columns={cols}

@@ -8,17 +8,16 @@ import useAuth from '../../config/AuthContext';
 import useToken from '../../config/useToken';
 
 const Package = () => {
-    const {user} = useAuth();
-    const {getToken} = useToken()
+    const {getToken, userData} = useToken()
     const [subscription, setSubscription] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [paymentLoading, setPaymentLoading] = useState(true);
 
-    const makePayment = async () => {
+    const makePayment = async (amount, subscription) => {
         await axios.post(`${GLOBAL_URL}/billing`, {
-            "amount": 1000,
-            "username": `${user.first_name}`,
+            "amount": amount,
+            "package": subscription,
         }, {
             headers: {
                 "Authorization": `Token ${getToken()}`,
@@ -30,16 +29,16 @@ const Package = () => {
             const finRes = response.data;
             var options = {
                 "key": "rzp_test_240llZpXCqHDn1", // Enter the Key ID generated from the Dashboard
-                "amount": `1000`, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise    
+                "amount": `${amount}`, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise    
                 "currency": "INR",   
                 "name": "Taiyo",
                 "description": "Recharge your account",
                 "order_id": `${finRes.data.data.order_id}`, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1    
                 "callback_url": "https://taiyoindustries.herokuapp.com/api/success-payment",
                 "prefill": {
-                    "name": `Alankar`,
-                    "email": `saxenaalankar42@gmail.com`,
-                    "contact": `+918750859034`
+                    "name": `${userData().first_name} ${userData().last_name}`,
+                    "email": `${userData().email}`,
+                    "contact": `+91${userData().phone_number}`
                 }
             };
             var rzp1 = new window.Razorpay(options);
@@ -47,6 +46,7 @@ const Package = () => {
                 rzp1.open();
             }
         }).catch(async(error) => {
+            console.log(error.response)
             setError(error)
         });
     }
@@ -72,7 +72,7 @@ const Package = () => {
                 :
                     subscription.map(
                         sub => (
-                            <PackageItem key={sub.id} name={sub.name} loading={paymentLoading} setLoading={setPaymentLoading} onClick={makePayment} amount= {sub.amount} days={sub.days} />
+                            <PackageItem key={sub.id} name={sub.name} loading={paymentLoading} setLoading={setPaymentLoading} onClick={() => makePayment(sub.amount, sub.id)} amount={sub.amount} days={sub.days} />
                         )
                     )
             } 

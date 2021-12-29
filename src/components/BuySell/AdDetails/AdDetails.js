@@ -14,29 +14,50 @@ const AdDetails = () => {
 
     const [postData, setPostData] = useState({})
     const [images, setImages] = useState([])
-    const [excel, setExcel] = useState("")
-    // const [pdf, setPdf] = useState("")
+    const [excel, setExcel] = useState(null)
     const [pdfFile, setPdfFile] = useState(null)
     const data = JSON.parse(localStorage.getItem("adDetail")) ? JSON.parse(localStorage.getItem("adDetail")) : false 
 
-    const fileUpload = async () => {
-        const storageRef = ref(storage, `Users/ProfilePics`)
-        await uploadBytes(storageRef, pdfFile).then(async (snapshot) => {
-            const imageRef = ref(storage, `Users/ProfilePics`)
-            await getDownloadURL(imageRef).then((url) => {
-                setExcel(url);
+    const fileUpload = async (file, name) => {
+        console.log("uploading")
+        const storageRef = ref(storage, `Advertisements/${postData.basic_price}_${postData.description}/${file.name}`)
+        await uploadBytes(storageRef, file).then(async (snapshot) => {
+            const fileRef = ref(storage, `Advertisements/${postData.basic_price}_${postData.description}/${file.name}`)
+            await getDownloadURL(fileRef).then((url) => {
+                console.log(url);
+                setPostData({...postData, [name] : url})
             }).catch((error) => console.log(error))
         }).catch((error) => console.log(error))
     }
-
+    
     const uploadImages = (e) => {
-        setImages(Array.from(e.target.files))
+        console.log("uploading images")
         if (images.length > MAX_AD_IMAGE_UPLOAD) {
             e.preventDefault();
             alertMessage("cannot upload more than 4 images!");
             return;
+        } else {
+            images.map((image, index) => {
+                fileUpload(image, `image_${index + 1}_link`)
+                return image;
+            })
         }
     }
+
+    const uploadExcelFile = (e) => {
+        console.log("uploading excel file")
+        console.log(excel)
+        fileUpload(e.target.files[0], 'excel_file_link')
+    }
+
+    const uploadPdfFile = (e) => {
+        console.log("uploading pdf file")
+        console.log(pdfFile)
+        fileUpload(e.target.files[0], 'pdf_file_link')
+    }
+    console.log(pdfFile)
+
+    // console.log(postData)
     
     useEffect(() => {
         const {category, product, buy_or_sell} = JSON.parse(localStorage.getItem("adInfo"));
@@ -145,7 +166,7 @@ const AdDetails = () => {
                         <label htmlFor="imageUpload">Upload Photos <span style={{"fontSize":"smaller"}} className="ml-2 text-muted">You can upload a maximum of 4 images. <b>Select all photos in single time.</b></span></label>
                         <div className="form-group custom-file">
                             <label htmlFor="imageUpload" className='custom-file-label'>Choose...</label>
-                            <input type="file" accept='.jpeg, .jpg, .png' name="" id="imageUpload" onChange={e => uploadImages(e)} multiple className="custom-file-input" />
+                            <input type="file" accept='.jpeg, .jpg, .png' name="" id="imageUpload" onChange={e => {setImages(Array.from(e.target.files)); uploadImages(e)}} multiple className="custom-file-input" />
                         </div>
                     </div>
                 </div>
@@ -154,7 +175,7 @@ const AdDetails = () => {
                         <label htmlFor="excelUpload">Upload Excel File </label>
                         <div className="form-group custom-file">
                             <label htmlFor="excelUpload" className='custom-file-label'>Choose...</label>
-                            <input type="file" accept='.xlsx' name="" id="excelUpload" onChange={e => uploadImages(e)} className="custom-file-input" />
+                            <input type="file" accept='.xlsx' name="" id="excelUpload" onChange={e => {setExcel(e.target.files[0]); uploadExcelFile(e)}} className="custom-file-input" />
                         </div>
                     </div>
                 </div>
@@ -163,7 +184,7 @@ const AdDetails = () => {
                         <label htmlFor="pdfUpload">Upload Pdf File </label>
                         <div className="form-group custom-file">
                             <label htmlFor="pdfUpload" className='custom-file-label'>Choose...</label>
-                            <input type="file" accept='.pdf' name="" id="pdfUpload" onChange={e => uploadImages(e)} className="custom-file-input" />
+                            <input type="file" accept='.pdf' name="" id="pdfUpload" onChange={e => {setPdfFile(e.target.files[0]);uploadPdfFile(e)}} className="custom-file-input" />
                         </div>
                     </div>
                 </div>

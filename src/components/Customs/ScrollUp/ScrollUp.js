@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const ScrollButton = () => {
     const [visible, setVisible] = useState(true);
+
+    const location = useLocation();
 
     const toggleVisible = () => {
         const scrolled = document.documentElement.scrollTop;
@@ -22,22 +25,30 @@ const ScrollButton = () => {
     window.addEventListener("scroll", toggleVisible);
 
     return (
-        <div
-            onClick={scrollToTop}
-            style={{
-                "display": visible ? "block" : "none",
-                "position": "fixed",
-                "bottom": "15px",
-                "right": "10px",
-                "background": "#504d4d",
-                "padding": "0px 15px 0px 15px",
-                "fontSize": "xx-large",
-                "borderRadius": "10%",
-                "color": "white"
-            }}
-        >
-            <i className="icon ion-arrow-up-c"></i>
-        </div>
+        <>
+        {
+            location.pathname === "/pdf"
+            ? <></>
+            : (
+                <div
+                    onClick={scrollToTop}
+                    style={{
+                        "display": visible ? "block" : "none",
+                        "position": "fixed",
+                        "bottom": "15px",
+                        "right": "10px",
+                        "background": "#504d4d",
+                        "padding": "0px 15px 0px 15px",
+                        "fontSize": "xx-large",
+                        "borderRadius": "10%",
+                        "color": "white"
+                    }}
+                    >
+                    <i className="icon ion-arrow-up-c"></i>
+                </div>
+            )
+        }
+        </>
     );
 };
 

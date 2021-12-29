@@ -14,7 +14,7 @@ const Search = () => {
     const [categoryLoading, setCategoryLoading] = useState(true)
 
     useEffect(() => {
-        axios.get(`${GLOBAL_URL}/ads`)
+        axios.get(`${GLOBAL_URL}/ads/1`)
             .then(async (response) => {
                 setAd(response.data.data);
                 setAdLoading(false)
@@ -46,8 +46,8 @@ const Search = () => {
                 </div>
             </div>
 
-            <div className="row my-4 mx-4">
-                <div className="col-md-2">
+            <div className="row my-4">
+                <div className="col-md-3">
                     <div className="container rounded-lg pt-4 pb-1" style={{"background": "#eeeded"}}>
                         <div className="row "> 
                             <div className="col-12">
@@ -107,7 +107,7 @@ const Search = () => {
                     </div>
 
                 </div>
-                <div className="col-md-10">
+                <div className="col-md-9">
                 {
                    (adLoading) ?   
                 <div className="d-flex justify-content-center align-items-center">

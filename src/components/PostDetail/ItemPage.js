@@ -11,6 +11,7 @@ import alertMessage from "../../global/AlertProvider";
 import SelectBid from "./Bids/SelectBid";
 import SubmitBid from "./Bids/SubmitBid";
 import CountDown from "../Countdown/CountDown";
+import { Link } from "react-router-dom";
 
 const CustomItemPage = (props) => {
     const postId = props.match.params.id;
@@ -21,7 +22,7 @@ const CustomItemPage = (props) => {
     const [selectedBid, setSelectedBid] = useState("off");
     const [bidList, setBidList] = useState([]);
     const [bidListLoading, setBidListLoading] = useState(true);
-    const [amount, setAmount] = useState(null);
+    const [amount, setAmount] = useState(0);
      
     const postBid = async () => {
         await axios
@@ -41,6 +42,7 @@ const CustomItemPage = (props) => {
                 }
             )
             .then(async (response) => {
+                setAmount(0)
                 alertMessage("bid posted successfully");
                 setBidList([...bidList, response.data.data]);
             })
@@ -49,7 +51,7 @@ const CustomItemPage = (props) => {
     };
     useEffect(() => {
         axios
-            .get(`${GLOBAL_URL}/ads/${postId}`, {
+            .get(`${GLOBAL_URL}/ads-detail/${postId}`, {
                 headers: {
                     Authorization: `Token ${getToken()}`,
                     "Content-Type": "application/json",
@@ -60,6 +62,9 @@ const CustomItemPage = (props) => {
                 setAdLoading(false);
             })
             .catch(async (error) => setError(error));
+    }, []);
+
+    useEffect(() => {
         axios
             .get(`${GLOBAL_URL}/ads/bid/${postId}`, {
                 headers: {
@@ -72,7 +77,7 @@ const CustomItemPage = (props) => {
                 setBidListLoading(false);
             })
             .catch(async (error) => setError(error));
-    }, [getToken, postId]);
+    })
     const [isOpen, setIsOpen] = useState(false);
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -120,7 +125,7 @@ const CustomItemPage = (props) => {
                     <div className="row d-flex justify-content-center my-3">
                         <CountDown time={ad.bidding_close_date} />
                     </div>
-                    <div className="row auth-bg">
+                    <div className="row auth-bg pt-3">
                         <div className="col-md-12">
                             <div
                                 id="carouselExampleIndicators"
@@ -145,21 +150,21 @@ const CustomItemPage = (props) => {
                                 <div className="carousel-inner image-height">
                                     <div className="carousel-item active">
                                         <img
-                                            className="d-block w-100"
+                                            className="d-block w-100 rounded"
                                             src={ad.image_1_link}
                                             alt="First slide"
                                         />
                                     </div>
                                     <div className="carousel-item">
                                         <img
-                                            className="d-block w-100"
+                                            className="d-block w-100 rounded"
                                             src={ad.image_2_link}
                                             alt="Second slide"
                                         />
                                     </div>
                                     <div className="carousel-item">
                                         <img
-                                            className="d-block w-100"
+                                            className="d-block w-100 rounded"
                                             src={ad.image_3_link}
                                             alt="Third slide"
                                         />
@@ -201,51 +206,169 @@ const CustomItemPage = (props) => {
                         <div className="container-fluid py-3">
                             <div className="row">
                                 <div className="col-md-8">
-                                    <div className="text-dark h5">
+                                    <div className="text-dark h3">
                                         #{ad.id}
-                                    </div>
-                                    <div className="text-dark">
-                                        Dimensions
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-4" style={{"fontSize" : "smaller"}}> Thickness : {ad.thickness} </div>
-                                        <div className="col-md-4"  style={{"fontSize" : "smaller"}}> Width : {ad.width} </div>
-                                        <div className="col-md-4"  style={{"fontSize" : "smaller"}}> Length : {ad.length} </div>
-                                    </div>
-                                    <div className="text-dark">
-                                        Feature
-                                    </div>
-                                    <div className="row">
-                                        <div className="col-md-3"  style={{"fontSize" : "smaller"}}>Quantity : {ad.quantity} </div>
-                                        <div className="col-md-3"  style={{"fontSize" : "smaller"}}>Quality : {ad.quality} </div>
                                     </div>
                                 </div>
                                 <div className="col-md-2">
-                                    <CustomButton fontSize="15" data="Excel" dataToggle="modal" dataTarget="#exampleModal" padding='8' backgroundColor='gray' color='white' handleClick={togglePopup} />
+                                    {
+                                        ad.excel_file_link
+                                            ?
+                                                <CustomButton fontSize="15" data="Excel" dataToggle="modal" dataTarget="#excelModal" padding='8' backgroundColor='gray' color='white' handleClick={togglePopup} />
+                                            :
+                                                <></>
+                                    }
                                         <Popup
+                                            target="excelModal"
+                                            title="Excel File Data"
                                             content=
                                             {
                                                 <>
-                                                    <CustomText
-                                                        name="Excel File Data"
-                                                        color="grey"
-                                                        size="xx-large"
-                                                        weight="400"
-                                                    />
-                                                    <Excel />
+                                                    <Excel fileLink={ad.excel_file_link} />
                                                 </>
                                             }
                                             handleClose={togglePopup}
                                         />
                                 </div>
                                 <div className="col-md-2">
-                                    <CustomButton
-                                        fontSize="15"
-                                        data="Pdf"
-                                        padding="8"
-                                        backgroundColor="gray"
-                                        color="white"
-                                    />
+                                    {
+                                        ad.pdf_file_link
+                                            ?
+                                                <Link to={{pathname: "/pdf", hash: ad.pdf_file_link}} target="_blank">
+                                                    <CustomButton
+                                                    fontSize="15"
+                                                    data="Pdf"
+                                                    padding="8"
+                                                    backgroundColor="gray"
+                                                    color="white"
+                                                    />
+                                                </Link>
+                                            :
+                                                <></>
+                                    }
+                                </div>
+                            </div>
+                            <div className="row mx-4">
+                                <div className="col-12">
+                                    <h4>
+                                        {ad.product}
+                                    </h4>
+                                </div>
+                                <div className="col-12">
+                                    <p>
+                                        {ad.product_description}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="row mx-4">
+                                <div className="col-md-6">
+                                    <dl>
+                                        <dt>
+                                            Dimensions
+                                        </dt>
+                                        <dd>
+                                            <table className="ml-4">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div className="" style={{"fontSize" : "smaller"}}> Thickness</div>
+                                                        </td>
+                                                        <td className="pl-4">
+                                                            <strong style={{"color": "#3b62ab"}}>{ad.thickness}</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div className="" style={{"fontSize" : "smaller"}}> Width</div>
+                                                        </td>
+                                                        <td className="pl-4">
+                                                            <strong style={{"color": "#3b62ab"}}>{ad.width}</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div className="" style={{"fontSize" : "smaller"}}> Length</div>
+                                                        </td>
+                                                        <td className="pl-4">
+                                                            <strong style={{"color": "#3b62ab"}}>{ad.length}</strong>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>
+                                            Features
+                                        </dt>
+                                        <dd>
+                                            <table className="ml-4">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div className="" style={{"fontSize" : "smaller"}}> Quantity</div>
+                                                        </td>
+                                                        <td className="pl-4">
+                                                            <strong style={{"color": "#3b62ab"}}>{ad.quantity}</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div className="" style={{"fontSize" : "smaller"}}> Quality</div>
+                                                        </td>
+                                                        <td className="pl-4">
+                                                            <strong style={{"color": "#3b62ab"}}>{ad.quality}</strong>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div className="col-md-6">
+                                    <dl>
+                                        <dt>
+                                            Specification
+                                        </dt>
+                                        <dd>
+                                            <table className="ml-4">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div className="" style={{"fontSize" : "smaller"}}> Temper</div>
+                                                        </td>
+                                                        <td className="pl-4">
+                                                            <strong style={{"color": "#3b62ab"}}>{ad.temper}</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div className="" style={{"fontSize" : "smaller"}}> Grad/Spec</div>
+                                                        </td>
+                                                        <td className="pl-4">
+                                                            <strong style={{"color": "#3b62ab"}}>{ad.grade_or_spec}</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div className="" style={{"fontSize" : "smaller"}}> Specification Number</div>
+                                                        </td>
+                                                        <td className="pl-4">
+                                                            <strong style={{"color": "#3b62ab"}}>{ad.specification_number}</strong>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <div className="" style={{"fontSize" : "smaller"}}> Coating in GSM</div>
+                                                        </td>
+                                                        <td className="pl-4">
+                                                            <strong style={{"color": "#3b62ab"}}>{ad.coating_in_gsm}</strong>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </dd>
+                                    </dl>
                                 </div>
                             </div>
                         </div>
@@ -297,7 +420,7 @@ const CustomItemPage = (props) => {
                                         }
                                         <div className="row px-2 mt-3">
                                             <div className="input-group">
-                                                <input type="number" className="form-control" onChange={(e) => setAmount(e.target.value)} placeholder="Enter Bid value" aria-label="Bid value" aria-describedby="button-addon2" />
+                                                <input type="number" className="form-control" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="Enter Bid value" aria-label="Bid value" aria-describedby="button-addon2" />
                                                 <div className="input-group-append">
                                                 <button className="btn btn-secondary" onClick={postBid} type="button" id="button-addon2">BID</button>
                                                 </div>

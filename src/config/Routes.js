@@ -27,6 +27,7 @@ import ScrollButton from '../components/Customs/ScrollUp/ScrollUp'
 import PrivateRoute from './PrivateRoute'
 import Ads from '../components/Advertisement/Ads/Ads'
 import Notification from '../components/Notification/Notification'
+import Pdf from '../components/Customs/Pdf/Pdf'
 
 
 const Routes = () => {
@@ -60,6 +61,7 @@ const Routes = () => {
                     <Route exact path="/register-success" component={RegisterSuccess} />
                     <Route exact path="/ads" component={Ads} /> 
                     <PrivateRoute exact path="/notification" component={Notification} />
+                    <Route exact path="/pdf" component={Pdf} /> 
                 </Switch>
                 <Footer />
                 <ScrollButton />

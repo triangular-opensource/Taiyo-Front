@@ -23,9 +23,9 @@ const PackageItem = (props) => {
     return (
         <div style={style}>
             <CustomText name={props.name} weight="bold" size="xxx-large" />
-            <CustomText name="Rs. 300" weight="100" size="x-large" />
+            <CustomText name={`Rs. ${props.amount}`} weight="100" size="x-large" />
             <CustomText
-                name="validity upto 30 days"
+                name={`validity upto ${props.days} days`}
                 weight="300"
                 size="large"
             />

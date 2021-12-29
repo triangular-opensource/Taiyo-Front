@@ -18,14 +18,14 @@ const Notification = () => {
                 },
             })
             .then(async (response) => {
-                setNotification(response.data.data);
-                setNotificationLoading(false);
+                setNotification(await response.data.data);
+                await setNotificationLoading(false);
             })
             .catch(async (error) => setError(error));
     });
 
     return (
-        <div class="container my-4">
+        <div className="container my-4">
             {notificationLoading ? (
                 <div className="d-flex justify-content-center align-items-center mt-5">
                     <div
@@ -38,7 +38,7 @@ const Notification = () => {
                 </div>
             ) : (
                 notification.map((notify) => (
-                    <div className="alert alert-warning alert-dismissible fade show">
+                    <div key={notify.id} className="alert alert-warning alert-dismissible fade show">
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="row">
@@ -56,7 +56,7 @@ const Notification = () => {
                         </div>
                         <button
                             type="button"
-                            class="close"
+                            className="close"
                             data-dismiss="alert"
                             aria-label="Close"
                         >

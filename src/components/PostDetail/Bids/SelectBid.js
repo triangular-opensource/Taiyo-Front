@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import CustomText from '../../Customs/CustomText/CustomText'
 
-const SelectBid = ({bid, selectBid}) => {
+const SelectBid = forwardRef(({bid, selectBid}, ref) => {
 
     return (
-        <div className="row d-flex align-items-center mt-1 mb-1">
+        <div ref={ref} className="row d-flex align-items-center mt-1 mb-1">
             <div className="col-6">
                 <CustomText name={`Rs.${bid.amount}`} />
             </div>
@@ -19,6 +19,6 @@ const SelectBid = ({bid, selectBid}) => {
             </div>
         </div>
     )
-}
+})
 
 export default SelectBid
