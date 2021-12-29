@@ -29,6 +29,7 @@ import Ads from '../components/Advertisement/Ads/Ads'
 import Notification from '../components/Notification/Notification'
 import Pdf from '../components/Customs/Pdf/Pdf'
 import RegisterFailure from '../components/Auth/Register/RegisterFailure/RegisterFailure'
+import SubscriptionRoute from './SubscriptionRoute'
 
 
 const Routes = () => {
@@ -44,7 +45,7 @@ const Routes = () => {
                     <PrivateRoute exact path="/post-ad/step-1" component={AdInformation} />
                     <PrivateRoute exact path="/post-ad/step-2" component={AdDetails} />
                     <PrivateRoute exact path="/post-ad/step-3" component={UserInformation} />
-                    <PrivateRoute exact path="/post/:id" component={ItemPage} />
+                    <SubscriptionRoute exact path="/post/:id" component={ItemPage} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
                     <PrivateRoute exact path="/profile" component={Profile} />
