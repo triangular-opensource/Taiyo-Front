@@ -11,6 +11,7 @@ import alertMessage from "../../global/AlertProvider";
 import SelectBid from "./Bids/SelectBid";
 import SubmitBid from "./Bids/SubmitBid";
 import CountDown from "../Countdown/CountDown";
+import {ReactComponent as Empty} from "../../global/static/svg/empty.svg"
 
 const CustomItemPage = (props) => {
     const postId = props.match.params.id;
@@ -23,7 +24,48 @@ const CustomItemPage = (props) => {
     const [bidListLoading, setBidListLoading] = useState(true);
     const [amount, setAmount] = useState(null);
      
-    const postBid = async () => {
+    const postBid = async () => 
+    {
+
+    if(amount > 9999)
+    {
+        if(ad.buy_or_sell === 'Buy')
+        {
+            if(bidList.length === 0 )
+                {
+                    if(amount < ad.basic_price + 100 )
+                    {
+                        return alertMessage("Amount is 100Rs more than basic price");  
+                    }
+                }
+            else
+                {
+                    if(amount < bidList[0].amount + 100 )
+                    {
+                        return alertMessage("Amount is 100Rs more than highest bid");  
+                    }
+                }
+        }
+    }
+    else
+        return alertMessage("Bid Always Greater Than 9999");
+    
+
+
+
+
+        if(ad.buy_or_sell === 'Sell')
+        {
+        if(bidList.length === 0)
+        {
+            if(amount > ad.basic_price - 100 )
+                return alertMessage("Amount is 100Rs less than basic price");  
+        }
+        else
+            if(amount < bidList[0].amount - 100 )
+                return alertMessage("Amount is 100Rs less than least bid");  
+        }
+
         await axios
             .post(
                 `${GLOBAL_URL}/ads/bid`,
@@ -49,7 +91,7 @@ const CustomItemPage = (props) => {
     };
     useEffect(() => {
         axios
-            .get(`${GLOBAL_URL}/ads/${postId}`, {
+            .get(`${GLOBAL_URL}/ads-detail/${postId}`, {
                 headers: {
                     Authorization: `Token ${getToken()}`,
                     "Content-Type": "application/json",
@@ -72,7 +114,7 @@ const CustomItemPage = (props) => {
                 setBidListLoading(false);
             })
             .catch(async (error) => setError(error));
-    }, [getToken, postId]);
+    }, []);
     const [isOpen, setIsOpen] = useState(false);
     const togglePopup = () => {
         setIsOpen(!isOpen);
@@ -255,7 +297,7 @@ const CustomItemPage = (props) => {
                     <div className="auth-bg py-3 px-3">
                         <div className="row">
                             <div className="col-12">
-                                <div className="text-dark h4"> #{ad.id}</div>
+                                <div className="text-dark h4"> #{ad.id + " " + "Bidding" }</div>
                             </div>
                         </div>
                         
@@ -288,12 +330,20 @@ const CustomItemPage = (props) => {
                                 :
                                     <>
                                         {
+                                        
+                                        (bidList.length === 0) ?
+                                        
+                                        <div className="row px-5">
+                                            <Empty /> 
+                                        </div>
+                                        :                                   
                                             bidList.map((bid) => (
                                                 <div key={bid.id}>
                                                     <SubmitBid key={bid.id} bid={bid} />
                                                     <hr />
                                                 </div>
                                             ))
+                                        
                                         }
                                         <div className="row px-2 mt-3">
                                             <div className="input-group">

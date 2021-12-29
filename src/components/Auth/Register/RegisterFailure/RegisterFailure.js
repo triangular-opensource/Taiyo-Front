@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom'
 import CustomButton from '../../../Customs/CustomButton/CustomButton';
 import CustomText from '../../../Customs/CustomText/CustomText';
 
-const RegisterSuccess = () => 
-{
+const RegisterFailure = () => {
+
 const history =  useHistory();
 return (
 <div>
@@ -15,7 +15,7 @@ return (
         <div className="row">
           <div className="col-sm-12 mt-5 bgWhite">
             <div className="title">
-            <CustomText name="Account Activated" color='gray' size='xx-large' weight='bold' />
+            <CustomText name="Account Avtivation Failed " color='gray' size='xx-large' weight='bold' />
             </div>
             <CustomButton fontSize="17" marginTop="20" data="Back to Login Page" handleClick=  { ()=>history.push('/login')}   padding='16' backgroundColor='gray' color='white' width='620' />
             <br/>
@@ -28,6 +28,7 @@ return (
 </div>
 </div>
 )
+
 }
 
-export default RegisterSuccess
+export default RegisterFailure
