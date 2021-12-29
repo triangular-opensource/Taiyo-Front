@@ -28,6 +28,7 @@ import PrivateRoute from './PrivateRoute'
 import Ads from '../components/Advertisement/Ads/Ads'
 import Notification from '../components/Notification/Notification'
 import Pdf from '../components/Customs/Pdf/Pdf'
+import RegisterFailure from '../components/Auth/Register/RegisterFailure/RegisterFailure'
 
 
 const Routes = () => {
@@ -62,6 +63,7 @@ const Routes = () => {
                     <Route exact path="/ads" component={Ads} /> 
                     <PrivateRoute exact path="/notification" component={Notification} />
                     <Route exact path="/pdf" component={Pdf} /> 
+                    <PrivateRoute exact path="/register-failure" component={RegisterFailure} />
                 </Switch>
                 <Footer />
                 <ScrollButton />

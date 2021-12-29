@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
 
 
     const register = async (firstName, middleName, lastName, gst, phoneNumber, companyName, companyType, companyAddress, companyCity, companyState, companyCountry, companyPincode, email, password) => {
+        
         await axios.post(`${GLOBAL_URL}/auth/register`, {
             "first_name": firstName,
             "middle_name": middleName,
@@ -51,6 +52,7 @@ export const AuthProvider = ({ children }) => {
             }
         )
         .catch(async (error) => {
+            console.log(error.response);
             alertFire(<p> OOPs Some Problem Occur </p>)
         })
     }
