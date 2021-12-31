@@ -1,6 +1,7 @@
 .timer {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .countdown_timer_div {

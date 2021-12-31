@@ -57,7 +57,7 @@ const PackageHistoryData = () => {
                                             <tr key={payment.id}>
                                                 <td className="text-center">#{payment.id}</td>
                                                 <td className="text-center">{payment.package}</td>
-                                                <td className="text-center">{payment.paid ?<span className="badge badge-success">Success</span>: <span className="badge badge-secondary">Pending Payment</span>}</td>
+                                                <td className="text-center">{payment.paid ?<span className="badge badge-success">Success</span>: <span className="badge badge-danger">Failure</span>}</td>
                                                 <td className="text-center">
                                                     {`${payment_date.getHours()}:${payment_date.getMinutes()} ${payment_date.getDate()}-${payment_date.getMonth() + 1}-${payment_date.getFullYear()}`}
                                                 </td>

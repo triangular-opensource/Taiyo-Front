@@ -12,11 +12,31 @@ const AdDetails = () => {
 
     const history = useHistory()
 
-    const [postData, setPostData] = useState({})
+    const [basicPrice, setBasicPrice] = useState();
+ 
+    const [postData, setPostData] = useState({
+        basic_price: "",
+        description: "",
+        quantity: "",
+        grad_or_spec: "",
+        quality: "",
+        temper: "",
+        specification_number: "",
+        coating_in_gsm: "",
+        thickness: "",
+        width: "",
+        length: "",
+        image_1_link: "",
+        image_2_link: "",
+        image_3_link: "",
+        image_4_link: "",
+        excel_file_link: "",
+        pdf_file_link: ""
+    })
     const [images, setImages] = useState([])
     const [excel, setExcel] = useState(null)
     const [pdfFile, setPdfFile] = useState(null)
-    const data = JSON.parse(localStorage.getItem("adDetail")) ? JSON.parse(localStorage.getItem("adDetail")) : false 
+    const data = JSON.parse(localStorage.getItem("adDetail")) ? JSON.parse(localStorage.getItem("adDetail")) : null
 
     const fileUpload = async (file, name) => {
         console.log("uploading")
@@ -55,14 +75,14 @@ const AdDetails = () => {
         console.log(pdfFile)
         fileUpload(e.target.files[0], 'pdf_file_link')
     }
-    console.log(pdfFile)
-
-    // console.log(postData)
     
     useEffect(() => {
         const {category, product, buy_or_sell} = JSON.parse(localStorage.getItem("adInfo"));
         if (! (category && product && buy_or_sell)) {
             history.push("/post-ad/step-1")
+        }
+        if (JSON.parse(localStorage.getItem("adDetail"))) {
+            setPostData(JSON.parse(localStorage.getItem("adDetail")))
         }
     }, [history])
 
@@ -79,7 +99,7 @@ const AdDetails = () => {
                     <div className="col-12 mx-3 pr-5">
                         <div className="form-group">
                             <label htmlFor="basicPrice">Basic Price <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">(₹ per metric ton. GST extra as applicable)</span></label>
-                            <input type="text" name="" id="basicPrice" value={data.basic_price ? data.basic_price : postData.basic_price} onChange={e => setPostData({...postData, basic_price: e.target.value})} placeholder='Basic Price' className="form-control" />
+                            <input type="text" name="" id="basicPrice" value={data.basic_price ? data.basic_price : basicPrice} onChange={e => {setBasicPrice(e.target.value); setPostData({...postData, basic_price: basicPrice})}} placeholder='Basic Price' className="form-control" />
                         </div>
                     </div>
                 </div>

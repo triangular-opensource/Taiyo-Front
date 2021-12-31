@@ -34,7 +34,7 @@ const Package = () => {
                 "name": "Taiyo",
                 "description": "Recharge your account",
                 "order_id": `${finRes.data.data.order_id}`, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1    
-                "callback_url": "https://taiyoindustries.herokuapp.com/api/success-payment",
+                "callback_url": `${GLOBAL_URL}/success-payment`,
                 "prefill": {
                     "name": `${userData().first_name} ${userData().last_name}`,
                     "email": `${userData().email}`,

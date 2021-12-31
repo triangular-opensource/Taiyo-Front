@@ -37,7 +37,7 @@ const Header = () => {
             location.pathname === "/pdf"
             ? <></>
             : (
-                <nav className="navbar sticky navbar-expand-lg navbar-dark bg-dark">
+                <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <NavLink className="navbar-brand pt-2" to="/">
                         <h3>{generalInfo.name}</h3></NavLink>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,7 +112,7 @@ const Header = () => {
                                         </>
                                 }
                         </ul>
-                        <NavLink to="/post-ad/step-1" className="ml-4 p-2 bg-secondary rounded text-white nav-btn">Buy/Sell</NavLink>
+                        <NavLink to="/post-ad" className="ml-4 p-2 bg-secondary rounded text-white nav-btn">Buy/Sell</NavLink>
                     </div>
                 </nav>
             ) 

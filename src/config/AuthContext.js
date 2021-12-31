@@ -66,7 +66,6 @@ export const AuthProvider = ({ children }) => {
         }).then(async (response) => {
             let data = [await response.data.data]
             setUser(data[0])
-            console.log(user)
             localStorage.setItem("user", JSON.stringify(data[0]))
         }).catch(async (error) => {
             setError(await error)
@@ -133,6 +132,8 @@ export const AuthProvider = ({ children }) => {
             setLoading(true);
             if (localStorage.getItem("token") !== "" && localStorage.getItem("user") !== "") {
                 dispatch({type: "USER", payload:true})
+            } else {
+                dispatch({type: "USER", payload:false})
             }
             await getGeneralInfo();
             await getAddress();

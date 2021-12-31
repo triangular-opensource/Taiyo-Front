@@ -19,52 +19,67 @@ const Notification = () => {
             })
             .then(async (response) => {
                 setNotification(await response.data.data);
-                await setNotificationLoading(false);
+                setNotificationLoading(false);
             })
             .catch(async (error) => setError(error));
-    });
+    }, [getToken]);
+
+    const deleteNotification = async (id) => {
+        axios.delete(`${GLOBAL_URL}/auth/notification/${id}`, {
+            headers: {
+                Authorization: `Token ${getToken()}`,
+                "Content-Type": "application/json",
+            },
+        }).then(response => {console.log(response.data)})
+        .catch(async (error) => setError(await error.response))
+    }
 
     return (
         <div className="container my-4">
-            {notificationLoading ? (
-                <div className="d-flex justify-content-center align-items-center mt-5">
-                    <div
-                        className="spinner-border"
-                        style={{ width: "4rem", height: "4rem" }}
-                        role="status"
-                    >
-                        <span className="sr-only">Loading...</span>
-                    </div>
-                </div>
-            ) : (
-                notification.map((notify) => (
-                    <div key={notify.id} className="alert alert-warning alert-dismissible fade show">
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="row">
-                                    <div className="col-md-10">
-                                        <div className="h5">
-                                            {notify.heading}
-                                        </div>
-                                    </div>
-                                    <div className="col-md-2">
-                                        {notify.create_time.slice(0, 10)}
-                                    </div>
-                                </div>
-                                <div>{notify.text}</div>
+            {
+                notificationLoading
+                    ?
+                        <div className="d-flex justify-content-center align-items-center mt-5">
+                            <div
+                                className="spinner-border"
+                                style={{ width: "4rem", height: "4rem" }}
+                                role="status"
+                            >
+                                <span className="sr-only">Loading...</span>
                             </div>
                         </div>
-                        <button
-                            type="button"
-                            className="close"
-                            data-dismiss="alert"
-                            aria-label="Close"
-                        >
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                ))
-            )}
+                    : 
+                        notification.map((notify) => (
+                            <div key={notify.id}>
+                                <div className="alert alert-warning alert-dismissible fade show">
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <div className="row">
+                                                <div className="col-md-10">
+                                                    <div className="h5">
+                                                        {notify.heading}
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-2">
+                                                    {notify.create_time.slice(0, 10)}
+                                                </div>
+                                            </div>
+                                            <div>{notify.text}</div>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        className="close"
+                                        data-dismiss="alert"
+                                        aria-label="Close"
+                                        onClick={() => deleteNotification(notify.id)}
+                                    >
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+            }
         </div>
     );
 };

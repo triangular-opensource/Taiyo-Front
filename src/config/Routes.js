@@ -30,6 +30,7 @@ import Notification from '../components/Notification/Notification'
 import Pdf from '../components/Customs/Pdf/Pdf'
 import RegisterFailure from '../components/Auth/Register/RegisterFailure/RegisterFailure'
 import SubscriptionRoute from './SubscriptionRoute'
+import PostForm from '../components/BuySell/PostForm/PostForm'
 
 
 const Routes = () => {
@@ -37,7 +38,7 @@ const Routes = () => {
     return (
         <>
             <Header />
-            <div className='mt-4 pt-4'>
+            <div className=''>
                 <Switch>
                     <Route exact path="/" component={() => <Home />} />
                     <Route exact path="/about" component={() => <About />} />
@@ -64,6 +65,7 @@ const Routes = () => {
                     <Route exact path="/ads" component={Ads} /> 
                     <PrivateRoute exact path="/notification" component={Notification} />
                     <Route exact path="/pdf" component={Pdf} /> 
+                    <Route exact path="/post-ad" component={PostForm} /> 
                     <PrivateRoute exact path="/register-failure" component={RegisterFailure} />
                 </Switch>
                 <Footer />
