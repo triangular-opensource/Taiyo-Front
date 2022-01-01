@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import useToken from "../../config/useToken";
 import { GLOBAL_URL } from "../../global/Constant";
+import {ReactComponent as Empty} from "../../global/static/svg/empty.svg"
 
 const Notification = () => {
     const { getToken } = useToken();
@@ -22,7 +23,7 @@ const Notification = () => {
                 setNotificationLoading(false);
             })
             .catch(async (error) => setError(error));
-    }, [getToken]);
+    }, []);
 
     const deleteNotification = async (id) => {
         axios.delete(`${GLOBAL_URL}/auth/notification/${id}`, {
@@ -39,7 +40,7 @@ const Notification = () => {
             {
                 notificationLoading
                     ?
-                        <div className="d-flex justify-content-center align-items-center mt-5">
+                        <div className="d-flex justify-content-center align-items-center my-5 py-5">
                             <div
                                 className="spinner-border"
                                 style={{ width: "4rem", height: "4rem" }}
@@ -49,6 +50,7 @@ const Notification = () => {
                             </div>
                         </div>
                     : 
+                        (notification.length!==0) ?
                         notification.map((notify) => (
                             <div key={notify.id}>
                                 <div className="alert alert-warning alert-dismissible fade show">
@@ -79,6 +81,13 @@ const Notification = () => {
                                 </div>
                             </div>
                         ))
+                        : 
+                        <div className= "w-100 my-5 py-5 d-flex justify-content-center align-items-center flex-column">
+                            
+                            <Empty />
+                        
+                            <div className="h4 mt-2">No Notifications</div>
+                        </div>
             }
         </div>
     );

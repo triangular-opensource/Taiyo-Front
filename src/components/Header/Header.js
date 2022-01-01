@@ -57,13 +57,6 @@ const Header = () => {
                         </li>
                         <li className="nav-item dropdown">
                             <NavLink className="nav-link" id="navbarDropdown" to="/search">Search</NavLink>
-                            {/* <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <NavLink className="dropdown-item" to="/">Uncoated Flat Steel</NavLink>
-                                <NavLink className="dropdown-item" to="/">HR - Hot Rolled Steel</NavLink>
-                                <NavLink className="dropdown-item" to="/">CR - Cold Rolled Steel</NavLink>
-                                <NavLink className="dropdown-item" to="/">Coated Flat Steel</NavLink>
-                                <NavLink className="dropdown-item" to="/">GP - Galvanized Steel</NavLink>
-                            </div> */}
                         </li>
                         </ul>
                     </div>
@@ -95,7 +88,7 @@ const Header = () => {
                                         </>
                                     :
                                         <>
-                                         <li className="nav-item">
+                                        <li className="nav-item">
                                                 <NavLink className="nav-link p-0" to="/notification">
                                                     <i style={{"fontSize": "xx-large"}} className="icon ion-ios-bell"></i>
                                                 </NavLink>

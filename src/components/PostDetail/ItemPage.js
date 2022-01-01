@@ -14,6 +14,7 @@ import CountDown from "../Countdown/CountDown";
 import { Link } from "react-router-dom";
 import {ReactComponent as Empty} from "../../global/static/svg/empty.svg"
 
+
 const CustomItemPage = (props) => {
     const postId = props.match.params.id;
     const { getToken, userData } = useToken();
@@ -217,32 +218,53 @@ const CustomItemPage = (props) => {
                                     </div>
                                     <div className="carousel-item">
                                         <span className="d-flex justify-content-center align-items-center">
-                                            <img
+                                            
+                                            {
+                                            (ad.image_2_link) ? <img
                                                 className="d-block rounded"
                                                 src={ad.image_2_link}
                                                 alt="Second slide"
                                                 style={{"height": "300px"}}
                                             />
+                                            :
+                                            <Empty    style={{"height": "300px"}} />
+                                            
+                                            }
+
                                         </span>
                                     </div>
                                     <div className="carousel-item">
                                         <span className="d-flex justify-content-center align-items-center">
-                                            <img
+                                          
+                                        {
+                                            (ad.image_3_link) ? <img
                                                 className="d-block rounded"
                                                 src={ad.image_3_link}
-                                                alt="Third slide"
+                                                alt="third slide"
                                                 style={{"height": "300px"}}
                                             />
+                                            :
+                                          
+                                            <Empty    style={{"height": "300px"}} />  
+                                            }
+
                                         </span>
                                     </div>
                                     <div className="carousel-item">
                                         <span className="d-flex justify-content-center align-items-center">
-                                            <img
+                                        {
+                                            (ad.image_4_link) ? <img
                                                 className="d-block rounded"
                                                 src={ad.image_4_link}
-                                                alt="Third slide"
+                                                alt="fourth slide"
                                                 style={{"height": "300px"}}
                                             />
+                                            :
+                                            
+                                            
+                                            <Empty    style={{"height": "300px"}} />
+                                            
+                                            }
                                         </span>
                                     </div>
                                 </div>

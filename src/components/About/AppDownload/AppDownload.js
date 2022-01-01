@@ -5,6 +5,7 @@ import { ReactComponent as AppleSvg } from "../../../global/static/svg/apple.svg
 import { ReactComponent as AndroidSvg } from "../../../global/static/svg/android.svg";
 
 function AppDownload() {
+
     return (
         <div className="bg-secondary contain">
             <div className="container py-5">

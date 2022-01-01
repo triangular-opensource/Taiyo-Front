@@ -62,7 +62,7 @@ const Routes = () => {
                     <Route exact path="/reset-password" component={ResetPassword} />
                     <Route exact path="/reset-password-success" component={ResetPasswordSuccess} />
                     <Route exact path="/register-success" component={RegisterSuccess} />
-                    <Route exact path="/ads" component={Ads} /> 
+                    <Route exact path="/my-ads" component={Ads} /> 
                     <PrivateRoute exact path="/notification" component={Notification} />
                     <Route exact path="/pdf" component={Pdf} /> 
                     <Route exact path="/post-ad" component={PostForm} /> 

@@ -1,6 +1,5 @@
 import React from 'react'
 import useToken from '../../config/useToken';
-import Friends from './Friends/Friends';
 import ProfileData from './ProfileData/ProfileData'
 import ProfileHeader from './ProfileHeader/ProfileHeader'
 import ProfileNavbar from './ProfileNavbar/ProfileNavbar'
@@ -19,7 +18,7 @@ function Profile() {
                 </div>
                 <div className="col-md-12">
                     <ProfileData />
-                    <Friends />
+                
                 </div>
             </div>
         </div>

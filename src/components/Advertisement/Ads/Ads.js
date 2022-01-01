@@ -2,24 +2,45 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { GLOBAL_URL } from "../../../global/Constant";
 import CustomItemCard from "../../Customs/CustomItemCard/CustomItemCard";
-
+import {ReactComponent as Empty} from "../../../global/static/svg/empty.svg"
+import useToken from "../../../config/useToken";
 const Ads = (props) => {
     const [ads, setAd] = useState([]);
     const [adLoading, setAdLoading] = useState(true);
     const [error, setError] = useState(null);
-    useEffect(() => {
-        axios
-            .get(`${GLOBAL_URL}/ads`)
-            .then(async (response) => {
+    const {getToken} = useToken();
+
+
+    const [url , setUrl] = useState(`${GLOBAL_URL}/ads/10`);
+
+    useEffect(async () => 
+    {
+        setAdLoading(true)  
+        await axios
+            .get(url , 
+                 {
+                    headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Token ${getToken()}`,
+                    },
+                }
+            )
+            .then(async (response) => 
+            {
                 setAd(response.data.data);
                 setAdLoading(false);
             })
             .catch(async (error) => {
                 console.log(error.response);
                 setError(error);
+                setAdLoading(false);
             });
-    }, []);
 
+    }, [url]);
+
+    
+    
+    
     return (
         <div className="container-fluid py-4 px-5">
             <div className="row my-4 mx-4">
@@ -39,30 +60,48 @@ const Ads = (props) => {
                                 </div>
                                 <div className="row ml-auto">
                                     <div className="col-12">
-                                        <div className="custom-control custom-switch mb-1">
+
+                                    <div className="custom-control custom-switch mt-2">
                                             <input
                                                 type="radio"
-                                                id="customRadio1"
+                                                id="customRadio0"
                                                 name="customRadio"
                                                 className="custom-control-input"
+                                                onClick=
+                                                {async() =>
+                                                    {
+                                                        setUrl(`${GLOBAL_URL}/ads/10`)
+                                                        
+                                                    }
+                                                }
+                                                checked= {url ===  `${GLOBAL_URL}/ads/10` }
+                                                
                                             />
                                             <label
                                                 className="custom-control-label"
-                                                for="customRadio1"
+                                                for="customRadio0"
                                             >
-                                                InActive Add
+                                                All 
                                             </label>
                                         </div>
                                         <div className="custom-control custom-switch mt-2">
                                             <input
                                                 type="radio"
-                                                id="customRadio2"
+                                                id="customRadio1"
                                                 name="customRadio"
                                                 className="custom-control-input"
+                                                onClick=
+                                                {async() =>
+                                                    {
+                                                        setUrl(`${GLOBAL_URL}/ads/2`)
+                                                
+                                                    }
+                                                }
+                                                
                                             />
                                             <label
                                                 className="custom-control-label"
-                                                for="customRadio2"
+                                                for="customRadio1"
                                             >
                                                 Active Add
                                             </label>
@@ -73,12 +112,40 @@ const Ads = (props) => {
                                                 id="customRadio2"
                                                 name="customRadio"
                                                 className="custom-control-input"
+                                                onClick=
+                                                {async () =>
+                                                    {
+                                                        setUrl(`${GLOBAL_URL}/ads/3`)
+                                                        
+                                                    }
+                                                }
                                             />
                                             <label
                                                 className="custom-control-label"
                                                 for="customRadio2"
                                             >
-                                                ShortListed Add{" "}
+                                                InActive Add
+                                            </label>
+                                        </div>                       
+                                        <div className="custom-control custom-switch mt-2">
+                                            <input
+                                                type="radio"
+                                                id="customRadio3"
+                                                name="customRadio"
+                                                className="custom-control-input"
+                                                onClick=
+                                                {async () =>
+                                                    {
+                                                        setUrl(`${GLOBAL_URL}/ads/4`)
+                                                    
+                                                    }
+                                                }
+                                            />
+                                            <label
+                                                className="custom-control-label"
+                                                for="customRadio3"
+                                            >
+                                                ShortListed Add
                                             </label>
                                         </div>
                                     </div>
@@ -88,7 +155,9 @@ const Ads = (props) => {
                     </div>
                 </div>
                 <div className="col-md-9">
-                    {adLoading ? (
+                    {
+                    
+                    adLoading ? (
                         <div className="d-flex justify-content-center align-items-center">
                             <div
                                 className="spinner-border"
@@ -98,11 +167,21 @@ const Ads = (props) => {
                                 <span className="sr-only">Loading...</span>
                             </div>
                         </div>
-                    ) : (
+                    ) : 
+                        
+                    (ads.length !== 0) ? (
                         ads.map((ad) => (
                             <CustomItemCard key={ad.id} data={ad} />
                         ))
-                    )}
+                    ) :
+                   
+                   <div class = "text-center">
+                        <Empty/>
+                    </div>
+                
+                
+                
+                }
                 </div>
             </div>
         </div>
