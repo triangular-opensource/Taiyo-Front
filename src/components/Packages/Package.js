@@ -6,6 +6,7 @@ import Loader from '../Customs/Loader/Loader';
 import PackageItem from "./PackageItem/PackageItem"
 import useAuth from '../../config/AuthContext';
 import useToken from '../../config/useToken';
+import alertMessage from '../../global/AlertProvider';
 
 const Package = () => {
     const {getToken, userData} = useToken()
@@ -14,7 +15,10 @@ const Package = () => {
     const [loading, setLoading] = useState(true);
     const [paymentLoading, setPaymentLoading] = useState(true);
 
+    const [buySellLoading, setBuySellLoading] = useState(false);
+
     const makePayment = async (amount, subscription) => {
+        setBuySellLoading(true);
         await axios.post(`${GLOBAL_URL}/billing`, {
             "amount": amount,
             "package": subscription,
@@ -43,11 +47,16 @@ const Package = () => {
             };
             var rzp1 = new window.Razorpay(options);
             if (finRes.data.id !== null) {
+                setBuySellLoading(false);
                 rzp1.open();
             }
+            else
+                setBuySellLoading(false);
         }).catch(async(error) => {
             console.log(error.response)
             setError(error)
+            alertMessage("OOps Some error Ocurred in the payment gateway");
+            setBuySellLoading(false);
         });
     }
 
