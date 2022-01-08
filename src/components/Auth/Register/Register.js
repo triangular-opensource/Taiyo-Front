@@ -139,7 +139,18 @@ function Register() {
                             <CustomInput type="text" value={companyName} onChangeValue={(event) => setCompanyName(event.target.value)} placeholder='Company Name *'/>
                         </div>
                         <div className="col-md-6">
-                            <CustomInput type="text" value={companyType} onChangeValue={(event) => setCompanyType(event.target.value)} placeholder='Company Type *'/>
+                            <div className="form-group mt-2">
+                                <select name="" value={companyType} onChange={(e) => setCompanyType(e.target.value)} id="category" style={{"paddingBottom": "5px", "height": "44px"}} className="form-control">
+                                    <option value={""} defaultValue={""} disabled>Choose...</option>
+                                    <option value="Proprietorship">Proprietorship</option>
+                                    <option value="Partnership">Partnership</option>
+                                    <option value="PvtLtd">Pvt Ltd</option>
+                                    <option value="Ltd">Ltd</option>
+                                    <option value="LLP">LLP</option>
+                                </select>
+                            </div>
+                            
+                            {/* <CustomInput type="text" value={companyType} onChangeValue={(event) => setCompanyType(event.target.value)} placeholder='Company Type *'/> */}
                         
                         </div>
                     </div>
@@ -177,13 +188,15 @@ function Register() {
                             <div className="custom-control custom-checkbox my-2">
                                 <input type="checkbox" className="custom-control-input" id="customControlValidation1"  defaultChecked={check} onChange={() => setCheck(!check)} />
                                 <label className="custom-control-label" htmlFor="customControlValidation1">I agree to </label>
-                                <span className='ml-2 text-primary' style={{"fontWeight": "bold", "cursor": "pointer"}} data-target="#exampleModal" data-toggle="modal">
+                                <span className='ml-2 text-primary' style={{"fontWeight": "bold", "cursor": "pointer"}} data-target="#tncModal" data-toggle="modal">
                                     Terms And Condition
                                 </span>
                             </div>
                         </div>
                     </div>
-                    <Popup 
+                    <Popup
+                        target="tncModal"
+                        title="Terms and Conditions"
                         content={
                             <>
                                 <TermAndConditions />

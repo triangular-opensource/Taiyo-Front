@@ -8,7 +8,7 @@ const SubscriptionRoute = ({ component: Component, ...rest }) => {
 
     return (
         <Route { ...rest } render={props => {
-                return isUser() && userData().package_type !== "" ? <Component {...props} /> : <Redirect to='/packages' />
+                return isUser() && userData().package_type !== null ? <Component {...props} /> : <Redirect to='/packages' />
             }}>
         </Route>
     )

@@ -20,21 +20,24 @@ const Otp = (props) => {
     const changePasswordByOtp = async (otp, password) => {
         await axios
             .post(
-                `${GLOBAL_URL}/reset-password-token/${props.location.state.email}`,
+                `${GLOBAL_URL}/auth/reset-password-token/${props.location.state.email}`,
                 {
-                    otp: otp,
+                    token: otp,
                     password: password,
                 }
             )
             .then(async () => {
                 history.push("/reset-password-success");
             })
-            .catch(() => alertMessage(<p>oOOps Some Problem Occr </p>));
+            .catch((error) => {
+                console.log(error.response)
+                alertMessage(<p>oOOps Some Problem Occr </p>);
+            })
     };
 
     return (
         <div>
-            <div className="container">
+            <div className="container mb-5">
                 <div className="row justify-content-md-center">
                     <div className="text-center">
                         <div className="row">
@@ -53,8 +56,9 @@ const Otp = (props) => {
                                         color: "black",
                                     }}
                                     inputStyle={{
+                                        width: "3rem",
                                         margin: "15px",
-                                        padding: "7px",
+                                        padding: "7px 9px",
                                     }}
                                     value={otp}
                                     onChange={(event) => handleChange(event)}

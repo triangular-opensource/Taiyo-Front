@@ -14,7 +14,7 @@ const Home = () => {
                 alt="cover"
             />
             <div id="about">
-                <AboutData />
+                <AboutData about={generalInfo.about} />
             </div>
             <div id="contact">
                 <Contact />

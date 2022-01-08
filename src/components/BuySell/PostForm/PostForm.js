@@ -23,7 +23,7 @@ const PostForm = () => {
 
     const [postData, setPostData] = useState({
         category: "",
-        product: null,
+        product: "",
         buy_or_sell: "",
         product_name: "",
         basic_price: "",
@@ -123,7 +123,7 @@ const PostForm = () => {
 
     const savePost = async () => {
         await axios.post(`${GLOBAL_URL}/post-ads`, {
-            "product": postData.product_name.name,
+            "product": postData.product,
             "buy_or_sell": postData.buy_or_sell,
             "basic_price": postData.basic_price,
             "product_description": postData.description,
@@ -200,7 +200,7 @@ const PostForm = () => {
                         <div
                             onClick={() => {setActive1(false);setActive2(false);setActive3(true)}}
                             className={
-                                ((postData?.category && postData?.product && postData?.buy_or_sell) && ((postData?.basic_price && postData?.description && postData?.quantity && postData?.grad_or_spec && postData?.quality && postData?.temper && postData?.specification_number && postData?.coating_in_gsm && postData?.thickness && postData?.width && postData?.length && postData?.image_1_link)))
+                                ((postData?.category && postData?.product && postData?.buy_or_sell) && ((postData?.basic_price && postData?.description && postData?.quantity && postData?.grad_or_spec && postData?.quality && postData?.temper && postData?.specification_number && postData?.coating_in_gsm && postData?.thickness && postData?.width && postData?.length && postData?.image_1_link && imageLoading)))
                                     ?   
                                         active3 && !active1 && !active2
                                             ?
@@ -243,11 +243,11 @@ const PostForm = () => {
                                 <div className="col-12 mx-3 pr-5">
                                     <div className="form-group">
                                         <label htmlFor="category">Product <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">Select suitable Product</span></label>
-                                        <select name="" id="category"value={postData.product} onChange={async (e) => setPostData({...postData, product: parseInt(e.target.value), product_name: await products[parseInt(e.target.value)]})} className="form-control">
+                                        <select name="" id="category"value={postData.product} onChange={async (e) => setPostData({...postData, product: e.target.value})} className="form-control">
                                             <option value={""} selected disabled>Choose...</option>
                                             {
                                                 products.map(prod => (
-                                                    <option key={prod.id} value={prod.id}>{prod.name}</option>
+                                                    <option key={prod.id} value={prod.name}>{prod.name}</option>
                                                 ))
                                             }
                                         </select>
@@ -396,7 +396,7 @@ const PostForm = () => {
                                                             </div>
                                                         :
                                                             <div className="d-flex justify-content-center align-items-center mb-2 text-success">
-                                                                <span className="mx-2">Images Uploaded</span><i class="icon ion-checkmark-circled"></i>
+                                                                <span className="mx-2">Images Uploaded</span><i className="icon ion-checkmark-circled"></i>
                                                             </div>
                                     }
                                     <div className="form-group custom-file">
@@ -423,7 +423,7 @@ const PostForm = () => {
                                                         </div>
                                                     :
                                                         <div className="d-flex justify-content-center align-items-center mb-2 text-success">
-                                                            <span className="mx-2">Excel File Uploaded</span><i class="icon ion-checkmark-circled"></i>
+                                                            <span className="mx-2">Excel File Uploaded</span><i className="icon ion-checkmark-circled"></i>
                                                         </div>
                                     }
                                     <div className="form-group custom-file">
@@ -450,7 +450,7 @@ const PostForm = () => {
                                                         </div>
                                                     :
                                                         <div className="d-flex justify-content-center align-items-center mb-2 text-success">
-                                                            <span className="mx-2">Pdf File Uploaded</span><i class="icon ion-checkmark-circled"></i>
+                                                            <span className="mx-2">Pdf File Uploaded</span><i className="icon ion-checkmark-circled"></i>
                                                         </div>
                                     }
                                     <div className="form-group custom-file">

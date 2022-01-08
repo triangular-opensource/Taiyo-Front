@@ -43,9 +43,6 @@ const Routes = () => {
                     <Route exact path="/" component={() => <Home />} />
                     <Route exact path="/about" component={() => <About />} />
                     <Route exact path="/contact" component={() => <Contact />} />
-                    <PrivateRoute exact path="/post-ad/step-1" component={AdInformation} />
-                    <PrivateRoute exact path="/post-ad/step-2" component={AdDetails} />
-                    <PrivateRoute exact path="/post-ad/step-3" component={UserInformation} />
                     <SubscriptionRoute exact path="/post/:id" component={ItemPage} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
@@ -65,7 +62,7 @@ const Routes = () => {
                     <Route exact path="/my-ads" component={Ads} /> 
                     <PrivateRoute exact path="/notification" component={Notification} />
                     <Route exact path="/pdf" component={Pdf} /> 
-                    <Route exact path="/post-ad" component={PostForm} /> 
+                    <SubscriptionRoute exact path="/post-ad" component={PostForm} /> 
                     <PrivateRoute exact path="/register-failure" component={RegisterFailure} />
                 </Switch>
                 <Footer />
