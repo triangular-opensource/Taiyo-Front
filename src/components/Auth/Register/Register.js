@@ -28,11 +28,11 @@ function Register() {
     const [companyPincode, setCompanyPincode] = useState("")
     const [showConfirmPassAlert, setShowConfirmPassAlert] = useState(false)
     const [check, setCheck] = useState(false)
-
     const [checked, setChecked] = useState(true);
-
-    const handleRegister = () => {
-
+    const [loading, setLoading] = useState(false);
+    const handleRegister = async() => 
+    {
+        setLoading(true);
         if(firstName ==="" 
             || lastName ===""
             || companyName===""
@@ -88,7 +88,24 @@ function Register() {
                 return;
             }
 
-        return register(firstName, middleName, lastName, gst, phoneNumber, companyName, companyType, companyAddress, companyCity, companyState, companyCountry, companyPincode, email, password);
+       await register(firstName, middleName, lastName, gst, phoneNumber, companyName, companyType, companyAddress, companyCity, companyState, companyCountry, companyPincode, email, password);
+       
+        setEmail("")
+        setFirstName("")
+        setMiddleName("")  
+        setLastName("")
+        setPhoneNumber("")
+        setPassword("")
+        setConfirmPassword("") 
+        setGst("")
+        setCompanyName("")
+        setCompanyType("")
+        setCompanyAddress("")
+        setCompanyCity("")
+        setCompanyState("")
+        setCompanyCountry("")
+        setCompanyPincode("") 
+        setLoading(false);
     }
     return (
         <div className="container-fluid py-5 px-4">
@@ -205,11 +222,17 @@ function Register() {
                     />
                     <div className="form-row">
                         <div className="col-md-12">
-                            <CustomButton  fontSize="17" data="REGISTER" handleClick={handleRegister} padding='16' backgroundColor='gray' color='white' />
+                            <CustomButton 
+                             fontSize="17"
+                           c
+                               handleClick={handleRegister}
+                                padding='16'
+                                 backgroundColor='gray'
+                                  color='white'
+                                   />
                         </div>
                     </div>
-                    <hr/>
-                    
+                    <hr/>  
                     <p className="mt-2">Already have an account? <NavLink className="text-decoration-none" to="/login">Login.</NavLink></p>
 				</div>
 			</div>

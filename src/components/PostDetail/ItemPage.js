@@ -31,7 +31,7 @@ const CustomItemPage = (props) => {
 
     if(amount > 9999)
     {
-        if(ad.buy_or_sell === 'Buy')
+        if(ad.buy_or_sell === 'Sell')
         {
             if(bidList.length === 0 )
                 {
@@ -56,7 +56,7 @@ const CustomItemPage = (props) => {
 
 
 
-        if(ad.buy_or_sell === 'Sell')
+        if(ad.buy_or_sell === 'Buy')
         {
         if(bidList.length === 0)
         {

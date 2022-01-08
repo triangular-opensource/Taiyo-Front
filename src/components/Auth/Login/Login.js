@@ -77,7 +77,7 @@ function Login() {
                                 loading
                                 ?
                                     <span>
-                                        Loading
+                                        Login
                                         <div className="ml-2 spinner-border spinner-border-sm" role="status">
                                             <span className="sr-only">Loading...</span>
                                         </div>

@@ -11,6 +11,7 @@ function Footer() {
     const { generalInfo } = useAuth();
 
     const [email, setEmail] = useState("");
+    const [loading, setLoading] = useState(false);
     return (
         <>
         {
@@ -59,15 +60,30 @@ function Footer() {
                                             </span>
                                             <button
                                                 disabled={!email}
-                                                onClick={() => 
+                                                onClick={async () => 
                                                     {
-                                                    postNewsLetter(email)
+                                                    setLoading(true)
+                                                    await postNewsLetter(email)
                                                     setEmail("")
+                                                    setLoading(false)
                                                     }
                                                 }
                                                 className="btn btn-secondary SubmitBtn"
                                                 >
-                                                Send
+                                                
+                            {
+                                loading
+                                ?
+                                    <span>
+                                        SEND
+                                        <div className="ml-2 spinner-border spinner-border-sm" role="status">
+                                            <span className="sr-only">Loading...</span>
+                                        </div>
+                                    </span>
+                                : 
+                                    "SEND"
+                            }
+                            
                                             </button>
                                         </div>
                                     </div>
