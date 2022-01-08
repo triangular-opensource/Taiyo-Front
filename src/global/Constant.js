@@ -1,4 +1,5 @@
 export const GLOBAL_URL = "https://taiyoindustries.herokuapp.com/api";
+// export const GLOBAL_URL = "http://127.0.0.1:9000/api";
 export const MAX_AD_IMAGE_UPLOAD = 4;
 export const EMAIL_ERROR = "Please Enter Valid Email."
 export const PASSWORD_ERROR = () => { 

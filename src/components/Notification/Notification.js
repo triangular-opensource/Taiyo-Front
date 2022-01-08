@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import useToken from "../../config/useToken";
 import { GLOBAL_URL } from "../../global/Constant";
 import {ReactComponent as Empty} from "../../global/static/svg/empty.svg"
@@ -22,7 +23,7 @@ const Notification = () => {
                 setNotification(await response.data.data);
                 setNotificationLoading(false);
             })
-            .catch(async (error) => setError(error));
+            .catch(async (error) => console.log(error.response));
     }, []);
 
     const deleteNotification = async (id) => {
@@ -53,7 +54,7 @@ const Notification = () => {
                         (notification.length!==0) ?
                         notification.map((notify) => (
                             <div key={notify.id}>
-                                <div className="alert alert-warning alert-dismissible fade show">
+                                <div className="alert alert-secondary alert-dismissible fade show">
                                     <div className="row">
                                         <div className="col-md-12">
                                             <div className="row">
@@ -66,7 +67,19 @@ const Notification = () => {
                                                     {notify.create_time.slice(0, 10)}
                                                 </div>
                                             </div>
-                                            <div>{notify.text}</div>
+                                            <div className="d-flex justify-content-between">
+                                                <p>
+                                                    {notify.text}
+                                                </p>
+                                                <div style={{"marginRight": "-40px"}}>
+                                                    <NavLink
+                                                        to={`post/${notify.ad}`}
+                                                        className={"btn btn-dark btn-sm float-right"}
+                                                        >
+                                                        Open
+                                                    </NavLink>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <button
