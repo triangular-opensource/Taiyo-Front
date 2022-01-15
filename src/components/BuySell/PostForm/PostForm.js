@@ -7,10 +7,9 @@ import useToken from '../../../config/useToken'
 import alertMessage from '../../../global/AlertProvider'
 import { GLOBAL_URL, MAX_AD_IMAGE_UPLOAD } from '../../../global/Constant'
 import "./PostForm.css"
-import countries from "../../../global/json/countries.json"
-import states from "../../../global/json/states.json"
 import Popup from '../../Customs/Popup/Popup';
 import TermAndConditions from '../../Policiy/TermsAndConditions/TermAndConditions';
+import ReactGoogleAutocomplete from "react-google-autocomplete";
 
 const PostForm = () => {
 
@@ -23,6 +22,10 @@ const PostForm = () => {
     }
     window.ononline = () => {
         alertMessage("Connection Restored👍");
+    }
+
+    const adDetailsFieldChecks = async () => {
+        await axios.get("")
     }
 
     const [postData, setPostData] = useState({
@@ -49,7 +52,9 @@ const PostForm = () => {
         name: "",
         number: "",
         address: "",
-        country: "",
+        latitude: "",
+        longitude: "",
+        location: "",
         t_and_c: false
     })
     const [imageLinks, setImageLinks] = useState([])
@@ -72,7 +77,6 @@ const PostForm = () => {
             setCategory(response.data.data)
             })
             .catch(async (error) => setError(error))
-        console.log(countries)
     }, [])
 
     const getProduct = async (category) => {
@@ -299,7 +303,7 @@ const PostForm = () => {
                                 <div className="col-12 mx-3 pr-5">
                                     <div className="form-group">
                                         <label htmlFor="basicPrice">Basic Price <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">(₹ per metric ton. GST extra as applicable)</span></label>
-                                        <input type="text" name="" id="basicPrice" value={postData.basic_price} onChange={e => setPostData({...postData, basic_price: e.target.value})} placeholder='Basic Price' className="form-control" />
+                                        <input type="text" name="" min={4} minLength={4} max={6} maxLength={6} id="basicPrice" value={postData.basic_price} onChange={e => setPostData({...postData, basic_price: e.target.value})} placeholder='Basic Price' className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -320,8 +324,8 @@ const PostForm = () => {
                                 </div>
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label htmlFor="grad-spec">Grade <span className="text-danger">*</span></label>
-                                        <input type="text" name="" id="grade" value={postData.grade} onChange={e => setPostData({...postData, grade: e.target.value})} placeholder='Grade' className="form-control" />
+                                        <label htmlFor="coating_gsm">Coating in GSM <span className="text-danger">*</span></label>
+                                        <input type="text" name="" id="coating_gsm" value={postData.coating_in_gsm} onChange={e => setPostData({...postData, coating_in_gsm: e.target.value})} placeholder='Coating in GSM' className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -350,14 +354,14 @@ const PostForm = () => {
                             <div className="row px-3">
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label htmlFor="specNumber">Specification Number <span className="text-danger">*</span></label>
-                                        <input type="text" name="" id="specNumber" value={postData.specification_number} onChange={e => setPostData({...postData, specification_number: e.target.value})} placeholder='Specification Number' className="form-control" />
+                                        <label htmlFor="grad-spec">Grade <span className="text-danger">*</span></label>
+                                        <input type="text" name="" id="grade" value={postData.grade} onChange={e => setPostData({...postData, grade: e.target.value})} placeholder='Grade' className="form-control" />
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label htmlFor="coating_gsm">Coating in GSM <span className="text-danger">*</span></label>
-                                        <input type="text" name="" id="coating_gsm" value={postData.coating_in_gsm} onChange={e => setPostData({...postData, coating_in_gsm: e.target.value})} placeholder='Coating in GSM' className="form-control" />
+                                        <label htmlFor="specNumber">Specification Number <span className="text-danger">*</span></label>
+                                        <input type="text" name="" id="specNumber" value={postData.specification_number} onChange={e => setPostData({...postData, specification_number: e.target.value})} placeholder='Specification Number' className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -495,34 +499,37 @@ const PostForm = () => {
                                 <div className="col-md-6">
                                     <div className="form-group">
                                         <label htmlFor="authorMobile">Mobile Number <span className="text-danger">*</span></label>
-                                        <input type="text" name="" value={postData.number} onChange={e => setPostData({...postData, number: e.target.value})} placeholder='Mobile Number' id="authorMobile" className="form-control" />
+                                        <input type="text" name="" max={10} maxLength={10} value={postData.number} onChange={e => setPostData({...postData, number: e.target.value})} placeholder='Mobile Number' id="authorMobile" className="form-control" />
                                     </div>
                                 </div>
                             </div>
                             <div className="row mx-2">
-                                <div className="col-md-4">
+                                <div className="col-md-12">
                                     <div className="form-group">
-                                    <label htmlFor="authorCountry">Country <span className="text-danger">*</span></label>
-                                        <select name="" value={postData.country} onChange={e => setPostData({...postData, country: e.target.value})} id="authorCountry" className="form-control">
-                                            <option value={""} defaultValue={""} disabled>Choose...</option>
+                                        <label htmlFor="authorCity">
+                                            Location <span className="text-danger">*</span>
+                                        </label>
+                                        <ReactGoogleAutocomplete
+                                            apiKey="AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM"
+                                            onPlaceSelected={(place) => 
                                             {
-                                                countries.map(country => (
-                                                    <option key={country.name} value={country.name}>{country.name}</option>
-                                                ))
+                                                var x= "" ;
+                                                place.address_components.map
+                                                (dat => {
+                                                    x  = x + dat.long_name+" ,"
+                                                })
+                                                x = x.slice(0,x.length-2)
+                                                console.log(x)
+                                                setPostData({
+                                                    ...postData,
+                                                    latitude:(place.geometry.location.lat()),
+                                                    longitude:(place.geometry.location.lng()),
+                                                    location:x
+                                                })  
                                             }
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="form-group">
-                                        <label htmlFor="authorState">State <span className="text-danger">*</span></label>
-                                        <input type="text" name="" value={postData.state} onChange={e => setPostData({...postData, state: e.target.value})} placeholder='State' id="authorState" className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="col-md-4">
-                                    <div className="form-group">
-                                        <label htmlFor="authorCity">City <span className="text-danger">*</span></label>
-                                        <input type="text" name="" value={postData.city} onChange={e => setPostData({...postData, city: e.target.value})} placeholder='City' id="authorCity" className="form-control" />
+                                        }
+                                        className="form-control"
+                                        />
                                     </div>
                                 </div>
                             </div>
