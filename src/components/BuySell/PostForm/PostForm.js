@@ -7,6 +7,8 @@ import useToken from '../../../config/useToken'
 import alertMessage from '../../../global/AlertProvider'
 import { GLOBAL_URL, MAX_AD_IMAGE_UPLOAD } from '../../../global/Constant'
 import "./PostForm.css"
+import countries from "../../../global/json/countries.json"
+import states from "../../../global/json/states.json"
 
 const PostForm = () => {
 
@@ -57,7 +59,7 @@ const PostForm = () => {
     const [error, setError] = useState(null)
     const [active1, setActive1] = useState(true)
     const [active2, setActive2] = useState(false)
-    const [active3, setActive3] = useState(!false)
+    const [active3, setActive3] = useState(false)
     const [loading, setLoading] = useState(false)
     const [imageLoading, setImageLoading] = useState(null)
     const [excelLoading, setExcelLoading] = useState(null)
@@ -69,6 +71,7 @@ const PostForm = () => {
             setCategory(response.data.data)
             })
             .catch(async (error) => setError(error))
+        console.log(countries)
     }, [])
 
     const getProduct = async (category) => {
@@ -505,8 +508,15 @@ const PostForm = () => {
                             <div className="row mx-2">
                                 <div className="col-md-4">
                                     <div className="form-group">
-                                        <label htmlFor="authorCountry">Country <span className="text-danger">*</span></label>
-                                        <input type="text" name="" value={postData.country} onChange={e => setPostData({...postData, country: e.target.value})} placeholder='Country' id="authorCountry" className="form-control" />
+                                    <label htmlFor="authorCountry">Country <span className="text-danger">*</span></label>
+                                        <select name="" value={postData.country} onChange={e => setPostData({...postData, country: e.target.value})} id="authorCountry" className="form-control">
+                                            <option value={""} defaultValue={""} disabled>Choose...</option>
+                                            {
+                                                countries.map(country => (
+                                                    <option key={country.name} value={country.name}>{country.name}</option>
+                                                ))
+                                            }
+                                        </select>
                                     </div>
                                 </div>
                                 <div className="col-md-4">
