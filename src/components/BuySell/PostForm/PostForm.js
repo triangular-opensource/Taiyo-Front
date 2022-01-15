@@ -24,10 +24,6 @@ const PostForm = () => {
         alertMessage("Connection Restored👍");
     }
 
-    const adDetailsFieldChecks = async () => {
-        await axios.get("")
-    }
-
     const [postData, setPostData] = useState({
         category: "",
         product: "",
@@ -70,6 +66,18 @@ const PostForm = () => {
     const [imageLoading, setImageLoading] = useState(null)
     const [excelLoading, setExcelLoading] = useState(null)
     const [pdfLoading, setPdfLoading] = useState(null)
+    const [fieldsVisible, setFieldVisible] = useState({
+        product_id: null,
+        quality: false,
+        temper: false,
+        dimensions: false,
+        grade: false,
+        specification_number: false,
+        quantity: false,
+        coating_in_gsm: false,
+        product_description: false,
+        color: false
+    })
 
     useEffect(() => {
         axios.get(`${GLOBAL_URL}/category`)
@@ -85,6 +93,27 @@ const PostForm = () => {
             setProducts(await response.data.data)
         })
         .catch(async(error) => setError(error))
+    }
+
+    
+    const getFieldVisible = async (product_id) => {
+        await axios.get(`${GLOBAL_URL}/product-field/${product_id}`)
+        .then(async (res) => {
+            setFieldVisible({
+                product_id: await product_id,
+                quality: await res.data.data[0].quality,
+                temper: await res.data.data[0].temper,
+                dimensions: await res.data.data[0].dimensions,
+                grade: await res.data.data[0].grade,
+                specification_number: await res.data.data[0].specification_number,
+                quantity: await res.data.data[0].quantity,
+                coating_in_gsm: await res.data.data[0].coating_in_gsm,
+                product_description: await res.data.data[0].product_description,
+                color: await res.data.data[0].color,
+            })
+        })
+        .catch(async (err) => setError(err.response))
+        console.log(fieldsVisible)
     }
 
     const fileUpload = async (file, name) => {
@@ -169,6 +198,10 @@ const PostForm = () => {
         })
     }
 
+    const getProductId = (prod_name) => {
+        return products.find((prod) => prod.name === prod_name).id
+    }
+
     return (
         <div className="container my-5 auth-bg">
 
@@ -250,7 +283,17 @@ const PostForm = () => {
                                 <div className="col-12 mx-3 pr-5">
                                     <div className="form-group">
                                         <label htmlFor="category">Product <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">Select suitable Product</span></label>
-                                        <select name="" id="category"value={postData.product} onChange={async (e) => setPostData({...postData, product: e.target.value})} className="form-control">
+                                        <select
+                                            name=""
+                                            id="category"
+                                            value={postData.product}
+                                            onChange={async (e) => {
+                                                setPostData({...postData, product: e.target.value});
+                                                let id = await getProductId(e.target.value)
+                                                await getFieldVisible(id)
+                                            }}
+                                            className="form-control"
+                                        >
                                             <option value={""} selected disabled>Choose...</option>
                                             {
                                                 products.map(prod => (
