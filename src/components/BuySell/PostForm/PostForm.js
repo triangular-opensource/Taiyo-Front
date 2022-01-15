@@ -57,7 +57,7 @@ const PostForm = () => {
     const [error, setError] = useState(null)
     const [active1, setActive1] = useState(true)
     const [active2, setActive2] = useState(false)
-    const [active3, setActive3] = useState(false)
+    const [active3, setActive3] = useState(!false)
     const [loading, setLoading] = useState(false)
     const [imageLoading, setImageLoading] = useState(null)
     const [excelLoading, setExcelLoading] = useState(null)
@@ -503,16 +503,30 @@ const PostForm = () => {
                                 </div>
                             </div>
                             <div className="row mx-2">
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label htmlFor="authorAddress">Business Address <span className="text-danger">*</span></label>
-                                        <input type="text" name=""  value={postData.address} onChange={e => setPostData({...postData, address: e.target.value})} placeholder='Business Address' id="authorAddress" className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
+                                <div className="col-md-4">
                                     <div className="form-group">
                                         <label htmlFor="authorCountry">Country <span className="text-danger">*</span></label>
                                         <input type="text" name="" value={postData.country} onChange={e => setPostData({...postData, country: e.target.value})} placeholder='Country' id="authorCountry" className="form-control" />
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <div className="form-group">
+                                        <label htmlFor="authorState">State <span className="text-danger">*</span></label>
+                                        <input type="text" name="" value={postData.state} onChange={e => setPostData({...postData, state: e.target.value})} placeholder='State' id="authorState" className="form-control" />
+                                    </div>
+                                </div>
+                                <div className="col-md-4">
+                                    <div className="form-group">
+                                        <label htmlFor="authorCity">City <span className="text-danger">*</span></label>
+                                        <input type="text" name="" value={postData.city} onChange={e => setPostData({...postData, city: e.target.value})} placeholder='City' id="authorCity" className="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row mx-2">
+                                <div className="col-md-12">
+                                    <div className="form-group">
+                                        <label htmlFor="authorAddress">Business Address <span className="text-danger">*</span></label>
+                                        <input type="text" name=""  value={postData.address} onChange={e => setPostData({...postData, address: e.target.value})} placeholder='Business Address' id="authorAddress" className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -522,7 +536,7 @@ const PostForm = () => {
                                         <div className="custom-control custom-checkbox">
                                             <input type="checkbox" value={postData.t_and_c} onChange={e => setPostData({...postData, t_and_c: e.target.checked})} name="" id="adTerms" className="custom-control-input" />
                                             <label htmlFor="adTerms" className="custom-control-label">
-                                                I agree to <div to="/terms">Terms & Conditions</div>
+                                                I agree to <span data-target="#tncModal" data-toggle="modal">Terms & Conditions</span>
                                             </label>
                                         </div>
                                     </div>
