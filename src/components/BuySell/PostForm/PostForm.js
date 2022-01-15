@@ -7,7 +7,9 @@ import useToken from '../../../config/useToken'
 import alertMessage from '../../../global/AlertProvider'
 import { GLOBAL_URL, MAX_AD_IMAGE_UPLOAD } from '../../../global/Constant'
 import "./PostForm.css"
-
+import countries from "../../../global/json/countries.json"
+import city from "../../../global/json/city.json"
+import state from "../../../global/json/states.json"
 const PostForm = () => {
 
     const {getToken} = useToken();
@@ -57,7 +59,7 @@ const PostForm = () => {
     const [error, setError] = useState(null)
     const [active1, setActive1] = useState(true)
     const [active2, setActive2] = useState(false)
-    const [active3, setActive3] = useState(!false)
+    const [active3, setActive3] = useState(false)
     const [loading, setLoading] = useState(false)
     const [imageLoading, setImageLoading] = useState(null)
     const [excelLoading, setExcelLoading] = useState(null)
