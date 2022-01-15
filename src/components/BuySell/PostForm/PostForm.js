@@ -9,6 +9,8 @@ import { GLOBAL_URL, MAX_AD_IMAGE_UPLOAD } from '../../../global/Constant'
 import "./PostForm.css"
 import countries from "../../../global/json/countries.json"
 import states from "../../../global/json/states.json"
+import Popup from '../../Customs/Popup/Popup';
+import TermAndConditions from '../../Policiy/TermsAndConditions/TermAndConditions';
 
 const PostForm = () => {
 
@@ -31,14 +33,13 @@ const PostForm = () => {
         basic_price: "",
         description: "",
         quantity: "",
-        grad_or_spec: "",
+        grade: "",
         quality: "",
         temper: "",
         specification_number: "",
         coating_in_gsm: "",
-        thickness: "",
-        width: "",
-        length: "",
+        dimensions: "",
+        color: "",
         image_1_link: "",
         image_2_link: "",
         image_3_link: "",
@@ -137,10 +138,9 @@ const PostForm = () => {
             "image_3_link": postData?.image_3_link,
             "image_4_link": postData?.image_4_link,
             "quality": postData.quality,
-            "thickness": postData.thickness,
-            "width": postData.width,
-            "length": postData.length,
-            "grade_or_spec": postData.grad_or_spec,
+            "dimesions": postData.dimensions,
+            "color": postData.color,
+            "grade": postData.grade,
             "temper": postData.temper,
             "specification_number": postData.specification_number,
             "quantity": postData.quantity,
@@ -203,7 +203,7 @@ const PostForm = () => {
                         <div
                             onClick={() => {setActive1(false);setActive2(false);setActive3(true)}}
                             className={
-                                ((postData?.category && postData?.product && postData?.buy_or_sell) && ((postData?.basic_price && postData?.description && postData?.quantity && postData?.grad_or_spec && postData?.quality && postData?.temper && postData?.specification_number && postData?.coating_in_gsm && postData?.thickness && postData?.width && postData?.length && postData?.image_1_link && imageLoading)))
+                                ((postData?.category && postData?.product && postData?.buy_or_sell) && ((postData?.basic_price && postData?.description && postData?.quantity && postData?.grade && postData?.quality && postData?.temper && postData?.specification_number && postData?.coating_in_gsm && postData?.dimensions && postData?.image_1_link && imageLoading)))
                                     ?   
                                         active3 && !active1 && !active2
                                             ?
@@ -320,8 +320,8 @@ const PostForm = () => {
                                 </div>
                                 <div className="col-6">
                                     <div className="form-group">
-                                        <label htmlFor="grad-spec">Grad/Spec <span className="text-danger">*</span></label>
-                                        <input type="text" name="" id="grad-spec" value={postData.grad_or_spec} onChange={e => setPostData({...postData, grad_or_spec: e.target.value})} placeholder='Grad/Spec' className="form-control" />
+                                        <label htmlFor="grad-spec">Grade <span className="text-danger">*</span></label>
+                                        <input type="text" name="" id="grade" value={postData.grade} onChange={e => setPostData({...postData, grade: e.target.value})} placeholder='Grade' className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -362,22 +362,16 @@ const PostForm = () => {
                                 </div>
                             </div>
                             <div className="row px-3">
-                                <div className="col-4">
+                                <div className="col-md-6">
                                     <div className="form-group">
-                                        <label htmlFor="thickness">Thickness <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">(in mm)</span></label>
-                                        <input type="text" name="" id="thickness" value={postData.thickness} onChange={e => setPostData({...postData, thickness: parseFloat(e.target.value)})} placeholder='Thickness' className="form-control" />
+                                        <label htmlFor="dimensions">Dimensions <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">thickness/dia <b>x</b> width <b>x</b> length</span></label>
+                                        <input type="text" name="" id="dimensions" value={postData.dimensions} onChange={e => setPostData({...postData, dimensions: e.target.value})} placeholder='Dimensions' className="form-control" />
                                     </div>
                                 </div>
-                                <div className="col-4">
+                                <div className="col-md-6">
                                     <div className="form-group">
-                                        <label htmlFor="width">Width <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">(in mm)</span></label>
-                                        <input type="text" name="" id="width" value={postData.width} onChange={e => setPostData({...postData, width: parseFloat(e.target.value)})} placeholder='Width' className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="col-4">
-                                    <div className="form-group">
-                                        <label htmlFor="length">Length <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">(in mm)</span></label>
-                                        <input type="text" name="" id="length" value={postData.length} onChange={e => setPostData({...postData, length: parseFloat(e.target.value)})} placeholder='Length' className="form-control" />
+                                        <label htmlFor="color">Colour <span className="text-danger">*</span></label>
+                                        <input type="text" name="" id="color" value={postData.color} onChange={e => setPostData({...postData, color: e.target.value})} placeholder='Colour' className="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -467,9 +461,9 @@ const PostForm = () => {
                                 <div onClick={()=>{setActive1(false);setActive2(false);setActive3(true)}}>
                                     <button
                                         style={{
-                                            "cursor": !(postData.basic_price && postData.description && postData.quantity && postData.grad_or_spec && postData.quality && postData.temper && postData.specification_number && postData.coating_in_gsm && postData.thickness && postData.width && postData.length && postData.image_1_link) ? "not-allowed" : "pointer"
+                                            "cursor": !(postData.basic_price && postData.description && postData.quantity && postData.grade && postData.quality && postData.temper && postData.specification_number && postData.coating_in_gsm && postData.dimensions && postData.image_1_link) ? "not-allowed" : "pointer"
                                         }}
-                                        disabled={!(postData.basic_price && postData.description && postData.quantity && postData.grad_or_spec && postData.quality && postData.temper && postData.specification_number && postData.coating_in_gsm && postData.thickness && postData.width && postData.length && postData.image_1_link)}
+                                        disabled={!(postData.basic_price && postData.description && postData.quantity && postData.grade && postData.quality && postData.temper && postData.specification_number && postData.coating_in_gsm && postData.dimensions && postData.image_1_link)}
                                         className="btn btn-primary float-right mx-3"
                                     >
                                         Next
@@ -546,11 +540,21 @@ const PostForm = () => {
                                         <div className="custom-control custom-checkbox">
                                             <input type="checkbox" value={postData.t_and_c} onChange={e => setPostData({...postData, t_and_c: e.target.checked})} name="" id="adTerms" className="custom-control-input" />
                                             <label htmlFor="adTerms" className="custom-control-label">
-                                                I agree to <span data-target="#tncModal" data-toggle="modal">Terms & Conditions</span>
+                                                I agree to 
                                             </label>
+                                            <span className="text-primary pl-1" style={{"cursor": "pointer"}} data-target="#tncModal" data-toggle="modal">Terms & Conditions</span>
                                         </div>
                                     </div>
                                 </div>
+                                <Popup
+                                    target="tncModal"
+                                    title="Terms and Conditions"
+                                    content={
+                                        <>
+                                            <TermAndConditions />
+                                        </>
+                                    }
+                                />
                             </div>
                             <div className="row">
                                 <div className="col-12">
