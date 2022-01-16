@@ -6,6 +6,12 @@ import { GLOBAL_URL } from '../../global/Constant'
 import axios from 'axios'
 import {ReactComponent as Empty} from "../../global/static/svg/empty.svg"
 
+import { getDistance } from 'geolib'
+import ReactGoogleAutocomplete from 'react-google-autocomplete'
+import { sort } from 'webpack/lib/dependencies/DependencyReference'
+
+
+
 const Search = () => {
 
     const [category, setCategory] = useState([]);
@@ -15,6 +21,8 @@ const Search = () => {
     const [categoryLoading, setCategoryLoading] = useState(true)
     const [adType, setAdType] = useState("all")
     const [categoryFilter, setCategoryFilter] = useState("all")
+
+ 
 
     useEffect(() => {
         let url = `${GLOBAL_URL}/ads/1`
@@ -52,8 +60,48 @@ const Search = () => {
         <div className="container-fluid py-4 px-5">
             <div className="row d-flex justify-content-center">
                 <div className="col-md-6 search__col">
-                    <CustomSearchBar placeholder="Location" /> 
-                </div>
+                <div className="wrapperSearch">
+            <div className="search-input">
+                <ReactGoogleAutocomplete
+                    apiKey="AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM"
+                    onPlaceSelected={(place) => 
+                    {
+                        setAdLoading(true)
+                        let x=[]
+                        ads.map((ad)=>
+                          (  
+                               x.append(
+                                   getDistance(
+                                    { latitude: place.geometry.location.lat() , longitude: place.geometry.location.lng()},
+                                    { latitude: ad.latitude, longitude: ad.longitude }
+                                ) , ad)
+                         )
+                        )
+                        console.log(x)
+                        x.sort(function(a,b){return a[0] < b[0]})
+                        let y=[]
+                        x.map((data)=>
+                            (
+                                y.append(data[1])
+                            )
+                        )
+                        console.log(y)
+                        setAd(y)
+                        setAdLoading(false)
+                    }
+                }
+                />
+                {/* <div
+                    onClick={() => onClick()}
+                    className="icon border mt-1 d-flex justify-content-center align-items-center bg-secondary rounded text-white"
+                >
+                </div> */}
+            </div>
+        </div>
+
+
+
+        </div>
             </div>
 
             <div className="row my-4">

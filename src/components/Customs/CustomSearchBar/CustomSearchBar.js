@@ -4,7 +4,7 @@ import { ReactComponent as SearchSvg } from "../../../global/static/svg/search.s
 import Autocomplete from "react-google-autocomplete";
 import alertMessage from "../../../global/AlertProvider";
 
-const CustomSearchBar = () => {
+const CustomSearchBar = ({placeholder ,  onClick}) => {
     return (
         <div className="wrapperSearch">
             <div className="search-input">
@@ -15,7 +15,7 @@ const CustomSearchBar = () => {
                     }}
                 />
                 <div
-                    onClick={() => alertMessage("search cliked")}
+                    onClick={() => onClick()}
                     className="icon border mt-1 d-flex justify-content-center align-items-center bg-secondary rounded text-white"
                 >
                     <SearchSvg style={{ color: "white" }} />
