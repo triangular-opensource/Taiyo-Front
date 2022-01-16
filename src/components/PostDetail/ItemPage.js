@@ -134,19 +134,20 @@ const CustomItemPage = (props) => {
             "product_description": ad.product_description,
             "image_1_link": ad.image_1_link,
             "quality": ad.quality,
-            "thickness": ad.thickness,
-            "width": ad.width,
-            "length": ad.length,
-            "grade_or_spec": ad.grade_or_spec,
+            "dimensions": ad.dimensions,
+            "grade": ad.grade,
             "temper": ad.temper,
             "specification_number": ad.specification_number,
             "quantity": ad.quantity,
+            "color": ad.color,
             "coating_in_gsm": ad.coating_in_gsm,
-            "author_name": ad.author_name,
-            "author_mobile_number": ad.author_mobile_number,
-            "author_country": ad.author_country,
-            "author_business_address": ad.author_business_address,
+            "name": ad.name,
+            "mobile_number": ad.mobile_number,
+            "location": ad.location,
+            "business_address": ad.business_address,
             "selected_bid": bidList[selectedBid].id,
+            "approval": ad.approval,
+            "visible" : ad.visible
         }, {
             headers: {
                 "Authorization": `Token ${getToken()}`,
@@ -380,26 +381,10 @@ const CustomItemPage = (props) => {
                                                             <tbody>
                                                                 <tr>
                                                                     <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Thickness</div>
+                                                                        <div className="" style={{"fontSize" : "smaller"}}> Dimensions </div>
                                                                     </td>
                                                                     <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.thickness}</strong>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Width</div>
-                                                                    </td>
-                                                                    <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.width}</strong>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Length</div>
-                                                                    </td>
-                                                                    <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.length}</strong>
+                                                                        <strong style={{"color": "#3b62ab"}}>{ad.dimensions}</strong>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>
@@ -429,6 +414,7 @@ const CustomItemPage = (props) => {
                                                                         <strong style={{"color": "#3b62ab"}}>{ad.quality}</strong>
                                                                     </td>
                                                                 </tr>
+                                                              
                                                             </tbody>
                                                         </table>
                                                     </dd>
@@ -452,10 +438,10 @@ const CustomItemPage = (props) => {
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Grad/Spec</div>
+                                                                        <div className="" style={{"fontSize" : "smaller"}}> Grade</div>
                                                                     </td>
                                                                     <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.grade_or_spec}</strong>
+                                                                        <strong style={{"color": "#3b62ab"}}>{ad.grade}</strong>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -472,6 +458,14 @@ const CustomItemPage = (props) => {
                                                                     </td>
                                                                     <td className="pl-4">
                                                                         <strong style={{"color": "#3b62ab"}}>{ad.coating_in_gsm}</strong>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div className="" style={{"fontSize" : "smaller"}}> Colour</div>
+                                                                    </td>
+                                                                    <td className="pl-4">
+                                                                        <strong style={{"color": "#3b62ab"}}>{ad.color}</strong>
                                                                     </td>
                                                                 </tr>
                                                             </tbody>

@@ -67,7 +67,6 @@ const PostForm = () => {
     const [excelLoading, setExcelLoading] = useState(null)
     const [pdfLoading, setPdfLoading] = useState(null)
     const [fieldsVisible, setFieldVisible] = useState({
-        product_id: null,
         quality: false,
         temper: false,
         dimensions: false,
@@ -97,23 +96,27 @@ const PostForm = () => {
 
     
     const getFieldVisible = async (product_id) => {
+        let x ;
         await axios.get(`${GLOBAL_URL}/product-field/${product_id}`)
         .then(async (res) => {
-            setFieldVisible({
-                product_id: await product_id,
-                quality: await res.data.data[0].quality,
-                temper: await res.data.data[0].temper,
-                dimensions: await res.data.data[0].dimensions,
-                grade: await res.data.data[0].grade,
-                specification_number: await res.data.data[0].specification_number,
-                quantity: await res.data.data[0].quantity,
-                coating_in_gsm: await res.data.data[0].coating_in_gsm,
-                product_description: await res.data.data[0].product_description,
-                color: await res.data.data[0].color,
-            })
+            x = res.data.data[0];
         })
         .catch(async (err) => setError(err.response))
+        
+        setFieldVisible({
+            quality:  x.quality,
+            temper:  x.temper,
+            dimensions:  x.dimensions,
+            grade:  x.grade,
+            specification_number:  x.specification_number,
+            quantity:  x.quantity,
+            coating_in_gsm:  x.coating_in_gsm,
+            product_description:  x.product_description,
+            color:  x.color,
+        })
+        console.log("hii")
         console.log(fieldsVisible)
+        console.log("hello")
     }
 
     const fileUpload = async (file, name) => {
@@ -198,8 +201,8 @@ const PostForm = () => {
         })
     }
 
-    const getProductId = (prod_name) => {
-        return products.find((prod) => prod.name === prod_name).id
+    const getProductId = async (prod_name) => {
+        return await products.find((prod) => prod.name === prod_name).id
     }
 
     return (
@@ -287,11 +290,15 @@ const PostForm = () => {
                                             name=""
                                             id="category"
                                             value={postData.product}
-                                            onChange={async (e) => {
-                                                setPostData({...postData, product: e.target.value});
+                                            onChange={
+                                                async (e) =>
+                                                {
+                                                setPostData(
+                                                    {...postData, product: e.target.value});
                                                 let id = await getProductId(e.target.value)
                                                 await getFieldVisible(id)
-                                            }}
+                                            }
+                                        }
                                             className="form-control"
                                         >
                                             <option value={""} selected disabled>Choose...</option>

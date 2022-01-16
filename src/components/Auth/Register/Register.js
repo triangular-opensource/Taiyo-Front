@@ -224,7 +224,19 @@ function Register() {
                         <div className="col-md-12">
                             <CustomButton 
                              fontSize="17"
-                           c
+                                data=
+                                {
+                                    loading
+                                    ?
+                                        <span>
+                                            REGISTER
+                                            <div className="ml-2 spinner-border spinner-border-sm" role="status">
+                                                <span className="sr-only">Loading...</span>
+                                            </div>
+                                        </span>
+                                    : 
+                                        "REGISTER"
+                                }
                                handleClick={handleRegister}
                                 padding='16'
                                  backgroundColor='gray'

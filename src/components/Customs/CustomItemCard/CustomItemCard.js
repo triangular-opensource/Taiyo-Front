@@ -60,13 +60,12 @@ const CustomItemCard = (props) => {
                     <div className="row my-1">
                         <div className="col text-muted searchItem__location">
                             <LocationSvg />
-                            <span> {props.data.author_business_address} </span>
-                            <span> {props.data.author_country} </span>
+                            <span> {props.data.location} </span>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-8 searchItem__timestamp">
-                            Posted :{` ${new Date(props.data.timestamp)}`}
+                            Posted :{` ${new Date(props.data.timestamp).toString().slice(0 , 24)}`}
                         </div>
                         <div className="col-4">
                             <NavLink to={`/post/${props.data.id}`}>
