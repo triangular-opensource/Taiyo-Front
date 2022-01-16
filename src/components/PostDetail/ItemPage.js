@@ -298,15 +298,9 @@ const CustomItemPage = (props) => {
                         <div className="container-fluid py-3">
                             <div className="row">
                                 <div className="col-md-12">
-                                    <div className="text-dark h3">
-                                        #{ad.id}
+                                    <div className="text-dark h3 mb-3">
+                                        Ad Id : <span className="text-success">{ad.id}</span>
                                     </div>
-                                </div>
-                                <div className="col-md-2">
-                                    
-                                </div>
-                                <div className="col-md-2">
-                                    
                                 </div>
                             </div>
                             <div className="container">
@@ -372,25 +366,31 @@ const CustomItemPage = (props) => {
                                         </div>
                                         <div className="row mx-4">
                                             <div className="col-md-6">
-                                                <dl>
-                                                    <dt>
-                                                        Dimensions
-                                                    </dt>
-                                                    <dd>
-                                                        <table className="ml-4">
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Dimensions </div>
-                                                                    </td>
-                                                                    <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.dimensions}</strong>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </dd>
-                                                </dl>
+                                                {
+                                                    ad.dimensions !== null
+                                                        ?
+                                                            <dl>
+                                                                <dt>
+                                                                    Dimensions
+                                                                </dt>
+                                                                <dd>
+                                                                    <table className="ml-4">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div className="" style={{"fontSize" : "smaller"}}> Dimensions </div>
+                                                                                </td>
+                                                                                <td className="pl-4">
+                                                                                    <strong style={{"color": "#3b62ab"}}>{ad.dimensions}</strong>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </dd>
+                                                            </dl>
+                                                        :
+                                                            <></>
+                                                }
                                                 <dl>
                                                     <dt>
                                                         Features
@@ -398,23 +398,34 @@ const CustomItemPage = (props) => {
                                                     <dd>
                                                         <table className="ml-4">
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Quantity</div>
-                                                                    </td>
-                                                                    <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.quantity}</strong>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Quality</div>
-                                                                    </td>
-                                                                    <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.quality}</strong>
-                                                                    </td>
-                                                                </tr>
-                                                              
+                                                                {
+                                                                    ad.quantity !== null
+                                                                        ?
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div className="" style={{"fontSize" : "smaller"}}> Quantity</div>
+                                                                                </td>
+                                                                                <td className="pl-4">
+                                                                                    <strong style={{"color": "#3b62ab"}}>{ad.quantity}</strong>
+                                                                                </td>
+                                                                            </tr>
+                                                                        :
+                                                                            <></>
+                                                                }
+                                                                {
+                                                                    ad.quality !== null
+                                                                        ?
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div className="" style={{"fontSize" : "smaller"}}> Quality</div>
+                                                                                </td>
+                                                                                <td className="pl-4">
+                                                                                    <strong style={{"color": "#3b62ab"}}>{ad.quality}</strong>
+                                                                                </td>
+                                                                            </tr>
+                                                                        :
+                                                                            <></>
+                                                                }
                                                             </tbody>
                                                         </table>
                                                     </dd>
@@ -428,46 +439,76 @@ const CustomItemPage = (props) => {
                                                     <dd>
                                                         <table className="ml-4">
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Temper</div>
-                                                                    </td>
-                                                                    <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.temper}</strong>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Grade</div>
-                                                                    </td>
-                                                                    <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.grade}</strong>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Specification Number</div>
-                                                                    </td>
-                                                                    <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.specification_number}</strong>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Coating in GSM</div>
-                                                                    </td>
-                                                                    <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.coating_in_gsm}</strong>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>
-                                                                        <div className="" style={{"fontSize" : "smaller"}}> Colour</div>
-                                                                    </td>
-                                                                    <td className="pl-4">
-                                                                        <strong style={{"color": "#3b62ab"}}>{ad.color}</strong>
-                                                                    </td>
-                                                                </tr>
+                                                                {
+                                                                    ad.temper !== null
+                                                                        ?
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div className="" style={{"fontSize" : "smaller"}}> Temper</div>
+                                                                                </td>
+                                                                                <td className="pl-4">
+                                                                                    <strong style={{"color": "#3b62ab"}}>{ad.temper}</strong>
+                                                                                </td>
+                                                                            </tr>
+                                                                        :
+                                                                            <></>
+                                                                }
+                                                                {
+                                                                    ad.grade !== null
+                                                                        ?
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div className="" style={{"fontSize" : "smaller"}}> Grade</div>
+                                                                                </td>
+                                                                                <td className="pl-4">
+                                                                                    <strong style={{"color": "#3b62ab"}}>{ad.grade}</strong>
+                                                                                </td>
+                                                                            </tr>
+                                                                        :
+                                                                            <></>
+                                                                }
+                                                                {
+                                                                    ad.specification_number !== null
+                                                                        ?
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div className="" style={{"fontSize" : "smaller"}}> Specification Number</div>
+                                                                                </td>
+                                                                                <td className="pl-4">
+                                                                                    <strong style={{"color": "#3b62ab"}}>{ad.specification_number}</strong>
+                                                                                </td>
+                                                                            </tr>
+                                                                        :
+                                                                            <></>
+                                                                }
+                                                                {
+                                                                    ad.coating_in_gsm !== null
+                                                                        ?
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div className="" style={{"fontSize" : "smaller"}}> Coating in GSM</div>
+                                                                                </td>
+                                                                                <td className="pl-4">
+                                                                                    <strong style={{"color": "#3b62ab"}}>{ad.coating_in_gsm}</strong>
+                                                                                </td>
+                                                                            </tr>
+                                                                        :
+                                                                            <></>
+                                                                }
+                                                                {
+                                                                    ad.color !== null
+                                                                        ?
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <div className="" style={{"fontSize" : "smaller"}}> Colour</div>
+                                                                                </td>
+                                                                                <td className="pl-4">
+                                                                                    <strong style={{"color": "#3b62ab"}}>{ad.color}</strong>
+                                                                                </td>
+                                                                            </tr>
+                                                                        :
+                                                                            <></>
+                                                                }
                                                             </tbody>
                                                         </table>
                                                     </dd>

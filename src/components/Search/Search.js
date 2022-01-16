@@ -1,16 +1,13 @@
 import {React , useState ,  useEffect } from 'react'
 import "./Search.css"
-import CustomSearchBar from '../Customs/CustomSearchBar/CustomSearchBar'
+import CustomSearchBar from "../Customs/CustomSearchBar/CustomSearchBar"
 import CustomItemCard from '../Customs/CustomItemCard/CustomItemCard'
 import { GLOBAL_URL } from '../../global/Constant'
 import axios from 'axios'
 import {ReactComponent as Empty} from "../../global/static/svg/empty.svg"
 
-import { getDistance } from 'geolib'
-import ReactGoogleAutocomplete from 'react-google-autocomplete'
-import { sort } from 'webpack/lib/dependencies/DependencyReference'
-
-
+import { usePlacesWidget } from 'react-google-autocomplete'
+import haversine from "haversine-distance"
 
 const Search = () => {
 
@@ -21,8 +18,7 @@ const Search = () => {
     const [categoryLoading, setCategoryLoading] = useState(true)
     const [adType, setAdType] = useState("all")
     const [categoryFilter, setCategoryFilter] = useState("all")
-
- 
+    const [place, setPlace] = useState(null)
 
     useEffect(() => {
         let url = `${GLOBAL_URL}/ads/1`
@@ -46,6 +42,7 @@ const Search = () => {
             })
             .catch(async (error) => setError(error))
     }, [adType, categoryFilter]);
+
     useEffect(() => {
         axios.get(`${GLOBAL_URL}/category`)
             .then(async (response) => {
@@ -55,53 +52,88 @@ const Search = () => {
             .catch(async (error) => 
             setError(error))
     }, []);
+
+    const calculateDistance = (lat1, long1, lat2, long2) => {
+        const a = { lat: lat1, lon: long1 }
+        const b = { lat: lat2, lon: long2 }
+        console.log(a)
+        console.log(b)
+        // console.log(haversine(a, b))
+        return haversine(a, b)/1000
+    }
+
+    const getDis = () => {
+        console.log(ads)
+        setAdLoading(true)
+        let x=[]
+        ads.forEach((ad) => (  
+            x.push(
+                calculateDistance(
+                    place.geometry.location.lat(), place.geometry.location.lng(), ad.latitude, ad.longitude
+                ), ad
+            )
+        ))
+        x.sort(function(a,b){return a[0] < b[0]})
+        // console.log(x)
+        let y=[]
+        x.map((data) =>
+            (
+                y.push(data[1])
+            )
+        )
+        // console.log(y)
+        // setAd(y)
+        setAdLoading(false)
+    }
+
+    const { ref } = usePlacesWidget({
+        apiKey: "AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM",
+        onPlaceSelected: (place) => setPlace(place)
+    })
     
     return (
         <div className="container-fluid py-4 px-5">
             <div className="row d-flex justify-content-center">
                 <div className="col-md-6 search__col">
-                <div className="wrapperSearch">
-            <div className="search-input">
-                <ReactGoogleAutocomplete
-                    apiKey="AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM"
-                    onPlaceSelected={(place) => 
-                    {
-                        setAdLoading(true)
-                        let x=[]
-                        ads.map((ad)=>
-                          (  
-                               x.append(
-                                   getDistance(
-                                    { latitude: place.geometry.location.lat() , longitude: place.geometry.location.lng()},
-                                    { latitude: ad.latitude, longitude: ad.longitude }
-                                ) , ad)
-                         )
-                        )
-                        console.log(x)
-                        x.sort(function(a,b){return a[0] < b[0]})
-                        let y=[]
-                        x.map((data)=>
-                            (
-                                y.append(data[1])
-                            )
-                        )
-                        console.log(y)
-                        setAd(y)
-                        setAdLoading(false)
-                    }
-                }
-                />
-                {/* <div
-                    onClick={() => onClick()}
-                    className="icon border mt-1 d-flex justify-content-center align-items-center bg-secondary rounded text-white"
-                >
-                </div> */}
-            </div>
-        </div>
-
-
-
-        </div>
+                    <div className="wrapperSearch">
+                        <div className="search-input">
+                            <input type="text" name="" ref={ref} id="" />
+                            {/* <Autocomplete
+                                apiKey="AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM"
+                                onPlaceSelected={async (place) => {
+                                    setAdLoading(true)
+                                    let x=[]
+                                    console.log(ads)
+                                    ads.forEach((ad) => (  
+                                        x.append(
+                                            getDistance(
+                                                { latitude: place.geometry.location.lat() , longitude: place.geometry.location.lng()},
+                                                { latitude: ad.latitude, longitude: ad.longitude }
+                                            ), ad
+                                        )
+                                    ))
+                                    console.log(x)
+                                    x.sort(function(a,b){return a[0] < b[0]})
+                                    let y=[]
+                                    x.map((data)=>
+                                        (
+                                            y.append(data[1])
+                                        )
+                                    )
+                                    console.log(y)
+                                    // setAd(y)
+                                    setAdLoading(false)
+                                }
+                            }
+                            /> */}
+                                <div
+                                    onClick={() => getDis()}
+                                    className="icon border mt-1 d-flex justify-content-center align-items-center bg-secondary rounded text-white"
+                                >
+                                </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className="row my-4">
