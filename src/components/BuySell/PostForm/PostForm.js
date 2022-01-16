@@ -66,17 +66,16 @@ const PostForm = () => {
     const [imageLoading, setImageLoading] = useState(null)
     const [excelLoading, setExcelLoading] = useState(null)
     const [pdfLoading, setPdfLoading] = useState(null)
-    const [fieldsVisible, setFieldVisible] = useState({
-        product_id: null,
-        quality: false,
-        temper: false,
-        dimensions: false,
-        grade: false,
-        specification_number: false,
-        quantity: false,
-        coating_in_gsm: false,
-        product_description: false,
-        color: false
+    const [fields, setFields] = useState([])
+    const [selectedProduct, setSelectedProduct] = useState({
+        quality: true,
+        temper: true,
+        dimensions: true,
+        grade: true,
+        specification_number: true,
+        quantity: true,
+        coating_in_gsm: true,
+        color: true
     })
 
     useEffect(() => {
@@ -93,27 +92,6 @@ const PostForm = () => {
             setProducts(await response.data.data)
         })
         .catch(async(error) => setError(error))
-    }
-
-    
-    const getFieldVisible = async (product_id) => {
-        await axios.get(`${GLOBAL_URL}/product-field/${product_id}`)
-        .then(async (res) => {
-            setFieldVisible({
-                product_id: await product_id,
-                quality: await res.data.data[0].quality,
-                temper: await res.data.data[0].temper,
-                dimensions: await res.data.data[0].dimensions,
-                grade: await res.data.data[0].grade,
-                specification_number: await res.data.data[0].specification_number,
-                quantity: await res.data.data[0].quantity,
-                coating_in_gsm: await res.data.data[0].coating_in_gsm,
-                product_description: await res.data.data[0].product_description,
-                color: await res.data.data[0].color,
-            })
-        })
-        .catch(async (err) => setError(err.response))
-        console.log(fieldsVisible)
     }
 
     const fileUpload = async (file, name) => {
@@ -176,12 +154,14 @@ const PostForm = () => {
             "grade": postData.grade,
             "temper": postData.temper,
             "specification_number": postData.specification_number,
-            "quantity": postData.quantity,
+            "quantity": postData.quantity === "" ? 0 : postData.quantity,
             "coating_in_gsm": postData.coating_in_gsm,
-            "author_name": postData.name,
-            "author_mobile_number": postData.number,
-            "author_country": postData.country,
-            "author_business_address": postData.address,
+            "name": postData.name,
+            "mobile_number": postData.number,
+            "location": postData.location,
+            "business_address": postData.address,
+            "latitide" : postData.latitide,
+            "longitude" : postData.longitude
         }, {
             headers: {
                 "Authorization": `Token ${getToken()}`,
@@ -198,9 +178,9 @@ const PostForm = () => {
         })
     }
 
-    const getProductId = (prod_name) => {
-        return products.find((prod) => prod.name === prod_name).id
-    }
+    // const getProductId = (prod_name) => {
+    //     return products.find((prod) => prod.name === prod_name).id
+    // }
 
     return (
         <div className="container my-5 auth-bg">
@@ -289,8 +269,18 @@ const PostForm = () => {
                                             value={postData.product}
                                             onChange={async (e) => {
                                                 setPostData({...postData, product: e.target.value});
-                                                let id = await getProductId(e.target.value)
-                                                await getFieldVisible(id)
+                                                const prod = products.find((prod) => prod.name === e.target.value);
+                                                setSelectedProduct({
+                                                    ...selectedProduct,
+                                                    quality: prod.quality,
+                                                    temper: prod.temper,
+                                                    dimensions: prod.dimensions,
+                                                    grade: prod.grade,
+                                                    specification_number: prod.specification_number,
+                                                    quantity: prod.quantity,
+                                                    coating_in_gsm: prod.coating_in_gsm,
+                                                    color: prod.coating_in_gsm
+                                                });
                                             }}
                                             className="form-control"
                                         >
@@ -308,7 +298,7 @@ const PostForm = () => {
                                 <div className="col-12 mx-3 pr-5">
                                     <div className="form-group">
                                         <label htmlFor="buySell">Want to Buy/Sell <span className="text-danger">*</span></label>
-                                        <select className='form-control' value={postData.buy_or_sell} onChange={e => setPostData({...postData, buy_or_sell: e.target.value})} name="" id="buySell">
+                                        <select className='form-control' value={postData.buy_or_sell} onChange={e => {setPostData({...postData, buy_or_sell: e.target.value})}} name="" id="buySell">
                                             <option value={""} defaultValue={""} disabled>Choose...</option>
                                             <option value="Buy">Buy</option>
                                             <option value="Sell">Sell</option>
@@ -359,68 +349,110 @@ const PostForm = () => {
                                 </div>
                             </div>
                             <div className="row px-3">
-                                <div className="col-6">
-                                    <div className="form-group">
-                                        <label htmlFor="quantity">Quantity (MT) <span className="text-danger">*</span></label>
-                                        <input type="text" name="" id="quantity" value={postData.quantity} onChange={e => setPostData({...postData, quantity: e.target.value})} placeholder='Quantity' className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="form-group">
-                                        <label htmlFor="coating_gsm">Coating in GSM <span className="text-danger">*</span></label>
-                                        <input type="text" name="" id="coating_gsm" value={postData.coating_in_gsm} onChange={e => setPostData({...postData, coating_in_gsm: e.target.value})} placeholder='Coating in GSM' className="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row px-3">
-                                <div className="col-6">
-                                    <div className="form-group">
-                                        <label htmlFor="quality">Quality <span className="text-danger">*</span></label>
-                                        <select className='form-control' value={postData.quality} onChange={e => setPostData({...postData, quality: e.target.value})} name="" id="quality">
-                                            <option value=""selected disabled>Choose...</option>
-                                            <option value="Prime">Prime</option>
-                                            <option value="Defective">Defective</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="form-group">
-                                        <label htmlFor="temper">Temper <span className="text-danger">*</span></label>
-                                        <select className='form-control' value={postData.temper} onChange={e => setPostData({...postData, temper: e.target.value})} name="" id="temper">
-                                            <option value=""selected disabled>Choose...</option>
-                                            <option value="Hard">Hard</option>
-                                            <option value="Soft">Soft</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row px-3">
-                                <div className="col-6">
-                                    <div className="form-group">
-                                        <label htmlFor="grad-spec">Grade <span className="text-danger">*</span></label>
-                                        <input type="text" name="" id="grade" value={postData.grade} onChange={e => setPostData({...postData, grade: e.target.value})} placeholder='Grade' className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="col-6">
-                                    <div className="form-group">
-                                        <label htmlFor="specNumber">Specification Number <span className="text-danger">*</span></label>
-                                        <input type="text" name="" id="specNumber" value={postData.specification_number} onChange={e => setPostData({...postData, specification_number: e.target.value})} placeholder='Specification Number' className="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row px-3">
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label htmlFor="dimensions">Dimensions <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">thickness/dia <b>x</b> width <b>x</b> length</span></label>
-                                        <input type="text" name="" id="dimensions" value={postData.dimensions} onChange={e => setPostData({...postData, dimensions: e.target.value})} placeholder='Dimensions' className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label htmlFor="color">Colour <span className="text-danger">*</span></label>
-                                        <input type="text" name="" id="color" value={postData.color} onChange={e => setPostData({...postData, color: e.target.value})} placeholder='Colour' className="form-control" />
-                                    </div>
-                                </div>
+                                {
+                                    selectedProduct.quantity
+                                        ?
+                                            <div className="col-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="quantity">Quantity (MT) <span className="text-danger">*</span></label>
+                                                    <input type="text" name="" id="quantity" value={postData.quantity} onChange={e => setPostData({...postData, quantity: e.target.value})} placeholder='Quantity' className="form-control" />
+                                                </div>
+                                            </div>
+                                        :
+                                            <></>
+                                }
+                                {
+                                    selectedProduct.coating_in_gsm
+                                        ?
+                                            <div className="col-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="coating_gsm">Coating in GSM <span className="text-danger">*</span></label>
+                                                    <input type="text" name="" id="coating_gsm" value={postData.coating_in_gsm} onChange={e => setPostData({...postData, coating_in_gsm: e.target.value})} placeholder='Coating in GSM' className="form-control" />
+                                                </div>
+                                            </div>
+                                        :
+                                            <></>
+                                }
+                                {
+                                    selectedProduct.quality
+                                        ?
+                                            <div className="col-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="quality">Quality <span className="text-danger">*</span></label>
+                                                    <select className='form-control' value={postData.quality} onChange={e => setPostData({...postData, quality: e.target.value})} name="" id="quality">
+                                                        <option value=""selected disabled>Choose...</option>
+                                                        <option value="Prime">Prime</option>
+                                                        <option value="Defective">Defective</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        :
+                                            <></>
+                                }
+                                {
+                                    selectedProduct.temper
+                                        ?
+                                            <div className="col-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="temper">Temper <span className="text-danger">*</span></label>
+                                                    <select className='form-control' value={postData.temper} onChange={e => setPostData({...postData, temper: e.target.value})} name="" id="temper">
+                                                        <option value=""selected disabled>Choose...</option>
+                                                        <option value="Hard">Hard</option>
+                                                        <option value="Soft">Soft</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        :
+                                            <></>
+                                }
+                                {
+                                    selectedProduct.grade
+                                        ?
+                                            <div className="col-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="grad-spec">Grade <span className="text-danger">*</span></label>
+                                                    <input type="text" name="" id="grade" value={postData.grade} onChange={e => setPostData({...postData, grade: e.target.value})} placeholder='Grade' className="form-control" />
+                                                </div>
+                                            </div>
+                                        :
+                                            <></>
+                                }
+                                {
+                                    selectedProduct.specification_number
+                                        ?
+                                            <div className="col-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="specNumber">Specification Number <span className="text-danger">*</span></label>
+                                                    <input type="text" name="" id="specNumber" value={postData.specification_number} onChange={e => setPostData({...postData, specification_number: e.target.value})} placeholder='Specification Number' className="form-control" />
+                                                </div>
+                                            </div>
+                                        :
+                                            <></>
+                                }
+                                {
+                                    selectedProduct.dimensions
+                                        ?
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="dimensions">Dimensions <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">thickness/dia <b>x</b> width <b>x</b> length</span></label>
+                                                    <input type="text" name="" id="dimensions" value={postData.dimensions} onChange={e => setPostData({...postData, dimensions: e.target.value})} placeholder='Dimensions' className="form-control" />
+                                                </div>
+                                            </div>
+                                        :
+                                            <></>
+                                }
+                                {
+                                    selectedProduct.color
+                                        ?
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label htmlFor="color">Colour <span className="text-danger">*</span></label>
+                                                    <input type="text" name="" id="color" value={postData.color} onChange={e => setPostData({...postData, color: e.target.value})} placeholder='Colour' className="form-control" />
+                                                </div>
+                                            </div>
+                                        :
+                                            <></>
+                                }
                             </div>
                             <div className="row">
                                 <div className="col-12 mx-3 pr-5">
@@ -508,9 +540,33 @@ const PostForm = () => {
                                 <div onClick={()=>{setActive1(false);setActive2(false);setActive3(true)}}>
                                     <button
                                         style={{
-                                            "cursor": !(postData.basic_price && postData.description && postData.quantity && postData.grade && postData.quality && postData.temper && postData.specification_number && postData.coating_in_gsm && postData.dimensions && postData.image_1_link) ? "not-allowed" : "pointer"
+                                            "cursor": !(
+                                                postData.basic_price &&
+                                                postData.description &&
+                                                (selectedProduct.quantity ? postData.quantity : true) &&
+                                                (selectedProduct.grade ? postData.grade : true) &&
+                                                (selectedProduct.quality ? postData.quality : true) &&
+                                                (selectedProduct.temper ? postData.temper : true) &&
+                                                (selectedProduct.specification_number ? postData.specification_number : true) &&
+                                                (selectedProduct.coating_in_gsm ? postData.coating_in_gsm : true) &&
+                                                (selectedProduct.dimensions ? postData.dimensions : true) &&
+                                                postData.image_1_link
+                                            ) ? "not-allowed" : "pointer"
                                         }}
-                                        disabled={!(postData.basic_price && postData.description && postData.quantity && postData.grade && postData.quality && postData.temper && postData.specification_number && postData.coating_in_gsm && postData.dimensions && postData.image_1_link)}
+                                        disabled={
+                                            !(
+                                                postData.basic_price &&
+                                                postData.description &&
+                                                (selectedProduct.quantity ? postData.quantity : true) &&
+                                                (selectedProduct.grade ? postData.grade : true) &&
+                                                (selectedProduct.quality ? postData.quality : true) &&
+                                                (selectedProduct.temper ? postData.temper : true) &&
+                                                (selectedProduct.specification_number ? postData.specification_number : true) &&
+                                                (selectedProduct.coating_in_gsm ? postData.coating_in_gsm : true) &&
+                                                (selectedProduct.dimensions ? postData.dimensions : true) &&
+                                                postData.image_1_link
+                                            )
+                                        }
                                         className="btn btn-primary float-right mx-3"
                                     >
                                         Next
@@ -533,6 +589,35 @@ const PostForm = () => {
                     ?
                         <div className='container pb-4'>
                             <div className="row mx-2">
+                                <div className="col-md-12">
+                                    <div className="form-group">
+                                        <label htmlFor="authorCity">
+                                            Location <span className="text-danger">*</span>
+                                        </label>
+                                        <ReactGoogleAutocomplete
+                                            apiKey="AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM"
+                                            onPlaceSelected={(place) => 
+                                            {
+                                                let x = "" ;
+                                                place.address_components.map(dat => (
+                                                    x = x + dat.long_name + " ,"
+                                                ))
+                                                x = x.slice(0,x.length-2)
+                                                console.log(x)
+                                                setPostData({
+                                                    ...postData,
+                                                    latitude: place.geometry.location.lat(),
+                                                    longitude: place.geometry.location.lng(),
+                                                    location: x
+                                                })  
+                                            }
+                                        }
+                                        className="form-control"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row mx-2">
                                 <div className="col-md-6">
                                     <div className="form-group">
                                         <label htmlFor="authorName">Your Name <span className="text-danger">*</span></label>
@@ -543,36 +628,6 @@ const PostForm = () => {
                                     <div className="form-group">
                                         <label htmlFor="authorMobile">Mobile Number <span className="text-danger">*</span></label>
                                         <input type="text" name="" max={10} maxLength={10} value={postData.number} onChange={e => setPostData({...postData, number: e.target.value})} placeholder='Mobile Number' id="authorMobile" className="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row mx-2">
-                                <div className="col-md-12">
-                                    <div className="form-group">
-                                        <label htmlFor="authorCity">
-                                            Location <span className="text-danger">*</span>
-                                        </label>
-                                        <ReactGoogleAutocomplete
-                                            apiKey="AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM"
-                                            onPlaceSelected={(place) => 
-                                            {
-                                                var x= "" ;
-                                                place.address_components.map
-                                                (dat => {
-                                                    x  = x + dat.long_name+" ,"
-                                                })
-                                                x = x.slice(0,x.length-2)
-                                                console.log(x)
-                                                setPostData({
-                                                    ...postData,
-                                                    latitude:(place.geometry.location.lat()),
-                                                    longitude:(place.geometry.location.lng()),
-                                                    location:x
-                                                })  
-                                            }
-                                        }
-                                        className="form-control"
-                                        />
                                     </div>
                                 </div>
                             </div>
@@ -608,7 +663,12 @@ const PostForm = () => {
                             </div>
                             <div className="row">
                                 <div className="col-12">
-                                    <div className="btn btn-success float-right mx-3" onClick={() => savePost()}>Submit</div>
+                                    <div
+                                        className="btn btn-success float-right mx-3"
+                                        onClick={() => savePost()}
+                                    >
+                                        Submit
+                                    </div>
                                     <div
                                         onClick={() => {setActive1(false);setActive2(true);setActive3(false)}} 
                                         className="btn btn-primary float-right"
