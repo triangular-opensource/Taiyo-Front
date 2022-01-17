@@ -178,7 +178,7 @@ const CustomItemPage = (props) => {
             "product": ad.product,
             "buy_or_sell": ad.buy_or_sell,
             "basic_price": ad.basic_price,
-            "product_description": ad.description,
+            "product_description": ad.product_description,
             "excel_file_link": ad?.excel_file_link,
             "pdf_file_link": ad?.pdf_file_link,
             "image_1_link": ad?.image_1_link,
@@ -194,9 +194,9 @@ const CustomItemPage = (props) => {
             "quantity": ad.quantity,
             "coating_in_gsm": ad.coating_in_gsm,
             "name": ad.name,
-            "mobile_number": ad.number,
+            "mobile_number": ad.mobile_number,
             "location": ad.location,
-            "business_address": ad.address,
+            "business_address": ad.business_address,
             "latitude" : ad.latitude,
             "longitude" : ad.longitude,
             "approval": true
@@ -680,8 +680,11 @@ const CustomItemPage = (props) => {
                                                                                                         </>
                                                                                                     :
                                                                                                         <>
-                                                                                                            <p>Your Bid has been selected</p>
-                                                                                                            <button onClick={() => setAdApproval()} className="btn btn-sm btn-primary">Approve Bid</button>
+                                                                                                            <p>Your Bid has been selected </p>
+                                                                                                            <button onClick={()  => 
+                                                                                                                setAdApproval()} className="btn btn-sm btn-primary">                                              
+                                                                                                                Approve Bid
+                                                                                                            </button>
                                                                                                         </>
                                                                                             :
                                                                                                 <></>
