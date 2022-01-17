@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { getDownloadURL, ref as storeRef, uploadBytes } from 'firebase/storage'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { storage } from '../../../config/Firebase'
@@ -9,7 +9,7 @@ import { GLOBAL_URL, MAX_AD_IMAGE_UPLOAD } from '../../../global/Constant'
 import "./PostForm.css"
 import Popup from '../../Customs/Popup/Popup';
 import TermAndConditions from '../../Policiy/TermsAndConditions/TermAndConditions';
-import ReactGoogleAutocomplete from "react-google-autocomplete";
+import ReactGoogleAutocomplete, { usePlacesWidget } from "react-google-autocomplete";
 
 const PostForm = () => {
 
@@ -66,6 +66,7 @@ const PostForm = () => {
     const [imageLoading, setImageLoading] = useState(null)
     const [excelLoading, setExcelLoading] = useState(null)
     const [pdfLoading, setPdfLoading] = useState(null)
+    const [place, setPlace] = useState(null)
     const [selectedProduct, setSelectedProduct] = useState({
         quality: true,
         temper: true,
@@ -95,13 +96,13 @@ const PostForm = () => {
 
     const fileUpload = async (file, name) => {
         console.log("uploading")
-        const storageRef = ref(storage, `Advertisements/${postData.basic_price}_${postData.description}/${file.name}`)
+        const storageRef = storeRef(storage, `Advertisements/${postData.basic_price}_${postData.description}/${file.name}`)
         await uploadBytes(storageRef, file).then(async (snapshot) => {
-            const fileRef = ref(storage, `Advertisements/${postData.basic_price}_${postData.description}/${file.name}`)
+            const fileRef = storeRef(storage, `Advertisements/${postData.basic_price}_${postData.description}/${file.name}`)
             await getDownloadURL(fileRef).then(async (url) => {
                 setPostData(postData => ({...postData, [name] : url}))
             }).catch((error) => console.log(error))
-        }).catch((error) => console.log(error))
+        }).catch((error) => console.log(error)) 
     }
 
     
@@ -159,7 +160,7 @@ const PostForm = () => {
             "mobile_number": postData.number,
             "location": postData.location,
             "business_address": postData.address,
-            "latitide" : postData.latitide,
+            "latitude" : postData.latitude,
             "longitude" : postData.longitude
         }, {
             headers: {
@@ -589,22 +590,23 @@ const PostForm = () => {
                                         <label htmlFor="authorCity">
                                             Location <span className="text-danger">*</span>
                                         </label>
+                                        {/* <input type="text" name="" ref={ref} id="" placeholder='Location' class="form-control" /> */}
                                         <ReactGoogleAutocomplete
                                             apiKey="AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM"
-                                            onPlaceSelected={(place) => 
-                                            {
+                                            onPlaceSelected={(place) => {
                                                 let x = "" ;
                                                 place.address_components.map(dat => (
                                                     x = x + dat.long_name + " ,"
                                                 ))
                                                 x = x.slice(0,x.length-2)
                                                 console.log(x)
+                                                console.log("alankar")
                                                 setPostData({
                                                     ...postData,
                                                     latitude: place.geometry.location.lat(),
                                                     longitude: place.geometry.location.lng(),
                                                     location: x
-                                                })  
+                                                })
                                             }
                                         }
                                         className="form-control"

@@ -53,38 +53,29 @@ const Search = () => {
             setError(error))
     }, []);
 
-    const calculateDistance = (lat1, long1, lat2, long2) => {
-        const a = { lat: lat1, lon: long1 }
-        const b = { lat: lat2, lon: long2 }
-        console.log(a)
-        console.log(b)
-        // console.log(haversine(a, b))
-        return haversine(a, b)/1000
-    }
-
-    const getDis = () => {
-        console.log(ads)
-        setAdLoading(true)
-        let x=[]
-        ads.forEach((ad) => (  
-            x.push(
-                calculateDistance(
-                    place.geometry.location.lat(), place.geometry.location.lng(), ad.latitude, ad.longitude
-                ), ad
-            )
-        ))
-        x.sort(function(a,b){return a[0] < b[0]})
-        // console.log(x)
-        let y=[]
-        x.map((data) =>
-            (
-                y.push(data[1])
-            )
-        )
-        // console.log(y)
-        // setAd(y)
-        setAdLoading(false)
-    }
+    useEffect(() => {
+        const calculateDistance = (lat1, long1, lat2, long2) => {
+            const a = { lat: lat1, lon: long1 }
+            const b = { lat: lat2, lon: long2 }
+            return haversine(a, b)/1000
+        }
+        const getDis = () => {
+            setAdLoading(true)
+            let x=[]
+            ads.forEach((ad) => (  
+                x.push([
+                    calculateDistance(place.geometry.location.lat(), place.geometry.location.lng(), ad.latitude, ad.longitude), ad
+                ])))
+                x.sort(function(a,b){return a[0] - b[0]})
+                let y=[]
+                x.forEach((data) => {
+                    y.push(data[1])
+                })
+                setAd(y)
+                setAdLoading(false)
+        }
+        getDis()               
+    }, [place])
 
     const { ref } = usePlacesWidget({
         apiKey: "AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM",
@@ -126,11 +117,11 @@ const Search = () => {
                                 }
                             }
                             /> */}
-                                <div
+                                {/* <div
                                     onClick={() => getDis()}
                                     className="icon border mt-1 d-flex justify-content-center align-items-center bg-secondary rounded text-white"
                                 >
-                                </div>
+                                </div> */}
                         </div>
                     </div>
                 </div>
@@ -230,7 +221,7 @@ const Search = () => {
                                     </>
                                 :
                                     ads.map((ad) => (
-                                        <CustomItemCard key={ad.id} data = {ad} />
+                                        <CustomItemCard key={ad.id} data={ad} />
                                         )
                                     )
                 }
