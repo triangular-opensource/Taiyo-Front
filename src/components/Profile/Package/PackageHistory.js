@@ -4,6 +4,7 @@ import ProfileNavbar from '../ProfileNavbar/ProfileNavbar'
 import PackageHistoryData from './PackageHistoryData'
 import useToken from '../../../config/useToken'
 import useAuth from '../../../config/AuthContext'
+import alertMessage from '../../../global/AlertProvider'
 
 const PackageHistory = (props) => {
 
@@ -12,6 +13,9 @@ const PackageHistory = (props) => {
 
     useEffect(() => {
         getUserData(getToken());
+        if (props.location.search === "?payment=success") {
+            alertMessage("Congrtulations! Your payment was successfull.")
+        }
     }, [])
 
     return (

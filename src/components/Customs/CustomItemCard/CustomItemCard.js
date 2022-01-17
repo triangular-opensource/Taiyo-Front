@@ -31,22 +31,22 @@ const CustomItemCard = (props) => {
                 </div>
                 <div className="col-9 pl-3">
                     <div className="row">
-                        <div className="col-2 px-0 pl-3">
-                            <h5>
+                        <div className="col-3 px-0 pl-3">
+                            <h6>
                                 <span className="">#{props.data.id}</span>
                                 {
                                     props.data.buy_or_sell === "Sell"
                                         ? 
-                                            <span style={{"fontSize" : "smaller"}} className="ml-2 badge badge-info">Sell</span>
+                                            <span style={{"fontSize" : "smaller"}} className="ml-2 badge badge-info">Stock for Sale</span>
                                         :
-                                            <span style={{"fontSize" : "smaller"}} className="ml-2 badge badge-warning">Buy</span>
+                                            <span style={{"fontSize" : "smaller"}} className="ml-2 badge badge-warning">Enquiry</span>
                                 }
-                            </h5>
+                            </h6>
                         </div>
-                        <div className="col-7">
+                        <div className="col-6 px-0">
                             <CountDown time={props.data.bidding_close_date} styleClass="countdown_timer_div_small" />
                         </div>
-                        <div className="col-3">
+                        <div className="col-3 pl-0">
                             <span className="float-right">
                                 <h5>&#8377; {props.data.basic_price} </h5>
                             </span>

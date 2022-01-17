@@ -219,7 +219,18 @@ const CustomItemPage = (props) => {
             <div className="row no-gutters">
                 <div className="col-md-12">
                     <div className="row d-flex justify-content-center my-3">
-                        <CountDown time={ad.bidding_close_date} />
+                        <div className="col-md-6 d-flex justify-content-between align-items-center">
+                            {
+                                ad.buy_or_sell === "Sell"
+                                    ? 
+                                        <span style={{"fontSize" : "x-large"}} className="ml-2 py-3 px-4 badge badge-info">Stock for Sale</span>
+                                    :
+                                        <span style={{"fontSize" : "x-large"}} className="ml-2 py-3 px-4 badge badge-warning">Enquiry</span>
+                            }
+                        </div>
+                        <div className="col-md-6 d-flex justify-content-center align-items-center">
+                            <CountDown time={ad.bidding_close_date} />
+                        </div>
                     </div>
                     <div className="row auth-bg pt-3">
                         <div className="col-md-12">
@@ -349,9 +360,9 @@ const CustomItemPage = (props) => {
                                     <div className="col-md-8">
                                         <div className="row mx-4">
                                             <div className="col-md-6">
-                                                <h4>
+                                                <h5>
                                                     {ad.product}
-                                                </h4>
+                                                </h5>
                                             </div>
                                             <div className="col-md-3">
                                                 {
