@@ -554,6 +554,8 @@ const CustomItemPage = (props) => {
                                                                         </div>
                                                                     </>
                                                                 :
+                                                                ad.approval
+                                                                ?
                                                                     <>
                                                                     <div className="row">
                                                                         <div className="col-12">
@@ -575,6 +577,16 @@ const CustomItemPage = (props) => {
                                                                         </div>
                                                                     </div>
                                                                 </>
+                                                                :
+                                                                <>
+                                                                   <div className="row">
+                                                                        <div className="col-12">
+                                                                            Waiting for owner approval
+                                                                        </div>
+                                                                    </div>
+
+                                                                </>
+                                                                
                                                     :
                                                         <>
                                                             {
