@@ -173,6 +173,47 @@ const CustomItemPage = (props) => {
         })
     }
 
+    const setAdApproval = async () => {
+        await axios.put(`${GLOBAL_URL}/ads-detail/${ad.id}`, {
+            "product": ad.product,
+            "buy_or_sell": ad.buy_or_sell,
+            "basic_price": ad.basic_price,
+            "product_description": ad.description,
+            "excel_file_link": ad?.excel_file_link,
+            "pdf_file_link": ad?.pdf_file_link,
+            "image_1_link": ad?.image_1_link,
+            "image_2_link": ad?.image_2_link,
+            "image_3_link": ad?.image_3_link,
+            "image_4_link": ad?.image_4_link,
+            "quality": ad.quality,
+            "dimesions": ad.dimensions,
+            "color": ad.color,
+            "grade": ad.grade,
+            "temper": ad.temper,
+            "specification_number": ad.specification_number,
+            "quantity": ad.quantity,
+            "coating_in_gsm": ad.coating_in_gsm,
+            "name": ad.name,
+            "mobile_number": ad.number,
+            "location": ad.location,
+            "business_address": ad.address,
+            "latitude" : ad.latitude,
+            "longitude" : ad.longitude,
+            "approval": true
+        }, {
+            headers: {
+                "Authorization": `Token ${getToken()}`,
+                "Content-Type": "application/json"
+            }
+        }).then((response) => {
+            alertMessage("Congratulations")
+        })
+        .catch((error) => {
+            console.log(error.response)
+            alertMessage("Oops some error occured!")
+        })
+    }
+
     return adLoading === false && bidListLoading === false ? (
         <div className="container my-4">
             <div className="row no-gutters">
@@ -557,36 +598,32 @@ const CustomItemPage = (props) => {
                                                                 ad.approval
                                                                 ?
                                                                     <>
+                                                                        <div className="row">
+                                                                            <div className="col-12">
+                                                                                You have already selected a bid of Rs. {ad.selected_bid_amount}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="row mt-3">
+                                                                            <div className="col-12 h5 text-primary">
+                                                                                Winner Details
+                                                                            </div>
+                                                                            <div className="col-12" style={{"fontSize": "smaller"}}>
+                                                                                Name : <span className="text-dark font-weight-bold">{ad.user__first_name} {ad.user__midlle_name} {ad.user__last_name}</span>
+                                                                            </div>
+                                                                            <div className="col-12" style={{"fontSize": "smaller"}}>
+                                                                                Email : <span className="text-dark font-weight-bold">{ad.user__email}</span>
+                                                                            </div>
+                                                                            <div className="col-12" style={{"fontSize": "smaller"}}>
+                                                                                Phone : <span className="text-dark font-weight-bold">{ad.user__phone_number}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </>
+                                                                :
                                                                     <div className="row">
                                                                         <div className="col-12">
-                                                                            You have already selected a bid of Rs. {ad.selected_bid_amount}
+                                                                            Waiting for bidder approval
                                                                         </div>
-                                                                    </div>
-                                                                    <div className="row mt-3">
-                                                                        <div className="col-12 h5 text-primary">
-                                                                            Winner Details
-                                                                        </div>
-                                                                        <div className="col-12" style={{"fontSize": "smaller"}}>
-                                                                            Name : <span className="text-dark font-weight-bold">{ad.user__first_name} {ad.user__midlle_name} {ad.user__last_name}</span>
-                                                                        </div>
-                                                                        <div className="col-12" style={{"fontSize": "smaller"}}>
-                                                                            Email : <span className="text-dark font-weight-bold">{ad.user__email}</span>
-                                                                        </div>
-                                                                        <div className="col-12" style={{"fontSize": "smaller"}}>
-                                                                            Phone : <span className="text-dark font-weight-bold">{ad.user__phone_number}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </>
-                                                                :
-                                                                <>
-                                                                   <div className="row">
-                                                                        <div className="col-12">
-                                                                            Waiting for owner approval
-                                                                        </div>
-                                                                    </div>
-
-                                                                </>
-                                                                
+                                                                    </div>           
                                                     :
                                                         <>
                                                             {
@@ -609,7 +646,37 @@ const CustomItemPage = (props) => {
                                                                                     <div className="col-12">
                                                                                         Bidding Closed!!!
                                                                                     </div>
+                                                                                    {
+                                                                                        userData().email === ad.user__email
+                                                                                            ?
+                                                                                                ad.approval
+                                                                                                    ?
+                                                                                                        <>
+                                                                                                            <div className="row mt-3">
+                                                                                                                <div className="col-12 h5 text-primary">
+                                                                                                                    Owner Details
+                                                                                                                </div>
+                                                                                                                <div className="col-12" style={{"fontSize": "smaller"}}>
+                                                                                                                    Name : <span className="text-dark font-weight-bold">{ad.name}</span>
+                                                                                                                </div>
+                                                                                                                <div className="col-12" style={{"fontSize": "smaller"}}>
+                                                                                                                    Email : <span className="text-dark font-weight-bold">{ad.email}</span>
+                                                                                                                </div>
+                                                                                                                <div className="col-12" style={{"fontSize": "smaller"}}>
+                                                                                                                    Phone : <span className="text-dark font-weight-bold">{ad.mobile_number}</span>
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                        </>
+                                                                                                    :
+                                                                                                        <>
+                                                                                                            <p>Your Bid has been selected</p>
+                                                                                                            <button onClick={() => setAdApproval()} className="btn btn-sm btn-primary">Approve Bid</button>
+                                                                                                        </>
+                                                                                            :
+                                                                                                <></>
+                                                                                    }
                                                                                 </div>
+
                                                             }
                                                             {
                                                                 ad.selected_bid !== null
