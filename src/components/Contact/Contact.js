@@ -6,9 +6,10 @@ import { ReactComponent as ContactSvg } from "../../global/static/svg/contact.sv
 import CustomTextarea from '../Customs/CustomTextarea/CustomTextarea'
 
 import { emailValidation } from '../../global/validations'
-import { EMAIL_ERROR } from '../../global/Constant'
+import { EMAIL_ERROR, GLOBAL_URL } from '../../global/Constant'
 import CustomAlert from '../Customs/CustomAlert/CustomAlert'
 import alertMessage from '../../global/AlertProvider';
+import axios from 'axios';
 
 function Contact() {
 
