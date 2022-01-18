@@ -6,7 +6,7 @@ import "./Header.css"
 
 const Header = () => {
     
-    const {userData} = useToken()
+    const {userData, isUser} = useToken()
 
     const [fullScreenEnabled, setFullScreenEnabled] = useState(false)
     const [userImage, setUserImage] = useState(userData()?.image)
@@ -76,7 +76,7 @@ const Header = () => {
                                     }
                                 </div>
                             </li>
-                                { !state
+                                { !isUser()
                                     ? 
                                         <>
                                             <li className="nav-item">
