@@ -43,12 +43,6 @@ function ProfileHeader({updateProfile}) {
                                 Last Active {userData().last_login}
                             </div>
                         </div>
-                        <div className="row mt-2">
-                            <div className="col-md-12">
-                                <span className="badge badge-primary mx-2 profileHeader__badge">Paid</span>
-                                <span className="badge badge-success mx-2 profileHeader__badge">Broker</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

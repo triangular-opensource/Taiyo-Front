@@ -35,6 +35,7 @@ const PackageHistoryData = () => {
                             <th scope="col">Status</th>
                             <th scope="col">Date</th>
                             <th scope="col">Order Total</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,6 +63,7 @@ const PackageHistoryData = () => {
                                                     {`${payment_date.getHours()}:${payment_date.getMinutes()} ${payment_date.getDate()}-${payment_date.getMonth() + 1}-${payment_date.getFullYear()}`}
                                                 </td>
                                                 <td className="text-center">{payment.amount}</td>
+                                                <td className="text-center"><i class="icon ion-cloud-download"></i></td>
                                             </tr>
                                     )})
                         }

@@ -29,7 +29,7 @@ const Header = () => {
 
     const location = useLocation();
 
-    const { generalInfo, logout, state} = useAuth();
+    const { generalInfo, logout} = useAuth();
 
     return (
     <>
@@ -62,20 +62,6 @@ const Header = () => {
                     </div>
                     <div className="navbar__right">
                         <ul className="navbar-nav">
-                            <li className="nav-item d-flex align-items-center">
-                                <div
-                                    onClick={toggleFullScreen}
-                                    className='fullScreen'
-                                >
-                                    {
-                                        fullScreenEnabled
-                                            ?
-                                                <i className="icon ion-android-contract"></i>
-                                            :
-                                                <i className="icon ion-android-expand"></i>
-                                    }
-                                </div>
-                            </li>
                                 { !isUser()
                                     ? 
                                         <>
@@ -88,18 +74,65 @@ const Header = () => {
                                         </>
                                     :
                                         <>
-                                        <li className="nav-item">
-                                                <NavLink className="nav-link p-0" to="/notification">
-                                                    <i style={{"fontSize": "xx-large"}} className="icon ion-ios-bell"></i>
-                                                </NavLink>
-                                            </li>
                                             <li className="nav-item dropdown">
                                                 <span className="nav-link dropdown-toggle" id="navbarProfileDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                                                    <span className='pr-2'>{userData().first_name}</span>
                                                     <img style={{"height": "35px", "width": "35px", "borderRadius": "50%"}} src={userImage} alt="profile" />
                                                 </span>
                                                 <div className="dropdown-menu">
-                                                    <Link className="dropdown-item" to="/profile">Profile</Link>
-                                                    <span className="dropdown-item" style={{"cursor": "pointer"}} onClick={() => logout()}>Logout</span>
+                                                    <Link className="dropdown-item" to="/profile">
+                                                        <div className="container px-0">
+                                                            <div className="row">
+                                                                <div className="col-12">
+                                                                <i className="icon ion-person pr-2"></i>
+                                                                        Profile
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </Link>
+                                                    <div class="dropdown-divider"></div>
+                                                    <span className="dropdown-item">
+                                                        <div className="container px-0">
+                                                            <div className="row">
+                                                                <div className="col-12">
+                                                                    <i className="icon ion-ios-bell pr-2"></i>
+                                                                    Notifications
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </span>
+                                                    <span className="dropdown-item">
+                                                        <div className="container px-0">
+                                                            <div className="row">
+                                                                <div className="col-12">
+                                                                    <div
+                                                                        onClick={toggleFullScreen}
+                                                                        className=''
+                                                                    >
+                                                                        {
+                                                                            fullScreenEnabled
+                                                                                ?
+                                                                                    <i className="icon ion-android-contract pr-2"></i>
+                                                                                :
+                                                                                    <i className="icon ion-android-expand pr-2"></i>
+                                                                        }
+                                                                        Full Screen
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </span>
+                                                    <div class="dropdown-divider"></div>
+                                                    <span className="dropdown-item" style={{"cursor": "pointer"}} onClick={() => logout()}>
+                                                        <div className="container px-0">
+                                                            <div className="row">
+                                                                <div className="col-12">
+                                                                    <i className="icon ion-log-out pr-2"></i>
+                                                                    Logout
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </span>
                                                 </div>
                                             </li>
                                         </>

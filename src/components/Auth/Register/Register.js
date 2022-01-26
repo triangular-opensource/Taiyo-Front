@@ -24,7 +24,7 @@ function Register() {
     const [companyAddress, setCompanyAddress] = useState("")
     const [companyCity, setCompanyCity] = useState("")
     const [companyState, setCompanyState] = useState("")
-    const [companyCountry, setCompanyCountry] = useState("")
+    const [companyCountry, setCompanyCountry] = useState("India")
     const [companyPincode, setCompanyPincode] = useState("")
     const [showConfirmPassAlert, setShowConfirmPassAlert] = useState(false)
     const [check, setCheck] = useState(false)
@@ -111,7 +111,7 @@ function Register() {
         setCompanyAddress("")
         setCompanyCity("")
         setCompanyState("")
-        setCompanyCountry("")
+        setCompanyCountry("India")
         setCompanyPincode("") 
         setLoading(false);
     }
@@ -186,16 +186,13 @@ function Register() {
                         </div>
                     </div>
                     <div className="form-row">
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                             <CustomInput type="text" value={companyCity} onChangeValue={(event) => setCompanyCity(event.target.value)} placeholder='Company City *'/>
                         
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-6">
                             <CustomInput type="text" value={companyState} onChangeValue={(event) => setCompanyState(event.target.value)} placeholder='Company State *'/>
                             
-                        </div>
-                        <div className="col-md-4">
-                            <CustomInput type="text" value={companyCountry} onChangeValue={(event) => setCompanyCountry(event.target.value)} placeholder='Company Country *'/>
                         </div>
                     </div>
                     <div className="form-row">
@@ -204,7 +201,7 @@ function Register() {
                             {/* {(companyPincode!=="" && !pincodeValidate(companyPincode)) ?  <CustomAlert  message = {"pincode is six digit numeric"}/ > : null }  */}
                         </div>
                         <div className="col-md-6">
-                            <CustomInput type="text" value={gst} onChangeValue={(event) => setGst(event.target.value)} placeholder='GST Number *'/>
+                            <CustomInput type="text" value={gst} maxLength={15}  onChangeValue={(event) => setGst(event.target.value)} placeholder='GST Number *'/>
                             {/* {(gst!=="" && !gstValidation(gst)) ?  <CustomAlert  message = {"type vali GstNumber"}/ > : null }  */}
                         </div>
                     </div>

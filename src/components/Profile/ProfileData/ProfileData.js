@@ -25,6 +25,10 @@ const ProfileData = () => {
                             <td className="">{userData().phone_number}</td>
                         </tr>
                         <tr>
+                            <td className="">GST Number</td>
+                            <td className="">{userData().gst_number}</td>
+                        </tr>
+                        <tr>
                             <td className="">You are a(n)</td>
                             <td className="">{userData().user_type}</td>
                         </tr>

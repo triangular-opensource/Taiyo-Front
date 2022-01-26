@@ -38,9 +38,10 @@ const Search = () => {
         axios.get(url)
             .then(async (response) => {
                 setAd(response.data.data);
+                console.log(response.data.data);
                 setAdLoading(false)
             })
-            .catch(async (error) => setError(error))
+            .catch(async (error) => console.log(error.response))
     }, [adType, categoryFilter]);
 
     useEffect(() => {
