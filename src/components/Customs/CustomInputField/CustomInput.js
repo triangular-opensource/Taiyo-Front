@@ -27,6 +27,8 @@ function CustomInput(props){
 				onInput={props.onInput}
 				onFocus={props.onFocus}
 				onBlur={props.onBlur}
+				disabled={props.disabled}
+				maxLength={props.maxLength}
 				/>
       		</div>
     	</div>

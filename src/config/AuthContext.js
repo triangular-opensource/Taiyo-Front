@@ -6,13 +6,14 @@ import { useHistory } from 'react-router';
 import useToken from './useToken';
 import { initialState, reducer } from './useReducer';
 import  alertFire from '../global/AlertProvider'
+import alertMessage from '../global/AlertProvider';
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
 
     const history = useHistory();
-    const {saveToken} = useToken();
+    const {saveToken, userData} = useToken();
     const [error, setError] = useState(null);
     const [loginError, setLoginError] = useState(null);
     const [user, setUser] = useState([]);
@@ -89,8 +90,9 @@ export const AuthProvider = ({ children }) => {
             getUserData(result.data.token)
             dispatch({type: "USER", payload:true})
             history.push("/")
+            // alertMessage(`Welcome ${userData().first_name}`)
         })
-        .catch(async(error) => setLoginError(await error));
+        .catch(async(error) => console.log(await error.response));
     }
 
     const logout = async () => {
