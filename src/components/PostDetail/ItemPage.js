@@ -29,44 +29,41 @@ const CustomItemPage = (props) => {
     const postBid = async () => 
     {
 
-    if(amount > 9999)
-    {
-        if(ad.buy_or_sell === 'Sell')
-        {
-            if(bidList.length === 0 )
-                {
-                    if(amount < ad.basic_price + 100 )
-                    {
-                        return alertMessage("Amount is 100Rs more than basic price");  
-                    }
-                }
-            else
-                {
-                    if(amount < bidList[0].amount + 100 )
-                    {
-                        return alertMessage("Amount is 100Rs more than highest bid");  
-                    }
-                }
-        }
-    }
-    else
-        return alertMessage("Bid Always Greater Than 9999");
+    // if(amount > 999)
+    // {
+    //     if(ad.buy_or_sell === 'Sell')
+    //     {
+    //         if(bidList.length === 0 )
+    //             {
+    //                 if(amount < ad.basic_price + 100 )
+    //                 {
+    //                     return alertMessage("Amount is 100Rs more than basic price");  
+    //                 }
+    //             }
+    //         else
+    //             {
+    //                 if(amount < bidList[0].amount + 100 )
+    //                 {
+    //                     return alertMessage("Amount is 100Rs more than highest bid");  
+    //                 }
+    //             }
+    //     }
+    // }
+    // else
+    //     return alertMessage("Bid Always Greater Than 9999");
     
 
-
-
-
-        if(ad.buy_or_sell === 'Buy')
-        {
-        if(bidList.length === 0)
-        {
-            if(amount > ad.basic_price - 100 )
-                return alertMessage("Amount is 100Rs less than basic price");  
-        }
-        else
-            if(amount < bidList[0].amount - 100 )
-                return alertMessage("Amount is 100Rs less than least bid");  
-        }
+    //     if(ad.buy_or_sell === 'Buy')
+    //     {
+    //     if(bidList.length === 0)
+    //     {
+    //         if(amount > ad.basic_price - 100 )
+    //             return alertMessage("Amount is 100Rs less than basic price");  
+    //     }
+    //     else
+    //         if(amount < bidList[0].amount - 100 )
+    //             return alertMessage("Amount is 100Rs less than least bid");  
+    //     }
 
         await axios
             .post(
