@@ -91,7 +91,7 @@ const Header = () => {
                                                         </div>
                                                     </Link>
                                                     <div class="dropdown-divider"></div>
-                                                    <span className="dropdown-item">
+                                                    <Link className="dropdown-item" to="/notification">
                                                         <div className="container px-0">
                                                             <div className="row">
                                                                 <div className="col-12">
@@ -100,7 +100,7 @@ const Header = () => {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </span>
+                                                    </Link>
                                                     <span className="dropdown-item">
                                                         <div className="container px-0">
                                                             <div className="row">

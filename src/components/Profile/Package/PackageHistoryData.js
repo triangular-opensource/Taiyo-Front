@@ -63,7 +63,7 @@ const PackageHistoryData = () => {
                                                     {`${payment_date.getHours()}:${payment_date.getMinutes()} ${payment_date.getDate()}-${payment_date.getMonth() + 1}-${payment_date.getFullYear()}`}
                                                 </td>
                                                 <td className="text-center">{payment.amount}</td>
-                                                <td className="text-center"><i class="icon ion-cloud-download"></i></td>
+                                                <td className="text-center"><i class="fas fa-download"></i></td>
                                             </tr>
                                     )})
                         }
