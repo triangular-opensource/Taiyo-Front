@@ -114,6 +114,21 @@ const Ads = (props) => {
                                                 ShortListed Add
                                             </label>
                                         </div>
+                                        <div className="custom-control custom-switch mt-2">
+                                            <input
+                                                type="radio"
+                                                id="customRadio4"
+                                                name="customRadio"
+                                                className="custom-control-input"
+                                                onClick={async () => setUrl(`${GLOBAL_URL}/ads/11`)}
+                                            />
+                                            <label
+                                                className="custom-control-label"
+                                                for="customRadio4"
+                                            >
+                                                Pending for Admin Add
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

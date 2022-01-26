@@ -50,41 +50,49 @@ function Register() {
             ||companyType===""  )
             {
                 alertMessage("please Fill All the Mandatory Field");
+                setLoading(false);
                 return; 
             }     
         if(!phoneValidation(phoneNumber)) 
             {
                 alertMessage("please Fill valid Phone Number");
+                setLoading(false);
                 return;
             }
         if(!emailValidation(email)) 
             {
                 alertMessage("please Fill valid email");
+                setLoading(false);
                 return;
             }
         if(!passwordValidate(password)) 
         {
                 alertMessage("Password should not contain any space.\n Password should contain at least one digit(0-9). \n Password length should be between 8 to 15 characters. \n Password should contain at least one lowercase letter(a-z). \n Password should contain at least one uppercase letter(A-Z). \n Password should contain at least one special character ( @, #, %, &, !, $, etc….)." );
+                setLoading(false);
                 return;
         } 
         if(password !== confirmPassword) 
             {
                 alertMessage("password and confirm password should be same");
+                setLoading(false);
                 return;
             } 
         if(!pincodeValidate(companyPincode)) 
             {
                 alertMessage("please enter valid pincode");
+                setLoading(false);
                 return;
             }    
         if(!gstValidation(gst)) 
             {
                 alertMessage("please Fill valid gst Number");
+                setLoading(false);
                 return;
             }
         if(check===false) 
             {
                 alertMessage("please allow terms and conditions");
+                setLoading(false);
                 return;
             }
 

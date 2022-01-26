@@ -4,10 +4,12 @@ import CustomInput from "../Customs/CustomInputField/CustomInput"
 import CustomButton from "../Customs/CustomButton/CustomButton"
 import { ReactComponent as ContactSvg } from "../../global/static/svg/contact.svg";
 import CustomTextarea from '../Customs/CustomTextarea/CustomTextarea'
-import {postContact} from '../../global/Function'
+
 import { emailValidation } from '../../global/validations'
-import { EMAIL_ERROR } from '../../global/Constant'
+import { EMAIL_ERROR, GLOBAL_URL } from '../../global/Constant'
 import CustomAlert from '../Customs/CustomAlert/CustomAlert'
+import alertMessage from '../../global/AlertProvider';
+import axios from 'axios';
 
 function Contact() {
 
@@ -15,6 +17,31 @@ function Contact() {
     const [email, setEmail] = useState("");
     const [subject, setSubject] = useState("");
     const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+
+
+
+    async function postContact(name, email, subject , message ) 
+    {   
+        setLoading(true)
+
+        if(name === "" || subject === "" || message === "")
+            return  alertMessage(<p> Please Fill all the fields</p>);    
+        await axios.post(`${GLOBAL_URL}/contact`, {
+                "name" :  name ,
+                "email" : email ,
+                "subject" : subject ,
+                "message" : message
+            }).then(async (response) => {
+                alertMessage(<p> Thankyou for Contacting Us , We Will Get Back To You</p>);
+        }).catch(async (error) =>  alertMessage(<p> OOps Some Problem Occur </p>) )
+       
+        setEmail("")
+        setSubject("")
+        setMessage("")
+        setLoading(false)
+    }
+    
 
     return (        
         <div className="container py-5 my-5 auth-bg px-5" > 
@@ -43,7 +70,22 @@ function Contact() {
                             <CustomTextarea placeholder='Message' height='120px'  value={message}   onChangeValue={(event) => setMessage(event.target.value)}/>
                         </div>
                     </div>
-                    <CustomButton  disabled = { !(email!=="" && emailValidation(email)) } fontSize="17" marginTop="20" data="Submit" handleClick=  { ()=>postContact(name , email , subject , message)}  padding='16' backgroundColor='gray' color='white' width='620' />
+                    <CustomButton  disabled = { !(email!=="" && emailValidation(email)) } fontSize="17" marginTop="20" data=
+                    {
+                        loading
+                        ?
+                            <span>
+                                Submit
+                                <div className="ml-2 spinner-border spinner-border-sm" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            </span>
+                        : 
+                            "Submit"
+                    }
+                    
+                    
+                    handleClick=  { ()=>postContact(name , email , subject , message)}  padding='16' backgroundColor='gray' color='white' width='620' />
                 </div>
             </div>
         </div>
