@@ -13,7 +13,7 @@ import ReactGoogleAutocomplete, { usePlacesWidget } from "react-google-autocompl
 
 const PostForm = () => {
 
-    const {getToken} = useToken();
+    const {getToken, userData} = useToken();
 
     const history = useHistory()
 
@@ -26,6 +26,7 @@ const PostForm = () => {
 
     const [postData, setPostData] = useState({
         category: "",
+        sub_category: "",
         product: "",
         buy_or_sell: "",
         product_name: "",
@@ -45,8 +46,8 @@ const PostForm = () => {
         image_4_link: "",
         excel_file_link: "",
         pdf_file_link: "",
-        name: "",
-        number: "",
+        name: `${userData().first_name} ${userData().middle_name} ${userData().last_name}`,
+        number: `${userData().phone_number}`,
         address: "",
         latitude: "",
         longitude: "",
@@ -57,6 +58,7 @@ const PostForm = () => {
     const [excel, setExcel] = useState(null)
     const [pdfFile, setPdfFile] = useState(null)
     const [category, setCategory] = useState([])
+    const [subCategory, setSubCategory] = useState([])
     const [products, setProducts] = useState([])
     const [error, setError] = useState(null)
     const [active1, setActive1] = useState(true)
@@ -86,8 +88,16 @@ const PostForm = () => {
             .catch(async (error) => setError(error))
     }, [])
 
-    const getProduct = async (category) => {
-        await axios.get(`${GLOBAL_URL}/product/${category}`)
+    const getSubCategory = async (category) => {
+        await axios.get(`${GLOBAL_URL}/sub-category/${category}`)
+        .then(async (response) => {
+            setSubCategory(await response.data.data)
+        })
+        .catch(async(error) => setError(error))
+    }
+
+    const getProduct = async (sub_category) => {
+        await axios.get(`${GLOBAL_URL}/product/${sub_category}`)
         .then(async (response) => {
             setProducts(await response.data.data)
         })
@@ -137,6 +147,7 @@ const PostForm = () => {
     }
 
     const savePost = async () => {
+        setLoading(true)
         await axios.post(`${GLOBAL_URL}/post-ads`, {
             "product": postData.product,
             "buy_or_sell": postData.buy_or_sell,
@@ -168,7 +179,7 @@ const PostForm = () => {
                 "Content-Type": "application/json"
             }
         }).then((response) => {
-            alertMessage("Ad Posted Succesfully")
+            alertMessage("Ad Posted Succesfully, wait for admin approval.")
             history.push("/search");
 
         })
@@ -176,6 +187,7 @@ const PostForm = () => {
             console.log(error.response)
             alertMessage("Oops some error occured!")
         })
+        .finally(() => setLoading(false))
     }
 
     return (
@@ -197,7 +209,7 @@ const PostForm = () => {
                         <div
                             onClick={() => {setActive1(false);setActive2(true);setActive3(false)}}
                             className={
-                                !(postData?.category && postData?.product && postData?.buy_or_sell)
+                                !(postData?.category && postData?.sub_category && postData?.product && postData?.buy_or_sell)
                                     ?
                                         "nav-link PostNavbar__pill disabled"
                                     :
@@ -216,7 +228,7 @@ const PostForm = () => {
                         <div
                             onClick={() => {setActive1(false);setActive2(false);setActive3(true)}}
                             className={
-                                ((postData?.category && postData?.product && postData?.buy_or_sell) && ((postData?.basic_price && postData?.description && postData?.quantity && postData?.grade && postData?.quality && postData?.temper && postData?.specification_number && postData?.coating_in_gsm && postData?.dimensions && postData?.image_1_link && imageLoading)))
+                                ((postData?.category && postData?.sub_category && postData?.product && postData?.buy_or_sell) && ((postData?.basic_price && postData?.description && postData?.quantity && postData?.grade && postData?.quality && postData?.temper && postData?.specification_number && postData?.coating_in_gsm && postData?.dimensions && postData?.image_1_link && imageLoading)))
                                     ?   
                                         active3 && !active1 && !active2
                                             ?
@@ -244,11 +256,32 @@ const PostForm = () => {
                                 <div className="col-12 mx-3 pr-5">
                                     <div className="form-group">
                                         <label htmlFor="category">Category <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">Select suitable Category</span></label>
-                                        <select name="" value={postData?.category} onChange={(e) => {setPostData({...postData, category: parseInt(e.target.value)}); getProduct(e.target.value)}} id="category" className="form-control">
+                                        <select name="" value={postData?.category} onChange={(e) => {setPostData({...postData, category: parseInt(e.target.value)}); getSubCategory(e.target.value)}} id="category" className="form-control">
                                             <option value={""} defaultValue={""} disabled>Choose...</option>
                                             {
                                                 category.map(cat => (
                                                     <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col-12 mx-3 pr-5">
+                                    <div className="form-group">
+                                        <label htmlFor="category">Sub Category <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">Select suitable Sub Category</span></label>
+                                        <select
+                                            name=""
+                                            id="sub-category"
+                                            value={postData.sub_category}
+                                            onChange={async (e) => {setPostData({...postData, sub_category: e.target.value}); getProduct(e.target.value)}}
+                                            className="form-control"
+                                        >
+                                            <option value={""} selected disabled>Choose...</option>
+                                            {
+                                                subCategory.map(sub_cat => ( 
+                                                    <option key={sub_cat.id} value={sub_cat.id}>{sub_cat.name}</option>
                                                 ))
                                             }
                                         </select>
@@ -306,10 +339,10 @@ const PostForm = () => {
                                 <div className="col-12">
                                     <span onClick={() => {setActive1(false);setActive2(true);setActive3(false)}}>
                                         <button
-                                            style={{
-                                                "cursor": !(postData.category && postData.product && postData.buy_or_sell) ? "not-allowed" : "pointer"
+                                            style={{ 
+                                                "cursor": !(postData.category && postData.sub_category && postData.product && postData.buy_or_sell) ? "not-allowed" : "pointer"
                                             }}
-                                            disabled={!(postData.category && postData.product && postData.buy_or_sell)}
+                                            disabled={!(postData.category && postData.sub_category && postData.product && postData.buy_or_sell)}
                                             className="btn btn-primary float-right mx-3"
                                         >
                                             Next
@@ -395,6 +428,7 @@ const PostForm = () => {
                                                         <option value=""selected disabled>Choose...</option>
                                                         <option value="Hard">Hard</option>
                                                         <option value="Soft">Soft</option>
+                                                        <option value="Any">Any</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -430,7 +464,7 @@ const PostForm = () => {
                                         ?
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    <label htmlFor="dimensions">Dimensions <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">thickness/dia <b>x</b> width <b>x</b> length</span></label>
+                                                    <label htmlFor="dimensions">Dimensions <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">thickness, dia, width, length, etc..</span></label>
                                                     <input type="text" name="" id="dimensions" value={postData.dimensions} onChange={e => setPostData({...postData, dimensions: e.target.value})} placeholder='Dimensions' className="form-control" />
                                                 </div>
                                             </div>
@@ -615,20 +649,6 @@ const PostForm = () => {
                                 </div>
                             </div>
                             <div className="row mx-2">
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label htmlFor="authorName">Your Name <span className="text-danger">*</span></label>
-                                        <input type="text" name="" value={postData.name} onChange={e => setPostData({...postData, name: e.target.value})} placeholder='Your Name' id="authorName" className="form-control" />
-                                    </div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="form-group">
-                                        <label htmlFor="authorMobile">Mobile Number <span className="text-danger">*</span></label>
-                                        <input type="text" name="" max={10} maxLength={10} value={postData.number} onChange={e => setPostData({...postData, number: e.target.value})} placeholder='Mobile Number' id="authorMobile" className="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="row mx-2">
                                 <div className="col-md-12">
                                     <div className="form-group">
                                         <label htmlFor="authorAddress">Business Address <span className="text-danger">*</span></label>
@@ -660,12 +680,30 @@ const PostForm = () => {
                             </div>
                             <div className="row">
                                 <div className="col-12">
-                                    <div
+                                    <button
                                         className="btn btn-success float-right mx-3"
                                         onClick={() => savePost()}
+                                        style={{
+                                            "cursor": !(
+                                                postData.location &&
+                                                postData.latitude &&
+                                                postData.longitude &&
+                                                postData.address &&
+                                                postData.t_and_c
+                                            ) ? "not-allowed" : "pointer"
+                                        }}
+                                        disabled={
+                                            !(
+                                                postData.location &&
+                                                postData.latitude &&
+                                                postData.longitude &&
+                                                postData.address &&
+                                                postData.t_and_c
+                                            )
+                                        }
                                     >
                                         Submit
-                                    </div>
+                                    </button>
                                     <div
                                         onClick={() => {setActive1(false);setActive2(true);setActive3(false)}} 
                                         className="btn btn-primary float-right"
