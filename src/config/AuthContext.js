@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }) => {
             saveToken(result.data.token)
             getUserData(result.data.token)
             dispatch({type: "USER", payload:true})
-            history.push("/")
+            history.push("/", {from: "login"})
             // alertMessage(`Welcome ${userData().first_name}`)
         })
         .catch(async(error) => console.log(await error.response));

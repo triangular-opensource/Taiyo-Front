@@ -41,7 +41,7 @@ const Notification = () => {
             {
                 notificationLoading
                     ?
-                        <div className="d-flex justify-content-center align-items-center my-5 py-5">
+                        <div className="d-flex justify-content-center align-items-center my-5 py-5 h-100">
                             <div
                                 className="spinner-border"
                                 style={{ width: "4rem", height: "4rem" }}

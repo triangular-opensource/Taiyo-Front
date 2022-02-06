@@ -2,10 +2,18 @@ import React from "react";
 import useAuth from "../../config/AuthContext";
 import AboutData from "../About/AboutData/AboutData";
 import Contact from "../Contact/Contact";
-import CountDown from "../Countdown/CountDown";
+import {useLocation} from "react-router-dom"
+import alertMessage from "../../global/AlertProvider";
 
 const Home = () => {
     const { generalInfo } = useAuth();
+
+    const location = useLocation()
+
+    if (location.state?.from === "login") {
+        alertMessage(`Welcome 🚀`)
+    }
+
     return (
         <div>
             <img

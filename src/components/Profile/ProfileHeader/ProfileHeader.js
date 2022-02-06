@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import "./ProfileHeader.css"
 import defaultImage from "../../../global/static/default.png"
@@ -7,6 +7,12 @@ import useToken from '../../../config/useToken'
 function ProfileHeader({updateProfile}) {
 
     const {userData} = useToken();
+    const [userImage, setUserImage] = useState(userData().image)
+
+    useEffect(() => {
+        (async () => setUserImage(await userData()?.image))() 
+    }, [userData])
+
 
     return (
         <div className="container profileHeader__background">
@@ -15,7 +21,7 @@ function ProfileHeader({updateProfile}) {
                     <div className="text-center">
                         <img
                             style={{height:"150px", width:"170px", borderRadius:"50%"}}
-                            src={userData().image ? userData().image : defaultImage}
+                            src={userImage ? userImage : defaultImage}
                             alt="profile_image"
                         />
                     </div>

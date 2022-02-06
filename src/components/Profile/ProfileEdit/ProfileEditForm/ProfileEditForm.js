@@ -43,29 +43,29 @@ const ProfileEditForm = () => {
 
 
     const imageUpload = async () => {
+        let imgUrl = "";
         const storageRef = ref(storage, `Users/ProfilePics/${email}`)
         await uploadBytes(storageRef, uploadImage).then(async (snapshot) => {
             const imageRef = ref(storage, `Users/ProfilePics/${email}`)
-            await getDownloadURL(imageRef).then((url) => {
-                setImageUrl(url);
+            await getDownloadURL(imageRef).then(async (url) => {
+                imgUrl = url;
             }).catch((error) => {
                 console.log(error)
             })
         }).catch((error) => {
             console.log(error)
         })
+        return imgUrl;
     }
     
     const upload = async () => {
         setLoading(true)
-        if (uploadImageName) {
-            await imageUpload()
-        }
+        let img = await imageUpload();
         await axios.patch(`${GLOBAL_URL}/auth/user`, {
             "first_name": firstName,
             "middle_name": middleName,
             "last_name": lastName,
-            "image": imageUrl,
+            "image": img,
             "gst_number": gst,
             "phone_number": phoneNumber,
             "user_type": userType,
@@ -86,10 +86,10 @@ const ProfileEditForm = () => {
             if (res.status === 200) {
                 getUserData(getToken());
                 setUpdated(true);
-                setLoading(false);
-                scrollRef.current.scrollIntoView({behavior: "smooth"})
+                // scrollRef.current.scrollIntoView({behavior: "smooth"})
                 setTimeout(() => {
-                    history.push("/edit-profile")
+                    setLoading(false);
+                    history.push("/profile")
                 }, 1000);
             }
         }).catch(error => console.log(error.response))
