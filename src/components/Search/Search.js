@@ -85,57 +85,18 @@ const Search = () => {
     
     return (
         <div className="container-fluid py-4 px-5">
-            <div className="row d-flex justify-content-center">
-                <div className="col-md-6 search__col">
-                    <div className="wrapperSearch">
-                        <div className="search-input">
-                            <input type="text" name="" ref={ref} id="" />
-                            {/* <Autocomplete
-                                apiKey="AIzaSyCDemNBz_ZjM1jrBq6WVMTYsPDFm1vX-uM"
-                                onPlaceSelected={async (place) => {
-                                    setAdLoading(true)
-                                    let x=[]
-                                    console.log(ads)
-                                    ads.forEach((ad) => (  
-                                        x.append(
-                                            getDistance(
-                                                { latitude: place.geometry.location.lat() , longitude: place.geometry.location.lng()},
-                                                { latitude: ad.latitude, longitude: ad.longitude }
-                                            ), ad
-                                        )
-                                    ))
-                                    console.log(x)
-                                    x.sort(function(a,b){return a[0] < b[0]})
-                                    let y=[]
-                                    x.map((data)=>
-                                        (
-                                            y.append(data[1])
-                                        )
-                                    )
-                                    console.log(y)
-                                    // setAd(y)
-                                    setAdLoading(false)
-                                }
-                            }
-                            /> */}
-                                {/* <div
-                                    onClick={() => getDis()}
-                                    className="icon border mt-1 d-flex justify-content-center align-items-center bg-secondary rounded text-white"
-                                >
-                                </div> */}
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div className="row my-4">
-                <div className="col-md-2">
+            <div className="row my-4 ">
+                <div className="col-md-3">
                     <div className="container rounded-lg pt-4 pb-1" style={{"background": "#eeeded", "fontSize": "smaller"}}>
+
+
                         <div className="row "> 
                             <div className="col-12">
                                 <h5>Filters</h5>
                             </div>
                         </div>
+
                         <div className="row mb-3 ml-auto">
                             <div className="container">
                                 <div className="row mb-1">
@@ -199,10 +160,35 @@ const Search = () => {
                                 </div>
                             </div>
                         </div>
+
+
+
+                        
+
+                        <div className="row mb-3 ml-auto">
+                            <div className="container">
+                                <div className="row mb-1">
+                                    <div className="col-12">
+                                       <h6>Location</h6> 
+                                    </div>
+                                </div>
+
+
+                            <div className="row ml-auto">
+                                <div className="col-12 ">
+                                    <input type="text" class="form-control" placeholder="Search" name = "" ref = {ref} id = "" />
+                                </div>
+                            </div>
+
+                            </div>
+                        </div>    
+
+
+
                     </div>
 
                 </div>
-                <div className="col-md-10">
+                <div className="col-md-9">
                 {
                     adLoading
                         ?   

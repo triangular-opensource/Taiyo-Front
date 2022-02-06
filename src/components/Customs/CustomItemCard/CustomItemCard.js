@@ -53,9 +53,11 @@ const CustomItemCard = (props) => {
                         </div>
                     </div>
                     <div className="row ">
-                        <div className="col ad__desc">
-                            {props.data.product_description}
-                        </div>
+                    <span style={{"fontSize" : "smaller" , "fontWeight" : "bold"}} className="ml-3 ">   {props.data.product} </span>
+                    {/* <span style={{"fontSize" : "smaller"}} className="ml-2 badge badge-success">    {props.data.sub_category} </span>
+                    <span style={{"fontSize" : "smaller"}} className="ml-2 badge badge-success">    {props.data.category} </span> */}
+                    
+                        
                     </div>
                     <div className="row my-1">
                         <div className="col text-muted searchItem__location">
