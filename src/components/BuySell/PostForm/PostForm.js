@@ -488,7 +488,7 @@ const PostForm = () => {
                                 <div className="col-12 mx-3 pr-5">
                                     <label htmlFor="imageUpload">Upload Photos <span className="text-danger">*</span><span style={{"fontSize":"smaller"}} className="ml-2 text-muted">You can upload a maximum of 4 images. <b>Select all photos in single time. <span className="text-primary">Uploading 1 image is compulsory.</span> </b></span></label>
                                     {
-                                        imageLoading === null
+                                        imageLoading !== null
                                             ?
                                                 <></>
                                                 :
