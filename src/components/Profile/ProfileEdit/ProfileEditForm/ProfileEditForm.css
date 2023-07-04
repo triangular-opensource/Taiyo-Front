@@ -1,0 +1,6 @@
+#profileImageUpload {
+    cursor: pointer;
+}
+#profileImageUpload:hover {
+    color: blue;
+}

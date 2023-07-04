@@ -1,17 +1,17 @@
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
+import { AuthProvider } from "./config/AuthContext";
+import Routes from "./config/Routes";
 
 function App() {
-  	return (
-		<div className="App">
-			<Header />
-			<br />
-			<br />
-			<br />
-			<Footer />
-		</div>
-	)
+    return (
+        <BrowserRouter>
+            <AuthProvider>
+                <Routes />
+            </AuthProvider>
+        </BrowserRouter>
+    );
 }
 
 export default App;

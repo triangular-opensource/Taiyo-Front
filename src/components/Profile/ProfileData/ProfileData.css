@@ -1,0 +1,10 @@
+.profileData__container {
+    padding: 25px;
+}
+
+tr td:nth-child(1) {
+    color: rgb(37, 37, 37);
+}
+tr td:nth-child(2) {
+    color: rgb(124, 124, 124);
+}
